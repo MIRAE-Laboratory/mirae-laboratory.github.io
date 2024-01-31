@@ -1,1 +1,112 @@
-hello
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MIRAE Lab. :: Multi-modal Intelligent Reasoning & Active Evaluation Laboratory</title>
+</head>
+
+<body>
+<div style="font-size: 50px; text-align: center; margin-top: 10px;">MIRAE Lab.</div>
+<div style="font-size: 20px; text-align: center;">Multi-modal Intelligent Reasoning & Active Evaluation Laboratory</div>
+
+<div id="currentTime" style="font-size: 50px; text-align: center; margin-top: 10px;"></div>
+<canvas id="pendulumCanvas"></canvas>
+</body>
+
+<script>
+    const canvas = document.getElementById('pendulumCanvas');
+    canvas.width = 1000
+    canvas.height = 2000
+    const ctx = canvas.getContext('2d');
+
+    let pendulums = [];
+    const numPendulums = 50; // Number of pendulums in the wave
+    const numPendulums_show = 40; // Number of pendulums in the wave
+    const stepPendulums_show = 1; // Number of pendulums in the wave
+    const basePeriod = 60; // Base period for the longest pendulum in seconds
+    const gravity = 1; // Acceleration due to gravity in 9.81 m/s^2
+    const scale = 1;
+    const startPositionX = canvas.width / 2; // X-coordinate of the first pendulum's pivot point
+    const startPositionY = 0; // Y-coordinate of all pendulums' pivot points
+    const colors = ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'lime', 'pink'];
+
+    for (let i = 0; i < numPendulums_show * stepPendulums_show; i += stepPendulums_show) {
+        let periodRatio = (numPendulums) / (numPendulums + 1 - i);
+        let length = gravity * Math.pow((basePeriod / (2 * Math.PI)), 2) * Math.pow(periodRatio, 2);
+
+        pendulums.push({
+            length: length * scale,
+            angle: Math.PI / 12, // Initial angle (in radians)
+            angularVelocity: 0,
+            angularAcceleration: 0,
+            pivotX: canvas.width / 2, // Space out pendulum pivot points
+            pivotY: startPositionY,
+        });
+    }
+
+    function updatePendulum(pendulum) {
+        pendulum.angularAcceleration = -(gravity / pendulum.length) * Math.sin(pendulum.angle);
+        pendulum.angularVelocity += pendulum.angularAcceleration;
+        pendulum.angle += pendulum.angularVelocity;
+
+        // Damping (optional, to eventually stop the motion)
+        pendulum.angularVelocity *= 1;
+    }
+
+    function drawPendulum(pendulum, index) {
+        // Set line thickness
+        ctx.lineWidth = 0.2; // Set your desired line thickness
+
+        ctx.beginPath();
+        const pendulumEndX = canvas.width / 2 + pendulum.length * Math.sin(pendulum.angle);
+        const pendulumEndY = pendulum.pivotY + pendulum.length * Math.cos(pendulum.angle);
+        ctx.moveTo(canvas.width / 2, pendulum.pivotY);
+        ctx.lineTo(pendulumEndX, pendulumEndY);
+        ctx.stroke();
+
+        // Set color for each ball
+        ctx.fillStyle = colors[index % colors.length]; // Loop through colors array if more pendulums than colors
+
+        // Draw pendulum bob
+        ctx.beginPath();
+        ctx.arc(pendulumEndX, pendulumEndY, 25, 0, 2 * Math.PI); // Adjust bob size as needed
+        ctx.fill();
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+        pendulums.forEach((pendulum, index) => {
+            updatePendulum(pendulum);
+            drawPendulum(pendulum, index);
+        });
+
+        requestAnimationFrame(animate); // Loop the animation
+    }
+
+    window.addEventListener('resize', function () {
+        canvas.width = window.innerWidth * 0.97; // Update canvas size to fill the window or adjust as needed
+        canvas.height = window.innerHeight; // Adjust height as needed or keep it constant
+
+        positionPendulums(); // Recalculate positions based on the new canvas size
+        // Optionally, redraw the pendulums here if your animation loop doesn't do it automatically
+    });
+
+    function updateTime() {
+        const now = new Date(); // Get current time
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        // Format the time in HH:MM:SS format
+        const timeString = `${hours}:${minutes}:${seconds}`;
+
+        // Set the timeString to the currentTime div
+        document.getElementById('currentTime').textContent = timeString;
+    }
+
+    // Update time initially and set interval to update every second
+    animate();
+    updateTime();
+    setInterval(updateTime, 1000);
+</script>
+</html>

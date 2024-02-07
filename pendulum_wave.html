@@ -44,12 +44,12 @@
     }
 
     function updatePendulum(pendulum) {
-        pendulum.angularAcceleration = -(gravity / pendulum.length) * Math.sin(pendulum.angle);
-        pendulum.angularVelocity += pendulum.angularAcceleration;
-        pendulum.angle += pendulum.angularVelocity;
+        pendulum_wave.angularAcceleration = -(gravity / pendulum_wave.length) * Math.sin(pendulum_wave.angle);
+        pendulum_wave.angularVelocity += pendulum_wave.angularAcceleration;
+        pendulum_wave.angle += pendulum_wave.angularVelocity;
 
         // Damping (optional, to eventually stop the motion)
-        pendulum.angularVelocity *= 1;
+        pendulum_wave.angularVelocity *= 1;
     }
 
     function drawPendulum(pendulum, index) {
@@ -57,9 +57,9 @@
         ctx.lineWidth = 0.2; // Set your desired line thickness
 
         ctx.beginPath();
-        const pendulumEndX = canvas.width / 2 + pendulum.length * Math.sin(pendulum.angle);
-        const pendulumEndY = pendulum.pivotY + pendulum.length * Math.cos(pendulum.angle);
-        ctx.moveTo(canvas.width / 2, pendulum.pivotY);
+        const pendulumEndX = canvas.width / 2 + pendulum_wave.length * Math.sin(pendulum_wave.angle);
+        const pendulumEndY = pendulum_wave.pivotY + pendulum_wave.length * Math.cos(pendulum_wave.angle);
+        ctx.moveTo(canvas.width / 2, pendulum_wave.pivotY);
         ctx.lineTo(pendulumEndX, pendulumEndY);
         ctx.stroke();
 
@@ -76,8 +76,8 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
 
         pendulums.forEach((pendulum, index) => {
-            updatePendulum(pendulum);
-            drawPendulum(pendulum, pendlum);
+            updatePendulum(pendulum_wave);
+            drawPendulum(pendulum_wave, pendlum);
         });
 
         requestAnimationFrame(animate); // Loop the animation

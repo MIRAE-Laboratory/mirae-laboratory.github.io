@@ -86,9 +86,6 @@
     window.addEventListener('resize', function () {
         canvas.width = window.innerWidth * 0.97; // Update canvas size to fill the window or adjust as needed
         canvas.height = window.innerHeight; // Adjust height as needed or keep it constant
-
-        positionPendulums(); // Recalculate positions based on the new canvas size
-        // Optionally, redraw the pendulums here if your animation loop doesn't do it automatically
     });
 
     function updateTime() {

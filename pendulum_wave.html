@@ -44,12 +44,12 @@
     }
 
     function updatePendulum(pendulum) {
-        pendulum_wave.angularAcceleration = -(gravity / pendulum_wave.length) * Math.sin(pendulum_wave.angle);
-        pendulum_wave.angularVelocity += pendulum_wave.angularAcceleration;
-        pendulum_wave.angle += pendulum_wave.angularVelocity;
+        pendulum.angularAcceleration = -(gravity / pendulum.length) * Math.sin(pendulum.angle);
+        pendulum.angularVelocity += pendulum.angularAcceleration;
+        pendulum.angle += pendulum.angularVelocity;
 
         // Damping (optional, to eventually stop the motion)
-        pendulum_wave.angularVelocity *= 1;
+        pendulum.angularVelocity *= 1;
     }
 
     function drawPendulum(pendulum, index) {
@@ -57,14 +57,14 @@
         ctx.lineWidth = 0.2; // Set your desired line thickness
 
         ctx.beginPath();
-        const pendulumEndX = canvas.width / 2 + pendulum_wave.length * Math.sin(pendulum_wave.angle);
-        const pendulumEndY = pendulum_wave.pivotY + pendulum_wave.length * Math.cos(pendulum_wave.angle);
-        ctx.moveTo(canvas.width / 2, pendulum_wave.pivotY);
+        const pendulumEndX = canvas.width / 2 + pendulum.length * Math.sin(pendulum.angle);
+        const pendulumEndY = pendulum.pivotY + pendulum.length * Math.cos(pendulum.angle);
+        ctx.moveTo(canvas.width / 2, pendulum.pivotY);
         ctx.lineTo(pendulumEndX, pendulumEndY);
         ctx.stroke();
 
         // Set color for each ball
-        ctx.fillStyle = colors[pendlum % colors.length]; // Loop through colors array if more pendulums than colors
+        ctx.fillStyle = colors[index % colors.length]; // Loop through colors array if more pendulums than colors
 
         // Draw pendulum bob
         ctx.beginPath();
@@ -76,8 +76,8 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
 
         pendulums.forEach((pendulum, index) => {
-            updatePendulum(pendulum_wave);
-            drawPendulum(pendulum_wave, pendlum);
+            updatePendulum(pendulum);
+            drawPendulum(pendulum, index);
         });
 
         requestAnimationFrame(animate); // Loop the animation

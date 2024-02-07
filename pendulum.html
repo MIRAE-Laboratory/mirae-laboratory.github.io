@@ -64,7 +64,7 @@
         ctx.stroke();
 
         // Set color for each ball
-        ctx.fillStyle = colors[index % colors.length]; // Loop through colors array if more pendulums than colors
+        ctx.fillStyle = colors[pendlum % colors.length]; // Loop through colors array if more pendulums than colors
 
         // Draw pendulum bob
         ctx.beginPath();
@@ -77,7 +77,7 @@
 
         pendulums.forEach((pendulum, index) => {
             updatePendulum(pendulum);
-            drawPendulum(pendulum, index);
+            drawPendulum(pendulum, pendlum);
         });
 
         requestAnimationFrame(animate); // Loop the animation

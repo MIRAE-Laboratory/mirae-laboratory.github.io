@@ -9,7 +9,6 @@ import { Link, useLocation } from "react-router-dom";
 // Images
 import defaultLogo from "../images/defaultNavLogo.svg";
 // Components
-import { Link as ScrollLink } from "react-scroll";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import ThemeToggle from "./ThemeToggle";
 
@@ -93,48 +92,24 @@ const NavBar = ({ Logo, callBack, closeDelay }) => {
           />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav navbarScroll className="me-auto">
-              {pathname === "/"
-                ? navLinks.to.map((el) => {
-                    return (
-                      <Nav.Item key={el.id}>
-                        <ScrollLink
-                          to={el.to}
-                          spy={true}
-                          activeClass="active"
-                          className="nav-link"
-                          onClick={() => {
-                            setTimeout(() => {
-                              setisExpanded(false);
-                            }, closeDelay);
-                          }}
-                        >
-                          {el.name}
-                        </ScrollLink>
-                      </Nav.Item>
-                    );
-                  })
-                : navLinks.routes.map((el) => {
-                    return (
-                      <Nav.Item key={el.id}>
-                        <Link
-                          to={el.route}
-                          className={
-                            pathname === el.route ||
-                            (el.route === "/Archive" && pathname.startsWith("/Archive"))
-                              ? "nav-link active"
-                              : "nav-link"
-                          }
-                          onClick={() => {
-                            setTimeout(() => {
-                              setisExpanded(false);
-                            }, closeDelay);
-                          }}
-                        >
-                          {el.name}
-                        </Link>
-                      </Nav.Item>
-                    );
-                  })}
+              {navLinks.routes.map((el) => (
+                <Nav.Item key={el.id}>
+                  <Link
+                    to={el.route}
+                    className={
+                      pathname === el.route ||
+                      (el.route === "/Archive" && pathname.startsWith("/Archive"))
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    onClick={() => {
+                      setTimeout(() => setisExpanded(false), closeDelay);
+                    }}
+                  >
+                    {el.name}
+                  </Link>
+                </Nav.Item>
+              ))}
             </Nav>
             <Nav>
               <ThemeToggle

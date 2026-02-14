@@ -32,7 +32,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run build:scraps && react-scripts build",
+    "build:scraps": "node scripts/build-scraps-index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

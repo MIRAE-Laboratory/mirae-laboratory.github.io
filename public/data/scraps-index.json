@@ -1,11 +1,69 @@
 [
   {
     "id": "scrap-1",
+    "slug": "README",
+    "title": "README",
+    "date": "",
+    "category": null,
+    "tags": [],
+    "source": null,
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": null,
+    "type": null,
+    "language": null
+  },
+  {
+    "id": "scrap-2",
+    "slug": "git-workflow-tutorial",
+    "title": "Git 브랜치 전략과 PR 워크플로",
+    "date": "2025-02-09",
+    "category": "Tutorials",
+    "tags": [
+      "Git",
+      "tutorial",
+      "GitHub",
+      "workflow"
+    ],
+    "source": "https://github.com",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "main/develop 브랜치, feature 브랜치, PR 리뷰까지 한 번에 따라 하기.",
+    "type": "tutorial",
+    "language": "ko"
+  },
+  {
+    "id": "scrap-3",
+    "slug": "lab-news-feb-2025",
+    "title": "연구실 소식 - 2025년 2월",
+    "date": "2025-02-10",
+    "category": "News",
+    "tags": [
+      "lab",
+      "news",
+      "event"
+    ],
+    "source": null,
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "신입생 합류, 세미나 일정, 논문 게재 소식.",
+    "type": "news",
+    "language": "ko"
+  },
+  {
+    "id": "scrap-4",
     "slug": "sample-paper-note",
     "title": "Sample Academic Note",
     "date": "2025-02-14",
     "category": "Paper",
-    "tags": ["ML", "research", "survey"],
+    "tags": [
+      "ML",
+      "research",
+      "survey"
+    ],
     "source": "https://example.com",
     "country": "South Korea",
     "institute": "Seoul National University",
@@ -15,15 +73,42 @@
     "language": "en"
   },
   {
-    "id": "scrap-2",
+    "id": "scrap-5",
     "slug": "technical-tip-example",
     "title": "Technical Tip Example",
     "date": "2025-02-13",
     "category": "Technical Tips",
-    "tags": ["Python", "tips", "tooling"],
+    "tags": [
+      "Python",
+      "tips",
+      "tooling"
+    ],
     "source": "https://example.com",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
     "abstract": "A quick technical tip for daily use.",
     "type": "blog",
+    "language": "en"
+  },
+  {
+    "id": "scrap-6",
+    "slug": "transformer-survey-2024",
+    "title": "Transformers in NLP - A Survey (2024)",
+    "date": "2025-02-12",
+    "category": "Paper",
+    "tags": [
+      "NLP",
+      "transformer",
+      "survey",
+      "deep-learning"
+    ],
+    "source": "https://arxiv.org/example",
+    "country": "USA",
+    "institute": "MIT",
+    "correspondingAuthor": "Jane Doe",
+    "abstract": "We survey recent advances in transformer architectures for natural language processing.",
+    "type": "paper",
     "language": "en"
   }
 ]

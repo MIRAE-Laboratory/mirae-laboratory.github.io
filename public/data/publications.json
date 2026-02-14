@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pub-1",
+    "type": "journal",
+    "title": "Sample Journal Paper Title",
+    "authors": ["Professor Mi", "Student One"],
+    "venue": "Journal Name",
+    "year": 2024,
+    "doi": null,
+    "url": null,
+    "abstract": null,
+    "bibtex": null
+  },
+  {
+    "id": "pub-2",
+    "type": "conference",
+    "title": "Sample Conference Paper",
+    "authors": ["Professor Mi", "Student One"],
+    "venue": "Conference Name 2024",
+    "year": 2024,
+    "doi": null,
+    "url": null,
+    "abstract": null,
+    "bibtex": null
+  }
+]

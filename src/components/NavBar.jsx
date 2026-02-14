@@ -17,7 +17,10 @@ import ThemeToggle from "./ThemeToggle";
 const navLinks = {
   routes: [
     { id: "1R", name: "Home", route: "/" },
-    { id: "2R", name: "All Projects", route: "/All-Projects" },
+    { id: "2R", name: "People", route: "/People" },
+    { id: "3R", name: "Publications", route: "/Publications" },
+    { id: "4R", name: "Archive", route: "/Archive" },
+    { id: "5R", name: "All Projects", route: "/All-Projects" },
   ],
   to: [
     { id: "1T", name: "Home", to: "Home" },
@@ -116,7 +119,8 @@ const NavBar = ({ Logo, callBack, closeDelay }) => {
                         <Link
                           to={el.route}
                           className={
-                            pathname === el.route
+                            pathname === el.route ||
+                            (el.route === "/Archive" && pathname.startsWith("/Archive"))
                               ? "nav-link active"
                               : "nav-link"
                           }

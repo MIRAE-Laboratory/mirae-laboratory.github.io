@@ -1,0 +1,29 @@
+[
+  {
+    "id": "scrap-1",
+    "slug": "sample-paper-note",
+    "title": "Sample Academic Note",
+    "date": "2025-02-14",
+    "category": "Paper",
+    "tags": ["ML", "research", "survey"],
+    "source": "https://example.com",
+    "country": "South Korea",
+    "institute": "Seoul National University",
+    "correspondingAuthor": "Professor Mi",
+    "abstract": "Short summary for preview.",
+    "type": "paper",
+    "language": "en"
+  },
+  {
+    "id": "scrap-2",
+    "slug": "technical-tip-example",
+    "title": "Technical Tip Example",
+    "date": "2025-02-13",
+    "category": "Technical Tips",
+    "tags": ["Python", "tips", "tooling"],
+    "source": "https://example.com",
+    "abstract": "A quick technical tip for daily use.",
+    "type": "blog",
+    "language": "en"
+  }
+]

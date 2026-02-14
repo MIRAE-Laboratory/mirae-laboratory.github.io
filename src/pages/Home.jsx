@@ -9,7 +9,7 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import BackToTop from "../components/BackToTop";
 // Config
-import { filteredProjects, moreInfo } from "../config";
+import { filteredProjects, moreInfo, siteName } from "../config";
 // Utils
 import { updateTitle } from "../utils";
 
@@ -18,7 +18,7 @@ const Home = () => {
   const { data: userData } = useGetUsersQuery();
 
   React.useEffect(() => {
-    updateTitle(`${userData.name} | Portfolio`);
+    updateTitle(userData?.name ? `${userData.name} | ${siteName}` : siteName);
   }, [userData]);
 
   return (

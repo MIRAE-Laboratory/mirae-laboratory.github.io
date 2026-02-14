@@ -20,6 +20,8 @@ import Loading from "../components/Loading";
 import Title from "../components/Title";
 import ProjectCard from "../components/ProjectCard";
 import BackToTop from "../components/BackToTop";
+// Config
+import { siteName } from "../config";
 // Utils
 import { updateTitle } from "../utils";
 
@@ -49,7 +51,7 @@ const AllProjects = () => {
   let content;
 
   React.useEffect(() => {
-    updateTitle(`${userData.name} | All Projects`);
+    updateTitle(userData?.name ? `${userData.name} | All Projects` : `All Projects | ${siteName}`);
   }, [userData]);
 
   React.useEffect(() => {

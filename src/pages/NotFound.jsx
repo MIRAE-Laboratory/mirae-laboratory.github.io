@@ -5,6 +5,8 @@ import styled, { keyframes } from "styled-components";
 import { Container } from "react-bootstrap";
 // Images
 import Logo from "../images/logo.svg";
+// Config
+import { siteName } from "../config";
 // Utils
 import { updateTitle } from "../utils";
 
@@ -48,7 +50,7 @@ const StyledNotFound = styled.main`
 // #region component
 const NotFound = () => {
   React.useEffect(() => {
-    updateTitle("Not found...");
+    updateTitle(`Page not found | ${siteName}`);
   }, []);
 
   return (

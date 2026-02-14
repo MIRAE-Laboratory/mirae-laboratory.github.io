@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mi",
+    "name": "Professor Mi",
+    "role": "Principal Investigator",
+    "avatar": null,
+    "bio": "Lab director and principal investigator.",
+    "email": null,
+    "link": null,
+    "researchAreas": []
+  },
+  {
+    "id": "student-1",
+    "name": "Student One",
+    "role": "Graduate Student",
+    "avatar": null,
+    "bio": "",
+    "email": null,
+    "link": null,
+    "researchAreas": []
+  }
+]

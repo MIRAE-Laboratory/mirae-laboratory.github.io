@@ -17,6 +17,9 @@ import Logo from "./images/logo.svg";
 */
 export const githubUsername = "mirae-laboratory";
 
+// Site name for document title (e.g. "People | Lab")
+export const siteName = "Lab";
+
 // Navbar Logo image
 export const navLogo = null;
 
@@ -115,3 +118,16 @@ export const formspreeUrl = "https://formspree.io/f/mldrepaa";
 
 // Footer icons theme (light or dark)
 export const footerTheme = "dark";
+
+/* Archive (scraps) – menu categories
+ **************************************************************
+  Each item appears as a menu entry under Archive. Scrap frontmatter
+  should use category: "Paper" etc. to match these keys.
+*/
+export const archiveCategories = [
+  { id: "all", label: "All", slug: "" },
+  { id: "Paper", label: "Paper", slug: "Paper" },
+  { id: "Technical Tips", label: "Technical Tips", slug: "Technical-Tips" },
+  { id: "News", label: "News", slug: "News" },
+  { id: "Tutorials", label: "Tutorials", slug: "Tutorials" },
+];

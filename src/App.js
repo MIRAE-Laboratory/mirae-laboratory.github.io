@@ -16,6 +16,9 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
 import AllProjects from "./pages/AllProjects";
+import People from "./pages/People";
+import Publications from "./pages/Publications";
+import Archive from "./pages/Archive";
 import NotFound from "./pages/NotFound";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -151,6 +154,10 @@ const App = ({ projectCardImages, filteredProjects }) => {
         </Element>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/People" element={<People />} />
+          <Route path="/Publications" element={<Publications />} />
+          <Route path="/Archive" element={<Archive />} />
+          <Route path="/Archive/:categorySlug" element={<Archive />} />
           <Route path="/All-Projects" element={<AllProjects />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

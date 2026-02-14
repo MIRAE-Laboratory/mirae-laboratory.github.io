@@ -1,0 +1,11 @@
+# package.json overrides 로 webpack-dev-server@^5.2.1 사용 중.
+# react-scripts@5.0.1 은 4.x 만 요구하므로 Dependabot 이 자동 PR 을 만들 수 없어
+# 해당 보안 알림만 무시합니다.
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#ignore
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    ignore:
+      - dependency-name: "webpack-dev-server"
+        update-types: ["security"]

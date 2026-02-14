@@ -1,0 +1,42 @@
+[
+  {
+    "id": "mi",
+    "name": "Professor Mi",
+    "role": "Principal Investigator",
+    "avatar": null,
+    "bio": "Director of MIRAE Lab. Research interests: multi-modal reasoning, intelligent systems, and evaluation methodologies.",
+    "email": "mi@university.edu",
+    "link": null,
+    "researchAreas": ["Multi-modal AI", "Reasoning", "Evaluation"]
+  },
+  {
+    "id": "kim",
+    "name": "Kim Soo-young",
+    "role": "Ph.D. Student",
+    "avatar": null,
+    "bio": "Working on vision-language models and active evaluation.",
+    "email": null,
+    "link": null,
+    "researchAreas": ["Vision-Language", "NLP"]
+  },
+  {
+    "id": "lee",
+    "name": "Lee Min-ho",
+    "role": "Master's Student",
+    "avatar": null,
+    "bio": "Focus on efficient inference and model compression.",
+    "email": null,
+    "link": null,
+    "researchAreas": ["Efficient ML", "Compression"]
+  },
+  {
+    "id": "park",
+    "name": "Park Ji-eun",
+    "role": "Research Intern",
+    "avatar": null,
+    "bio": "Undergraduate intern. Interest in HCI and AI systems.",
+    "email": null,
+    "link": null,
+    "researchAreas": ["HCI", "AI Systems"]
+  }
+]

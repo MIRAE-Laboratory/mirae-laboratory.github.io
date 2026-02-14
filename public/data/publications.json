@@ -1,0 +1,74 @@
+[
+  {
+    "id": "pub-j1",
+    "type": "journal",
+    "title": "Multi-Modal Reasoning with Large Language Models: A Survey and Benchmark",
+    "authors": ["Professor Mi", "Kim Soo-young", "Lee Min-ho"],
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "year": 2024,
+    "doi": "10.1109/TPAMI.2024.1234567",
+    "url": "https://doi.org/10.1109/TPAMI.2024.1234567",
+    "abstract": "We present a comprehensive survey of multi-modal reasoning methods and introduce a new benchmark for evaluating reasoning capabilities across text, image, and video.",
+    "bibtex": null
+  },
+  {
+    "id": "pub-c1",
+    "type": "conference",
+    "title": "Active Evaluation of Vision-Language Models: When to Ask for Human Feedback",
+    "authors": ["Professor Mi", "Kim Soo-young"],
+    "venue": "NeurIPS 2024",
+    "year": 2024,
+    "doi": null,
+    "url": null,
+    "abstract": "We propose an active evaluation framework that selectively queries human feedback to reduce cost while maintaining reliable assessment of VLM outputs.",
+    "bibtex": null
+  },
+  {
+    "id": "pub-patent1",
+    "type": "patent",
+    "title": "Method and System for Adaptive Multi-Modal Query Processing",
+    "authors": ["Professor Mi", "Lee Min-ho", "Park Ji-eun"],
+    "venue": "Korean Intellectual Property Office (KIPO)",
+    "year": 2024,
+    "doi": null,
+    "url": null,
+    "abstract": "Patent application for an adaptive system that routes user queries to the most appropriate modality (text, image, or hybrid) based on context and confidence.",
+    "bibtex": null
+  },
+  {
+    "id": "pub-c2",
+    "type": "conference",
+    "title": "Lightweight Reasoning Heads for Efficient Deployment of LLMs",
+    "authors": ["Lee Min-ho", "Professor Mi"],
+    "venue": "ACL 2024",
+    "year": 2024,
+    "doi": null,
+    "url": null,
+    "abstract": "We introduce small reasoning heads that can be attached to frozen base LLMs to improve step-by-step reasoning with minimal parameter overhead.",
+    "bibtex": null
+  },
+  {
+    "id": "pub-poster1",
+    "type": "poster",
+    "title": "Preliminary Results: User Study on Explainable AI in Clinical Decision Support",
+    "authors": ["Park Ji-eun", "Professor Mi"],
+    "venue": "CHI 2024 Extended Abstracts",
+    "year": 2024,
+    "doi": null,
+    "url": null,
+    "abstract": "Poster summarizing early findings from a user study on how clinicians interact with explanations from AI-assisted diagnosis systems.",
+    "bibtex": null
+  },
+  {
+    "id": "pub-j2",
+    "type": "journal",
+    "title": "Benchmarking Uncertainty Estimation in Natural Language Generation",
+    "authors": ["Professor Mi", "Kim Soo-young"],
+    "venue": "Computational Linguistics",
+    "year": 2023,
+    "doi": null,
+    "url": null,
+    "abstract": "We compare existing methods for uncertainty estimation in NLG and release a benchmark suite for future work.",
+    "bibtex": null
+  }
+]

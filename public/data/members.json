@@ -7,7 +7,8 @@
     "bio": "Lab director and principal investigator.",
     "email": null,
     "link": null,
-    "researchAreas": []
+    "researchAreas": [],
+    "order": 1
   },
   {
     "id": "student-1",
@@ -17,6 +18,7 @@
     "bio": "",
     "email": null,
     "link": null,
-    "researchAreas": []
+    "researchAreas": [],
+    "order": 2
   }
 ]

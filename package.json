@@ -26,14 +26,16 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.1.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "yaml": "^2.6.0"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "npm run build:scraps && react-scripts build",
+    "start": "npm run build:scraps && npm run build:content && react-scripts start",
+    "build": "npm run build:scraps && npm run build:content && react-scripts build",
     "build:scraps": "node scripts/build-scraps-index.js",
+    "build:content": "node scripts/build-content.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

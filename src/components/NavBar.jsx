@@ -16,10 +16,11 @@ import ThemeToggle from "./ThemeToggle";
 const navLinks = {
   routes: [
     { id: "1R", name: "Home", route: "/" },
-    { id: "2R", name: "People", route: "/People" },
-    { id: "3R", name: "Publications", route: "/Publications" },
-    { id: "4R", name: "Archive", route: "/Archive" },
-    { id: "5R", name: "All Projects", route: "/All-Projects" },
+    { id: "2R", name: "Professor", route: "/Professor" },
+    { id: "3R", name: "People", route: "/People" },
+    { id: "4R", name: "Publications", route: "/Publications" },
+    { id: "5R", name: "Archive", route: "/Archive" },
+    { id: "6R", name: "All Projects", route: "/All-Projects" },
   ],
   to: [
     { id: "1T", name: "Home", to: "Home" },

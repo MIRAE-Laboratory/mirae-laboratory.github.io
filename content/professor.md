@@ -195,7 +195,7 @@ careerRnd:
     org: 한국원자력연구원
   -
     period: "2020.02 - 2020.12"
-    title: AI 특성화 기업 역량강화 사업 (Track2: AI 솔루션 및 Pilot 제작)
+    title: "AI 특성화 기업 역량강화 사업 (Track2: AI 솔루션 및 Pilot 제작)"
     org: "(주)링크제네시스"
   -
     period: "2020.01 - 2020.12"

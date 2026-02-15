@@ -1,5 +1,5 @@
 /**
- * content/scraps/*.md 파일을 읽어 frontmatter를 추출하고
+ * public/content/scraps/*.md 파일을 읽어 frontmatter를 추출하고
  * public/data/scraps-index.json 을 생성합니다.
  * 빌드 전에 실행되므로 Archive 페이지는 이 인덱스를 사용합니다.
  *
@@ -12,7 +12,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SCRAPS_DIR = path.join(__dirname, "..", "content", "scraps");
+const SCRAPS_DIR = path.join(__dirname, "..", "public", "content", "scraps");
 const OUT_FILE = path.join(__dirname, "..", "public", "data", "scraps-index.json");
 
 function parseFrontmatter(content) {

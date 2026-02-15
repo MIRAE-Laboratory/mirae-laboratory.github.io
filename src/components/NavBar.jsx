@@ -84,7 +84,7 @@ const NavBar = ({ Logo, callBack, closeDelay }) => {
               src={Logo === null ? defaultLogo : Logo}
               width="35"
               height="35"
-              className="rounded-circle logo-img"
+              className={`logo-img ${typeof Logo === "string" ? "rounded-0" : "rounded-circle"}`}
             />
           </Navbar.Brand>
           <Navbar.Toggle

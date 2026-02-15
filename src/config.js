@@ -20,8 +20,8 @@ export const githubUsername = "mirae-laboratory";
 // Site name for document title (e.g. "People | Lab")
 export const siteName = "Lab";
 
-// Navbar Logo image
-export const navLogo = null;
+// Navbar Logo (public/content/files/)
+export const navLogo = `${process.env.PUBLIC_URL || ""}/content/files/MIRAE_Logo.png`;
 
 /* Main
  ************************************************************** 

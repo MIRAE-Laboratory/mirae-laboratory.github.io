@@ -47,7 +47,10 @@ const Professor = () => {
   const education = profile.education || [];
   const awards = profile.awards || [];
   const imageUrl = profile.imageUrl || null;
+  const imageSrc = imageUrl && !imageUrl.startsWith("http") ? (baseUrl + imageUrl) : imageUrl;
   const fullProfileUrl = profile.fullProfileUrl || "";
+  const cvPdfUrl = profile.cvPdfUrl || null;
+  const academicCvPdfUrl = profile.academicCvPdfUrl || null;
   const careerTeaching = profile.careerTeaching || [];
   const careerTransfer = profile.careerTransfer || [];
   const careerRnd = profile.careerRnd || [];
@@ -82,10 +85,10 @@ const Professor = () => {
           <Card.Body>
             <Row>
               <Col md={4} className="text-center mb-3 mb-md-0">
-                {imageUrl ? (
+                {imageSrc ? (
                   <>
                     <img
-                      src={imageUrl}
+                      src={imageSrc}
                       alt={profile.name || ""}
                       className="img-fluid rounded"
                       style={{ maxHeight: "280px", objectFit: "contain" }}
@@ -137,6 +140,30 @@ const Professor = () => {
                     <strong>Email:</strong>{" "}
                     <a href={`mailto:${profile.contactEmail}`}>{profile.contactEmail}</a>
                   </p>
+                )}
+                {(cvPdfUrl || academicCvPdfUrl) && (
+                  <div className="mt-2">
+                    {cvPdfUrl && (
+                      <a
+                        href={baseUrl + cvPdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline-secondary btn-sm me-1"
+                      >
+                        CV (PDF)
+                      </a>
+                    )}
+                    {academicCvPdfUrl && (
+                      <a
+                        href={baseUrl + encodeURI(academicCvPdfUrl)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline-secondary btn-sm"
+                      >
+                        학술이력서 (PDF)
+                      </a>
+                    )}
+                  </div>
                 )}
                 {fullProfileUrl && (
                   <a

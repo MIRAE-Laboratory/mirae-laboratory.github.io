@@ -1,7 +1,9 @@
 ---
 name: 서호건
 nameEn: Hogeon Seo
-imageUrl: https://miraelab.re.kr/pages/professor.files/image003.png
+imageUrl: /content/files/Hogeon_Seo.png
+cvPdfUrl: /content/files/Hogeon_Seo_CV.pdf
+academicCvPdfUrl: /content/files/서호건_학술이력서.pdf
 title1: 과학기술연합대학원대학교 · 인공지능 전공 · 부교수
 title2: 한국원자력연구원 · 인공지능응용연구실 · 선임연구원
 title3: 한국비파괴검사학회 · 국제협력이사

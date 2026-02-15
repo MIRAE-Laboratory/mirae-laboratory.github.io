@@ -1,15 +1,14 @@
 /**
- * content/professor.md → public/data/professor.json (frontmatter 전체 사용)
- * content/people/*.md → public/data/members.json
- *
- * Professor는 YAML frontmatter에 연구분야·학력·수상까지 모두 포함합니다.
+ * public/content/professor.md → public/data/professor.json
+ * public/content/people/*.md → public/data/members.json
+ * (content 전체가 public/content 아래에 있음 → 옵시디언에서 md·이미지 경로 공통)
  */
 
 const fs = require("fs");
 const path = require("path");
 const yaml = require("yaml");
 
-const CONTENT_DIR = path.join(__dirname, "..", "content");
+const CONTENT_DIR = path.join(__dirname, "..", "public", "content");
 const OUT_DIR = path.join(__dirname, "..", "public", "data");
 
 function parseFrontmatterSimple(content) {
@@ -97,6 +96,8 @@ function buildProfessor() {
     contactTel: frontmatter.contactTel || "",
     contactEmail: frontmatter.contactEmail || "",
     fullProfileUrl: frontmatter.fullProfileUrl || "",
+    cvPdfUrl: frontmatter.cvPdfUrl || null,
+    academicCvPdfUrl: frontmatter.academicCvPdfUrl || null,
     researchAreas: arr(frontmatter.researchAreas),
     education: arr(frontmatter.education),
     awards: arr(frontmatter.awards),

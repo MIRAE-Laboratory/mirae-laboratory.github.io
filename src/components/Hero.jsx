@@ -14,6 +14,9 @@ import { Link } from "react-scroll";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SocialLinks from "./SocialLinks";
 
+const baseUrl = process.env.PUBLIC_URL || "";
+const bannerUrl = `${baseUrl}/content/files/MIRAE_Banner.png`;
+
 // #region styled-components
 const spin = keyframes`
   from {
@@ -104,6 +107,19 @@ const Hero = ({ name }) => {
   return (
     <StyledHero>
       <Container>
+        <Row className="justify-content-center text-center mb-4">
+          <Col xs={12}>
+            <img
+              src={bannerUrl}
+              alt="MIRAE Lab"
+              className="img-fluid mx-auto"
+              style={{ maxHeight: "180px", width: "auto", objectFit: "contain" }}
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+            />
+          </Col>
+        </Row>
         <Row className="align-items-center text-center">
           <Col>
             <h1 className="mb-3 display-3 title">

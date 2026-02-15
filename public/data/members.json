@@ -1,24 +1,24 @@
 [
   {
     "id": "mi",
-    "name": "Professor Mi",
-    "role": "Principal Investigator",
-    "avatar": null,
-    "bio": "Lab director and principal investigator.",
-    "email": null,
-    "link": null,
-    "researchAreas": [],
-    "order": 1
-  },
-  {
-    "id": "student-1",
-    "name": "Student One",
-    "role": "Graduate Student",
+    "name": "mi",
+    "role": "",
     "avatar": null,
     "bio": "",
     "email": null,
     "link": null,
     "researchAreas": [],
-    "order": 2
+    "order": 999
+  },
+  {
+    "id": "student-1",
+    "name": "student-1",
+    "role": "",
+    "avatar": null,
+    "bio": "",
+    "email": null,
+    "link": null,
+    "researchAreas": [],
+    "order": 999
   }
 ]

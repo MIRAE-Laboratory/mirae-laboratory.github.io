@@ -2,6 +2,7 @@
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/mshuber1981/github-react-portfolio-template?color=%2361dbfb&style=for-the-badge&logo=github)](https://github.com/mshuber1981/github-react-portfolio-template/stargazers/) [![GitHub Repo Forks](https://img.shields.io/github/forks/mshuber1981/github-react-portfolio-template?color=%2361dbfb&style=for-the-badge&logo=github&label=Forks)](https://github.com/mshuber1981/github-react-portfolio-template/network/members) [![X (formerly Twitter) URL](https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com&style=for-the-badge&logo=X&label=Say%20thank%20you!&labelColor=black&color=black)](https://twitter.com/intent/tweet?text=Thanks%20for%20the%20awesome%20Portfolio%20Template!%20https://github.com/mshuber1981/github-react-portfolio-template&via=MikeyHuber1981)
 
+
 A performant, accessible, progressive React portfolio template that uses the [GitHub REST API](https://docs.github.com/en/free-pro-team@latest/rest).
 
 Add your GitHub username once and all of your info will automatically be updated. Deploy to GitHub pages in a few simple steps.
@@ -28,7 +29,6 @@ Add your GitHub username once and all of your info will automatically be updated
    ```bash
    npm install
    ```
-
 5. Navigate to the src directory and open src/config.js
 6. Add your GitHub username ([config.js](https://github.com/mshuber1981/github-react-portfolio-template/blob/main/src/config.js#L18) line 18)
 
@@ -39,7 +39,6 @@ Add your GitHub username once and all of your info will automatically be updated
    */
    export const githubUsername = "Your GitHub username here";
    ```
-
 7. Start the development server to view the results
 
    ```bash
@@ -70,7 +69,6 @@ A helpful guide for Create React App deployments with GitHub Pages can be found 
    ```json
    "homepage": "https://YourUserName.github.io/your-repo/",
    ```
-
 2. Run the deploy command
 
    ```bash
@@ -89,7 +87,7 @@ Checkout the [Wiki](https://github.com/mshuber1981/github-react-portfolio-templa
 - [Updating the theme color](https://github.com/mshuber1981/github-react-portfolio-template/wiki/Updating-the-theme-color)
 - [Updating the Footer icons theme (light or dark)](https://github.com/mshuber1981/github-react-portfolio-template/wiki/Updating-the-Footer-icons-theme)
 
-[Back to top :top:](#a-react-portfolio-template-for-github)
+[Back to top 🔝](#a-react-portfolio-template-for-github)
 
 ### License
 

@@ -27,7 +27,11 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.1.1",
     "react-scripts": "^5.0.1",
-    "yaml": "^2.8.2"
+    "yaml": "^2.8.2",
+    "concurrently": "^9.1.0",
+    "serve": "^14.2.3",
+    "nodemon": "^3.1.9",
+    "cross-env": "^7.0.3"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -36,6 +40,10 @@
     "build": "npm run build:scraps && npm run build:content && react-scripts build",
     "build:scraps": "node scripts/build-scraps-index.js",
     "build:content": "node scripts/build-content.js",
+    "build:local": "cross-env PUBLIC_URL=/ npm run build",
+    "build:watch": "nodemon --watch src --watch public --watch scripts --ignore public/data --ignore build -e js,jsx,json,md,html,css,scss,sass --exec \"npm run build:local\"",
+    "serve:live": "serve -s build -l 8080",
+    "dev:build": "npm run build:local && concurrently \"npm run build:watch\" \"npm run serve:live\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -60,6 +68,8 @@
   "overrides": {
     "nth-check": "^2.0.1",
     "postcss": "^8.4.31",
-    "webpack-dev-server": "^5.2.1"
+    "webpack-dev-server": "^5.2.1",
+    "braces": "^3.0.3",
+    "micromatch": "^4.0.8"
   }
 }

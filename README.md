@@ -46,6 +46,17 @@ researchAreas:
 
 ---
 
+## Local Deployment Test
+
+```
+npm run build
+npx serve -s build
+```
+
+```
+npm run dev:build
+```
+
 ---
 
 # A React Portfolio Template for GitHub

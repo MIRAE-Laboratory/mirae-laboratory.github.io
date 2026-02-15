@@ -1,5 +1,5 @@
 ---
-name: Sugon_Shim
+name: Sugon Shim
 role: Master (Alumni)
 bio: 2024.03. - 2026.02.
 avatar: Sugon_Shim.jpg

@@ -1,5 +1,5 @@
 ---
-name: Yeonga_Jang
+name: Yeonga Jang
 role: Unified Master and Ph.D. Student
 bio: 2026.03. - Present
 avatar: Yeonga_Jang.jpg

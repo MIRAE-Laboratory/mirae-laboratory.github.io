@@ -1,24 +1,73 @@
 [
   {
-    "id": "mi",
-    "name": "mi",
-    "role": "",
-    "avatar": null,
-    "bio": "",
-    "email": null,
+    "id": "Jaejun_Lee",
+    "name": "Jaejun Lee",
+    "role": "Ph.D. Student",
+    "avatar": "/content/people/Jaejun_Lee.jpg",
+    "bio": "2024.09. - Present",
+    "email": "wowns1484@gmail.com",
     "link": null,
-    "researchAreas": [],
-    "order": 999
+    "researchAreas": [
+      "Agentic AI for Physics-informed Machine Learning",
+      "Physics-informed Neural Networks",
+      "Automated Machine Learning",
+      "Multi-channel Signal Reconstruction"
+    ],
+    "order": 1
   },
   {
-    "id": "student-1",
-    "name": "student-1",
-    "role": "",
-    "avatar": null,
-    "bio": "",
+    "id": "Yeonga_Jang",
+    "name": "Yeonga Jang",
+    "role": "Unified Master and Ph.D. Student",
+    "avatar": "/content/people/Yeonga_Jang.jpg",
+    "bio": "2026.03. - Present",
+    "email": "jlife0090@gmail.com",
+    "link": null,
+    "researchAreas": [
+      "Agentic AI System"
+    ],
+    "order": 2
+  },
+  {
+    "id": "Inhye_Park",
+    "name": "Inhye Park",
+    "role": "Intern",
+    "avatar": "/content/people/Inhye_Park.jpg",
+    "bio": "2026.01. - Present",
+    "email": "parkinhye0412@gmail.com",
+    "link": null,
+    "researchAreas": [
+      "Agentic AI System",
+      "Real-time Human-AI Agent Interaction"
+    ],
+    "order": 3
+  },
+  {
+    "id": "Soyeon_Kim",
+    "name": "Soyeon Kim",
+    "role": "Master (Alumni)",
+    "avatar": "/content/people/Soyeon_Kim.jpg",
+    "bio": "2024.03. - 2026.02.",
     "email": null,
     "link": null,
-    "researchAreas": [],
-    "order": 999
+    "researchAreas": [
+      "Multimodal Sensor Fusion AI",
+      "AI Orchestration",
+      "Human AI Interaction"
+    ],
+    "order": 100
+  },
+  {
+    "id": "Sugon_Shim",
+    "name": "Sugon Shim",
+    "role": "Master (Alumni)",
+    "avatar": "/content/people/Sugon_Shim.jpg",
+    "bio": "2024.03. - 2026.02.",
+    "email": null,
+    "link": null,
+    "researchAreas": [
+      "Simultaneous Localization and Mapping (SLAM) based on Deep Learning"
+    ],
+    "order": 101
   }
 ]

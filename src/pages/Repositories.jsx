@@ -40,7 +40,7 @@ const StyledSection = styled.section`
 // #endregion
 
 // #region component
-const AllProjects = () => {
+const Repositories = () => {
   const [searchInput, setSearchInput] = React.useState("");
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [pageItems, setPageItems] = React.useState([]);
@@ -220,4 +220,4 @@ const AllProjects = () => {
 };
 // #endregion
 
-export default AllProjects;
+export default Repositories;

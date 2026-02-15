@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import { HashRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
-import AllProjects from "./pages/AllProjects";
+import Repositories from "./pages/Repositories";
 import Professor from "./pages/Professor";
 import People from "./pages/People";
 import Publications from "./pages/Publications";
@@ -161,7 +161,7 @@ const App = ({ projectCardImages, filteredProjects }) => {
           <Route path="/Publications" element={<Publications />} />
           <Route path="/Archive" element={<Archive />} />
           <Route path="/Archive/:categorySlug" element={<Archive />} />
-          <Route path="/Repositories" element={<AllProjects />} />
+          <Route path="/Repositories" element={<Repositories />} />
           <Route path="/Contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

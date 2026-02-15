@@ -56,7 +56,7 @@ const People = () => {
                 <Card.Body className="text-center">
                   {m.avatar ? (
                     <img
-                      src={m.avatar}
+                      src={m.avatar.startsWith("http") ? m.avatar : baseUrl + m.avatar}
                       alt={m.name}
                       className="rounded-circle mb-3"
                       style={{ width: "8rem", height: "8rem", objectFit: "cover" }}

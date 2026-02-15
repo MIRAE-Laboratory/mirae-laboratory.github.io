@@ -144,11 +144,15 @@ function buildMembers() {
     } else {
       researchAreas = [];
     }
+    let avatar = frontmatter.avatar || null;
+    if (avatar && typeof avatar === "string" && !avatar.startsWith("http") && !avatar.startsWith("/")) {
+      avatar = `/content/people/${avatar}`;
+    }
     members.push({
       id: frontmatter.id || id,
       name: frontmatter.name || id,
       role: frontmatter.role || "",
-      avatar: frontmatter.avatar || null,
+      avatar,
       bio: frontmatter.bio || "",
       email: frontmatter.email || null,
       link: frontmatter.link || null,

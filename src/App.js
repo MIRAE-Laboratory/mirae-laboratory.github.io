@@ -20,6 +20,7 @@ import Professor from "./pages/Professor";
 import People from "./pages/People";
 import Publications from "./pages/Publications";
 import Archive from "./pages/Archive";
+import ContactPage from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -160,7 +161,8 @@ const App = ({ projectCardImages, filteredProjects }) => {
           <Route path="/Publications" element={<Publications />} />
           <Route path="/Archive" element={<Archive />} />
           <Route path="/Archive/:categorySlug" element={<Archive />} />
-          <Route path="/All-Projects" element={<AllProjects />} />
+          <Route path="/Repositories" element={<AllProjects />} />
+          <Route path="/Contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer mode={footerTheme} />

@@ -49,7 +49,7 @@ const People = () => {
         <div className="d-flex justify-content-center mb-5">
           <Title size="h1" text="People" />
         </div>
-        <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
+        <Row xs={1} md={2} lg={3} className="g-4 justify-content-center align-items-start">
           {members.map((m) => (
             <Col key={m.id}>
               <Card className="h-100 shadow-sm">

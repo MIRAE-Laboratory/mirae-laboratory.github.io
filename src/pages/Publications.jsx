@@ -84,7 +84,7 @@ const Publications = () => {
             </Badge>
           ))}
         </div>
-        <Row xs={1} className="g-4">
+        <Row xs={1} className="g-4 align-items-start">
           {filtered.map((p) => (
             <Col key={p.id}>
               <Card className="h-100 shadow-sm">

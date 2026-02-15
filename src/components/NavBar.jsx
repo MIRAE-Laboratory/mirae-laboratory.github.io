@@ -19,8 +19,12 @@ const navLinks = {
     { id: "2R", name: "Professor", route: "/Professor" },
     { id: "3R", name: "People", route: "/People" },
     { id: "4R", name: "Publications", route: "/Publications" },
-    { id: "5R", name: "Archive", route: "/Archive" },
-    { id: "6R", name: "All Projects", route: "/All-Projects" },
+    { id: "5R", name: "Lectures", external: true, href: "https://github.com/MIRAE-Laboratory/Lectures" },
+    { id: "6R", name: "Repositories", route: "/Repositories" },
+    { id: "7R", name: "Archive", route: "/Archive" },
+    { id: "8R", name: "UST-KAERI School", external: true, href: "https://kaeri.ust.ac.kr/" },
+    { id: "9R", name: "UST", external: true, href: "https://ust.ac.kr/" },
+    { id: "10R", name: "Contact Us", route: "/Contact" },
   ],
   to: [
     { id: "1T", name: "Home", to: "Home" },
@@ -95,20 +99,32 @@ const NavBar = ({ Logo, callBack, closeDelay }) => {
             <Nav navbarScroll className="me-auto">
               {navLinks.routes.map((el) => (
                 <Nav.Item key={el.id}>
-                  <Link
-                    to={el.route}
-                    className={
-                      pathname === el.route ||
-                      (el.route === "/Archive" && pathname.startsWith("/Archive"))
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    onClick={() => {
-                      setTimeout(() => setisExpanded(false), closeDelay);
-                    }}
-                  >
-                    {el.name}
-                  </Link>
+                  {el.external ? (
+                    <a
+                      href={el.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="nav-link"
+                      onClick={() => setTimeout(() => setisExpanded(false), closeDelay)}
+                    >
+                      {el.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={el.route}
+                      className={
+                        pathname === el.route ||
+                        (el.route === "/Archive" && pathname.startsWith("/Archive"))
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      onClick={() => {
+                        setTimeout(() => setisExpanded(false), closeDelay);
+                      }}
+                    >
+                      {el.name}
+                    </Link>
+                  )}
                 </Nav.Item>
               ))}
             </Nav>

@@ -56,14 +56,14 @@ const Projects = () => {
             </Row>
             {projects.length > 3 && (
               <Container className="text-center mt-5">
-                <Link to="/All-Projects">
+                <Link to="/Repositories">
                   <Button
                     size="lg"
                     variant={
                       theme === "light" ? "outline-dark" : "outline-light"
                     }
                   >
-                    All <Icon icon="icomoon-free:github" /> Projects
+                    Repositories <Icon icon="icomoon-free:github" />
                   </Button>
                 </Link>
               </Container>

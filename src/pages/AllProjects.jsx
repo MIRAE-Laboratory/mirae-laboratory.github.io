@@ -51,7 +51,7 @@ const AllProjects = () => {
   let content;
 
   React.useEffect(() => {
-    updateTitle(userData?.name ? `${userData.name} | All Projects` : `All Projects | ${siteName}`);
+    updateTitle(userData?.name ? `${userData.name} | Repositories` : `Repositories | ${siteName}`);
   }, [userData]);
 
   React.useEffect(() => {
@@ -115,7 +115,7 @@ const AllProjects = () => {
     content = (
       <>
         <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"All Projects"} />
+          <Title size={"h2"} text={"Repositories"} />
         </Container>
         <Container className="d-flex flex-column justify-content-center">
           <Loading />
@@ -126,7 +126,7 @@ const AllProjects = () => {
     content = (
       <>
         <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"All Projects"} />
+          <Title size={"h2"} text={"Repositories"} />
         </Container>
         <Container>
           <InputGroup className="mx-auto mb-3">

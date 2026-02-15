@@ -124,7 +124,7 @@ const Archive = () => {
           />
         </Form>
 
-        <Row xs={1} md={2} lg={3} className="g-4">
+        <Row xs={1} md={2} lg={3} className="g-4 align-items-start">
           {filtered.map((s) => (
             <Col key={s.id}>
               <Card className="h-100 shadow-sm">

@@ -38,7 +38,7 @@ const People = () => {
   if (error) {
     return (
       <Container className="section py-5">
-        <p className="text-center text-danger">{error}</p>
+        <p className="text-center" style={{ color: "#dc3545" }}>{error}</p>
       </Container>
     );
   }
@@ -52,7 +52,7 @@ const People = () => {
         <Row xs={1} md={2} lg={3} className="g-4 justify-content-center align-items-start">
           {members.map((m) => (
             <Col key={m.id}>
-              <Card className="h-100 shadow-sm">
+              <Card className="h-100 shadow-sm" style={{ backgroundColor: "#ffffff", color: "#212529" }}>
                 <Card.Body className="text-center">
                   {m.avatar ? (
                     <img
@@ -63,8 +63,8 @@ const People = () => {
                     />
                   ) : (
                     <div
-                      className="rounded-circle mb-3 mx-auto d-flex align-items-center justify-content-center bg-secondary text-white"
-                      style={{ width: "8rem", height: "8rem" }}
+                      className="rounded-circle mb-3 mx-auto d-flex align-items-center justify-content-center"
+                      style={{ width: "8rem", height: "8rem", backgroundColor: "#007bff", color: "#ffffff" }}
                       aria-hidden
                     >
                       <span style={{ fontSize: "2rem" }}>
@@ -72,25 +72,25 @@ const People = () => {
                       </span>
                     </div>
                   )}
-                  <Card.Title>{m.name || "—"}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
+                  <Card.Title style={{ color: "#212529" }}>{m.name || "—"}</Card.Title>
+                  <Card.Subtitle className="mb-2" style={{ color: "#495057" }}>
                     {m.role || "—"}
                   </Card.Subtitle>
-                  {m.bio && <Card.Text className="small">{m.bio}</Card.Text>}
+                  {m.bio && <Card.Text className="small" style={{ color: "#212529" }}>{m.bio}</Card.Text>}
                   {m.researchAreas?.length > 0 && (
-                    <Card.Text className="small text-muted">
+                    <Card.Text className="small" style={{ color: "#495057" }}>
                       {m.researchAreas.join(", ")}
                     </Card.Text>
                   )}
                   {(m.email || m.link) && (
                     <div className="mt-2">
                       {m.email && (
-                        <a href={`mailto:${m.email}`} className="me-2 small">
+                        <a href={`mailto:${m.email}`} className="me-2 small" style={{ color: "#007bff" }}>
                           Email
                         </a>
                       )}
                       {m.link && (
-                        <a href={m.link} target="_blank" rel="noopener noreferrer" className="small">
+                        <a href={m.link} target="_blank" rel="noopener noreferrer" className="small" style={{ color: "#007bff" }}>
                           Link
                         </a>
                       )}
@@ -102,7 +102,7 @@ const People = () => {
           ))}
         </Row>
         {members.length === 0 && (
-          <p className="text-center text-muted">No members listed yet.</p>
+          <p className="text-center" style={{ color: "#495057" }}>No members listed yet.</p>
         )}
       </Container>
       <ScrollToTopButton />

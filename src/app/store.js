@@ -1,15 +1,15 @@
 // https://redux-toolkit.js.org/usage/usage-guide#simplifying-slices-with-createslice
 import { configureStore } from "@reduxjs/toolkit";
-//Reducers
+// Reducers
 import appReducer from "./appSlice";
-import projectsReducer from "./projectsSlice";
+import repositoriesReducer from "./repositoriesSlice";
 // API
 import { apiSlice } from "./apiSlice";
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    projects: projectsReducer,
+    repositories: repositoriesReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {

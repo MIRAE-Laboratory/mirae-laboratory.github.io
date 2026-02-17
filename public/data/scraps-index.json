@@ -1,6 +1,6 @@
 [
   {
-    "id": "scrap-1",
+    "id": "archive-1",
     "slug": "README",
     "title": "README",
     "date": "",
@@ -15,7 +15,7 @@
     "language": null
   },
   {
-    "id": "scrap-2",
+    "id": "archive-2",
     "slug": "git-workflow-tutorial",
     "title": "Git 브랜치 전략과 PR 워크플로",
     "date": "2025-02-09",
@@ -35,7 +35,7 @@
     "language": "ko"
   },
   {
-    "id": "scrap-3",
+    "id": "archive-3",
     "slug": "lab-news-feb-2025",
     "title": "연구실 소식 - 2025년 2월",
     "date": "2025-02-10",
@@ -54,7 +54,7 @@
     "language": "ko"
   },
   {
-    "id": "scrap-4",
+    "id": "archive-4",
     "slug": "sample-paper-note",
     "title": "Sample Academic Note",
     "date": "2025-02-14",
@@ -73,7 +73,7 @@
     "language": "en"
   },
   {
-    "id": "scrap-5",
+    "id": "archive-5",
     "slug": "technical-tip-example",
     "title": "Technical Tip Example",
     "date": "2025-02-13",
@@ -92,7 +92,7 @@
     "language": "en"
   },
   {
-    "id": "scrap-6",
+    "id": "archive-6",
     "slug": "transformer-survey-2024",
     "title": "Transformers in NLP - A Survey (2024)",
     "date": "2025-02-12",

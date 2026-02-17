@@ -66,11 +66,11 @@ function registerValidSW(swUrl, config) {
         installingWorker.onstatechange = () => {
           if (installingWorker.state === "installed") {
             if (navigator.serviceWorker.controller) {
-              // At this point, the updated precached content has been fetched,
+              // At this point, the updated precached contents has been fetched,
               // but the previous service worker will still serve the older
-              // content until all client tabs are closed.
+              // contents until all client tabs are closed.
               console.log(
-                "New content is available and will be used when all " +
+                "New contents is available and will be used when all " +
                   "tabs for this page are closed. See https://cra.link/PWA."
               );
 
@@ -81,8 +81,8 @@ function registerValidSW(swUrl, config) {
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              console.log("Content is cached for offline use.");
+              // "Contents is cached for offline use." message.
+              console.log("Contents is cached for offline use.");
 
               // Execute callback
               if (config && config.onSuccess) {
@@ -105,10 +105,10 @@ function checkValidServiceWorker(swUrl, config) {
   })
     .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.
-      const contentType = response.headers.get("content-type");
+      const contentsType = response.headers.get("contents-type");
       if (
         response.status === 404 ||
-        (contentType != null && contentType.indexOf("javascript") === -1)
+        (contentsType != null && contentsType.indexOf("javascript") === -1)
       ) {
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then((registration) => {

@@ -11,7 +11,7 @@ const baseUrl = process.env.PUBLIC_URL || "";
 
 const Archive = () => {
   const { categorySlug } = useParams();
-  const [scraps, setScraps] = useState([]);
+  const [archive, setArchive] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [keyword, setKeyword] = useState("");
@@ -22,10 +22,10 @@ const Archive = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${baseUrl}/data/scraps-index.json`)
+    fetch(`${baseUrl}/data/archive-index.json`)
       .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((data) => {
-        setScraps(Array.isArray(data) ? data : []);
+        setArchive(Array.isArray(data) ? data : []);
         setError(null);
       })
       .catch(() => setError("Failed to load archive."))
@@ -39,7 +39,7 @@ const Archive = () => {
   const currentCategory = categoryBySlug || archiveCategories.find((c) => c.id === "all");
   const categoryId = currentCategory?.id ?? "all";
 
-  let filtered = scraps.filter((s) => {
+  let filtered = archive.filter((s) => {
     if (categoryId !== "all") {
       const cat = Array.isArray(s.category) ? s.category : [s.category];
       if (!cat.some((c) => c === categoryId)) return false;
@@ -73,7 +73,7 @@ const Archive = () => {
   if (error) {
     return (
       <Container className="section py-5">
-        <p className="text-center text-danger">{error}</p>
+        <p className="text-center" style={{ color: "#dc3545" }}>{error}</p>
       </Container>
     );
   }
@@ -130,13 +130,13 @@ const Archive = () => {
               <Card className="h-100 shadow-sm">
                 <Card.Body>
                   <Card.Title className="small">
-                    {s.source ? (
-                      <a href={s.source} target="_blank" rel="noopener noreferrer" className="text-decoration-none text-reset" aria-label={`${s.title || "Untitled"} (opens in new tab)`}>
-                        {s.title || "Untitled"}
-                      </a>
-                    ) : (
-                      s.title || "Untitled"
-                    )}
+                    <Link
+                      to={`/Archive/item/${s.slug}`}
+                      className="text-decoration-none text-reset"
+                      style={{ color: "inherit" }}
+                    >
+                      {s.title || "Untitled"}
+                    </Link>
                   </Card.Title>
                   {(s.category || (s.tags && s.tags.length)) && (
                     <div className="mb-2">
@@ -153,24 +153,38 @@ const Archive = () => {
                         ))}
                     </div>
                   )}
-                  {s.abstract && (
-                    <Card.Text className="small text-muted">{s.abstract}</Card.Text>
-                  )}
-                  <Card.Text className="small mb-1">
-                    {s.date}
-                    {s.country && ` · ${s.country}`}
-                    {s.institute && ` · ${s.institute}`}
-                  </Card.Text>
-                  {s.source && (
-                    <a
-                      href={s.source}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="small"
-                    >
-                      Source
-                    </a>
-                  )}
+                  {(s.TLDR || s.abstract) && (() => {
+                    const raw = (s.TLDR || s.abstract) || "";
+                    const lines = raw.split(/\r?\n/).map((l) => l.replace(/^\s*-\s*/, "").trim()).filter(Boolean);
+                    if (lines.length === 0) return null;
+                    return (
+                      <Card.Text as="div" className="small text-muted mb-1">
+                        <ul className="mb-0 ps-3">
+                          {lines.map((line, i) => (
+                            <li key={i}>{line}</li>
+                          ))}
+                        </ul>
+                      </Card.Text>
+                    );
+                  })()}
+                  <div className="d-flex justify-content-between align-items-center small mb-1 flex-wrap gap-2">
+                    <Card.Text className="mb-0 text-muted">
+                      {s.date}
+                      {s.country && ` · ${s.country}`}
+                      {s.institute && ` · ${s.institute}`}
+                    </Card.Text>
+                    {s.source && (
+                      <a
+                        href={s.source}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="small"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        View Source
+                      </a>
+                    )}
+                  </div>
                 </Card.Body>
               </Card>
             </Col>

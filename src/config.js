@@ -1,16 +1,6 @@
 // Skills icons - https://icon-sets.iconify.design/
 import { Icon } from "@iconify/react";
 
-// Navbar Logo image (add your image to the src/images directory and uncomment the line below to import your image)
-// import newLogo from "./images/yourFileName"
-
-// Hero Images (add your images to the /images directory with the same names)
-import HeroLight from "./images/hero-light.jpg";
-import HeroDark from "./images/hero-dark.jpg";
-
-// Projects Images (add your images to the images directory and import below)
-import Logo from "./images/logo.svg";
-
 /* START HERE
  **************************************************************
   Add your GitHub username (string - "YourUsername") below.
@@ -20,25 +10,8 @@ export const githubUsername = "mirae-laboratory";
 // Site name for document title (e.g. "People | Lab")
 export const siteName = "Lab";
 
-// Navbar Logo (public/content/files/)
-export const navLogo = `${process.env.PUBLIC_URL || ""}/content/files/MIRAE_Logo.png`;
-
-/* Main
- ************************************************************** 
-  Add a custom blog icon or update the hero images for the Main section.
-*/
-export const Blog = null;
-
-// Hero images (imported above - lines 8-9)
-export { HeroLight as Light };
-export { HeroDark as Dark };
-
-/* About Me
- **************************************************************
-  Add a second paragraph for the about me section.
-*/
-export const moreInfo =
-  "I enjoy learning about technology and helping others use it to improve their lives and be more productive. I built this site with React, React Bootstrap, Redux, and the GitHub REST API.";
+// Navbar Logo (public/contents/files/)
+export const navLogo = `${process.env.PUBLIC_URL || ""}/contents/files/MIRAE_Logo.png`;
 
 /* Skills
  ************************************************************** 
@@ -92,22 +65,16 @@ export const skillData = [
   },
 ];
 
-// Resume link (string - "https://YourResumeUrl") - I am using CloudFront to share my resume (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html)
-export const resume = null;
-
-/* Projects
+/* Repositories
  ************************************************************** 
-  List the repo names (string - "your-repo-name") you want to include (they will be sorted alphabetically). If empty, only the first 3 will be included.
+  List the repo names (string - "your-repo-name") you want to include (they will be sorted alphabetically).
+  If empty, only the first 3 will be included.
 */
-export const filteredProjects = ["example-1", "example-2", "example-3"];
+export const filteredRepositories = [];
 
-// Replace the defualt GitHub image for matching repos below (images imported above - lines 7-8)
-export const projectCardImages = [
-  {
-    name: "example-1",
-    image: Logo,
-  },
-];
+// Custom images for repository cards (optional)
+// Format: { name: "repo-name", image: importedImage }
+export const repositoryCardImages = [];
 
 /* Contact Info
  ************************************************************** 
@@ -119,9 +86,9 @@ export const formspreeUrl = "https://formspree.io/f/mldrepaa";
 // Footer icons theme (light or dark)
 export const footerTheme = "dark";
 
-/* Archive (scraps) – menu categories
+/* Archive (archive) – menu categories
  **************************************************************
-  Each item appears as a menu entry under Archive. Scrap frontmatter
+  Each item appears as a menu entry under Archive. Archive frontmatter
   should use category: "Paper" etc. to match these keys.
 */
 export const archiveCategories = [

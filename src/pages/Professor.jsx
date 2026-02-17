@@ -38,7 +38,7 @@ const Professor = () => {
   if (error || !profile) {
     return (
       <Container className="section py-5">
-        <p className="text-center text-danger">{error || "No profile data."}</p>
+        <p className="text-center" style={{ color: "#dc3545" }}>{error || "No profile data."}</p>
       </Container>
     );
   }
@@ -81,7 +81,7 @@ const Professor = () => {
           <Title size="h1" text="Professor" />
         </div>
 
-        <Card className="shadow-sm mb-5">
+        <Card className="shadow-sm mb-5" style={{ backgroundColor: "#ffffff", color: "#212529" }}>
           <Card.Body>
             <Row>
               <Col md={4} className="text-center mb-3 mb-md-0">
@@ -99,8 +99,8 @@ const Professor = () => {
                       }}
                     />
                     <div
-                      className="rounded bg-secondary text-white d-none align-items-center justify-content-center"
-                      style={{ height: "200px" }}
+                      className="rounded d-none align-items-center justify-content-center"
+                      style={{ height: "200px", backgroundColor: "#007bff", color: "#ffffff" }}
                       aria-hidden
                     >
                       <span style={{ fontSize: "4rem" }}>{(profile.name || "").charAt(0) || "?"}</span>
@@ -108,8 +108,8 @@ const Professor = () => {
                   </>
                 ) : (
                   <div
-                    className="rounded bg-secondary text-white d-flex align-items-center justify-content-center mx-auto"
-                    style={{ width: "200px", height: "200px" }}
+                    className="rounded d-flex align-items-center justify-content-center mx-auto"
+                    style={{ width: "200px", height: "200px", backgroundColor: "#007bff", color: "#ffffff" }}
                     aria-hidden
                   >
                     <span style={{ fontSize: "4rem" }}>{(profile.name || "").charAt(0) || "?"}</span>

@@ -3,8 +3,8 @@ import React from "react";
 import styled from "styled-components";
 // State
 import { useSelector } from "react-redux";
-import { selectProjects } from "../app/projectsSlice";
-import { useGetUsersQuery, useGetProjectsQuery } from "../app/apiSlice";
+import { selectRepositories } from "../app/repositoriesSlice";
+import { useGetUsersQuery } from "../app/apiSlice";
 // Icons
 import { Icon } from "@iconify/react/dist/iconify.js";
 // Components
@@ -18,7 +18,7 @@ import {
 } from "react-bootstrap";
 import Loading from "../components/Loading";
 import Title from "../components/Title";
-import ProjectCard from "../components/ProjectCard";
+import RepositoryCard from "../components/RepositoryCard";
 import BackToTop from "../components/BackToTop";
 // Config
 import { siteName } from "../config";
@@ -45,10 +45,8 @@ const Repositories = () => {
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [pageItems, setPageItems] = React.useState([]);
   const [activePage, setActivePage] = React.useState(1);
-  const data = useSelector(selectProjects);
+  const data = useSelector(selectRepositories);
   const { data: userData } = useGetUsersQuery();
-  const { isLoading, isSuccess, isError, error } = useGetProjectsQuery();
-  let content;
 
   React.useEffect(() => {
     updateTitle(userData?.name ? `${userData.name} | Repositories` : `Repositories | ${siteName}`);
@@ -111,107 +109,81 @@ const Repositories = () => {
     setActivePage(1);
   }, [searchInput]);
 
-  if (isLoading) {
-    content = (
-      <>
-        <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"Repositories"} />
-        </Container>
-        <Container className="d-flex flex-column justify-content-center">
-          <Loading />
-        </Container>
-      </>
-    );
-  } else if (isSuccess) {
-    content = (
-      <>
-        <Container className="d-flex justify-content-center">
-          <Title size={"h2"} text={"Repositories"} />
-        </Container>
-        <Container>
-          <InputGroup className="mx-auto mb-3">
-            <InputGroup.Text id="search">
-              <Icon icon="ic:round-search" />
-            </InputGroup.Text>
-            <FormControl
-              placeholder="Project name"
-              aria-label="Search projects"
-              aria-describedby="search"
-              onChange={(e) => setSearchInput(e.currentTarget.value)}
-            />
-          </InputGroup>
-          <Row xs={1} md={2} lg={3} className="g-4 justify-content-center row">
-            {searchInput.length > 0
-              ? filteredResults.map((element) => {
-                  return (
-                    <Col key={element.id}>
-                      <ProjectCard
-                        image={element.image}
-                        name={element.name}
-                        description={element.description}
-                        url={element.html_url}
-                        demo={element.homepage}
-                      />
-                    </Col>
-                  );
-                })
-              : filteredResults.map((element) => {
-                  return (
-                    <Col key={element.id}>
-                      <ProjectCard
-                        image={element.image}
-                        name={element.name}
-                        description={element.description}
-                        url={element.html_url}
-                        demo={element.homepage}
-                      />
-                    </Col>
-                  );
-                })}
-          </Row>
-          <Container className="d-flex justify-content-center mt-5">
-            {pageItems.length <= 2 ? (
-              <Pagination size="lg">{pageItems}</Pagination>
-            ) : (
-              <Pagination>
-                <Pagination.Prev
-                  onClick={() =>
-                    activePage === 1
-                      ? setActivePage(pageItems.length)
-                      : setActivePage(activePage - 1)
-                  }
-                />
-                {pageItems[0]}
-                <Pagination.Ellipsis />
-                <Pagination.Item active={true}>{activePage}</Pagination.Item>
-                <Pagination.Ellipsis />
-                {pageItems[pageItems.length - 1]}
-                <Pagination.Next
-                  onClick={() =>
-                    activePage === pageItems.length
-                      ? setActivePage(1)
-                      : setActivePage(activePage + 1)
-                  }
-                />
-              </Pagination>
-            )}
+  if (data.length === 0) {
+    return (
+      <main>
+        <StyledSection className="py-4">
+          <Container className="d-flex justify-content-center">
+            <Title size="h1" text="Repositories" />
           </Container>
-        </Container>
-      </>
-    );
-  } else if (isError) {
-    content = (
-      <Container className="d-flex align-items-center justify-content-center">
-        <h2>{`${error.status} - check URLs in  src/app/apiSlice.js`}</h2>
-      </Container>
+          <Container className="d-flex flex-column align-items-center">
+            <Loading />
+          </Container>
+        </StyledSection>
+      </main>
     );
   }
 
   return (
     <>
       <main>
-        <StyledSection className="d-flex flex-column justify-content-center">
-          {content}
+        <StyledSection className="py-4">
+          <Container className="d-flex justify-content-center mb-4">
+            <Title size="h1" text="Repositories" />
+          </Container>
+          <Container>
+            <InputGroup className="mx-auto mb-3">
+              <InputGroup.Text id="search">
+                <Icon icon="ic:round-search" />
+              </InputGroup.Text>
+              <FormControl
+                placeholder="Repository name"
+                aria-label="Search repositories"
+                aria-describedby="search"
+                onChange={(e) => setSearchInput(e.currentTarget.value)}
+              />
+            </InputGroup>
+            <Row xs={1} md={2} lg={3} className="g-4 justify-content-center row">
+              {filteredResults.map((repository) => (
+                <Col key={repository.id}>
+                  <RepositoryCard
+                    image={repository.image}
+                    name={repository.name}
+                    description={repository.description}
+                    url={repository.html_url}
+                    demo={repository.homepage}
+                  />
+                </Col>
+              ))}
+            </Row>
+            <Container className="d-flex justify-content-center mt-5">
+              {pageItems.length <= 2 ? (
+                <Pagination size="lg">{pageItems}</Pagination>
+              ) : (
+                <Pagination>
+                  <Pagination.Prev
+                    onClick={() =>
+                      activePage === 1
+                        ? setActivePage(pageItems.length)
+                        : setActivePage(activePage - 1)
+                    }
+                  />
+                  {pageItems[0]}
+                  <Pagination.Ellipsis />
+                  <Pagination.Item active={true}>{activePage}</Pagination.Item>
+                  <Pagination.Ellipsis />
+                  {pageItems[pageItems.length - 1]}
+                  <Pagination.Next
+                    onClick={() =>
+                      activePage === pageItems.length
+                        ? setActivePage(1)
+                        : setActivePage(activePage + 1)
+                    }
+                  />
+                </Pagination>
+              )}
+            </Container>
+          </Container>
         </StyledSection>
       </main>
       <BackToTop home={"Home"} />

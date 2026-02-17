@@ -15,22 +15,20 @@ import ThemeToggle from "./ThemeToggle";
 // #region constants
 const navLinks = {
   routes: [
-    { id: "1R", name: "Home", route: "/" },
-    { id: "2R", name: "Professor", route: "/Professor" },
-    { id: "3R", name: "People", route: "/People" },
-    { id: "4R", name: "Publications", route: "/Publications" },
-    { id: "5R", name: "Lectures", external: true, href: "https://github.com/MIRAE-Laboratory/Lectures" },
-    { id: "6R", name: "Repositories", route: "/Repositories" },
-    { id: "7R", name: "Archive", route: "/Archive" },
-    { id: "8R", name: "UST-KAERI School", external: true, href: "https://kaeri.ust.ac.kr/" },
-    { id: "9R", name: "UST", external: true, href: "https://ust.ac.kr/" },
-    { id: "10R", name: "Contact Us", route: "/Contact" },
+    { id: "1R", name: "Professor", route: "/Professor" },
+    { id: "2R", name: "People", route: "/People" },
+    { id: "3R", name: "Achievements", route: "/Achievements" },
+    { id: "4R", name: "Lectures", external: true, href: "https://github.com/MIRAE-Laboratory/Lectures" },
+    { id: "5R", name: "Repositories", route: "/Repositories" },
+    { id: "6R", name: "Archive", route: "/Archive" },
+    { id: "7R", name: "Contact", route: "/Contact" },
+// { id: "8R", name: "UST-KAERI School", external: true, href: "https://kaeri.ust.ac.kr/" },
   ],
   to: [
     { id: "1T", name: "Home", to: "Home" },
     { id: "2T", name: "About Me", to: "About" },
     { id: "3T", name: "Skills", to: "Skills" },
-    { id: "4T", name: "Projects", to: "Projects" },
+    { id: "4T", name: "Repositories", to: "Repositories" },
     { id: "5T", name: "Contact", to: "Contact" },
   ],
 };
@@ -40,6 +38,20 @@ const navLinks = {
 const StyledDiv = styled.div`
   .navbar {
     border-bottom: var(--border);
+    background-color: #000000 !important;
+  }
+
+  .navbar .nav-link {
+    color: #ffffff !important;
+  }
+
+  .navbar .nav-link:hover,
+  .navbar .nav-link.active {
+    color: #007bff !important;
+  }
+
+  .navbar-brand {
+    color: #ffffff !important;
   }
 
   .spacer {
@@ -47,8 +59,7 @@ const StyledDiv = styled.div`
   }
 
   .logo-img {
-    background: ${({ theme }) =>
-      theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
+    background: #ffffff;
   }
 `;
 // #endregion
@@ -75,14 +86,15 @@ const NavBar = ({ Logo, callBack, closeDelay }) => {
       <Navbar
         id="nav"
         collapseOnSelect={true}
-        expand="xl"
+        expand="sm"
         expanded={isExpanded}
-        bg={theme === "light" ? "light" : "dark"}
-        variant={theme === "light" ? "light" : "dark"}
+        bg="dark"
+        variant="dark"
         fixed="top"
+        style={{ backgroundColor: "#000000 !important" }}
       >
         <Container>
-          <Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
             <img
               alt="Logo"
               src={Logo === null ? defaultLogo : Logo}
@@ -114,7 +126,8 @@ const NavBar = ({ Logo, callBack, closeDelay }) => {
                       to={el.route}
                       className={
                         pathname === el.route ||
-                        (el.route === "/Archive" && pathname.startsWith("/Archive"))
+                        (el.route === "/Archive" && pathname.startsWith("/Archive")) ||
+                        (el.route === "/Achievements" && pathname === "/Achievements")
                           ? "nav-link active"
                           : "nav-link"
                       }

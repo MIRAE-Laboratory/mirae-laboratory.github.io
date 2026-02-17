@@ -8,7 +8,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Title from "./Title";
 
 const baseUrl = process.env.PUBLIC_URL || "";
-const bannerUrl = `${baseUrl}/content/files/MIRAE_Banner.png`;
+const bannerUrl = `${baseUrl}/contents/files/MIRAE_Banner.png`;
 
 // #region styled-components
 const StyledIntroduction = styled.section`
@@ -73,7 +73,7 @@ const Introduction = () => {
                 </p>
                 <div className="text-center w-100 mt-4">
                   <img
-                    src={`${baseUrl}/content/files/Research_Interests.png`}
+                    src={`${baseUrl}/contents/files/Research_Interests.png`}
                     alt="Research Interests"
                     className="w-100"
                     style={{ maxWidth: "100%", objectFit: "contain" }}

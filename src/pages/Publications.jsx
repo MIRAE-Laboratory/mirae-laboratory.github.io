@@ -50,7 +50,7 @@ const Publications = () => {
   if (error) {
     return (
       <Container className="section py-5">
-        <p className="text-center text-danger">{error}</p>
+        <p className="text-center" style={{ color: "#dc3545" }}>{error}</p>
       </Container>
     );
   }

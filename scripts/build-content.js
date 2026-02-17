@@ -1,19 +1,19 @@
 /**
- * public/content/professor.md → public/data/professor.json
- * public/content/people/*.md → public/data/members.json
- * (content 전체가 public/content 아래에 있음 → 옵시디언에서 md·이미지 경로 공통)
+ * public/contents/professor.md → public/data/professor.json
+ * public/contents/people/*.md → public/data/members.json
+ * (contents 전체가 public/contents 아래에 있음 → 옵시디언에서 md·이미지 경로 공통)
  */
 
 const fs = require("fs");
 const path = require("path");
 const yaml = require("yaml");
 
-const CONTENT_DIR = path.join(__dirname, "..", "public", "content");
+const CONTENTS_DIR = path.join(__dirname, "..", "public", "contents");
 const OUT_DIR = path.join(__dirname, "..", "public", "data");
 
-function parseFrontmatterSimple(content) {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) return { frontmatter: {}, body: content };
+function parseFrontmatterSimple(contents) {
+  const match = contents.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) return { frontmatter: {}, body: contents };
   const yamlStr = match[1];
   const frontmatter = {};
   const lines = yamlStr.split(/\r?\n/);
@@ -58,16 +58,16 @@ function parseFrontmatterSimple(content) {
 }
 
 function buildProfessor() {
-  const mdPath = path.join(CONTENT_DIR, "professor.md");
+  const mdPath = path.join(CONTENTS_DIR, "professor.md");
   const outPath = path.join(OUT_DIR, "professor.json");
 
   if (!fs.existsSync(mdPath)) {
-    console.log("content/professor.md not found, skipping professor.json");
+    console.log("contents/professor.md not found, skipping professor.json");
     return;
   }
 
-  const mdContent = fs.readFileSync(mdPath, "utf8");
-  const match = mdContent.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+  const mdContents = fs.readFileSync(mdPath, "utf8");
+  const match = mdContents.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
   if (!match) {
     console.warn("professor.md has no frontmatter");
     return;
@@ -115,17 +115,17 @@ function buildProfessor() {
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(out, null, 2), "utf8");
-  console.log("Built professor.json from content/professor.md");
+  console.log("Built professor.json from contents/professor.md");
 }
 
 function buildMembers() {
-  const peopleDir = path.join(CONTENT_DIR, "people");
+  const peopleDir = path.join(CONTENTS_DIR, "people");
   const outPath = path.join(OUT_DIR, "members.json");
 
   if (!fs.existsSync(peopleDir)) {
     fs.mkdirSync(OUT_DIR, { recursive: true });
     fs.writeFileSync(outPath, "[]", "utf8");
-    console.log("content/people not found, wrote empty members.json");
+    console.log("contents/people not found, wrote empty members.json");
     return;
   }
 
@@ -134,8 +134,8 @@ function buildMembers() {
   for (const file of files) {
     const id = file.replace(/\.md$/i, "");
     const filePath = path.join(peopleDir, file);
-    const content = fs.readFileSync(filePath, "utf8");
-    const { frontmatter } = parseFrontmatterSimple(content);
+    const contents = fs.readFileSync(filePath, "utf8");
+    const { frontmatter } = parseFrontmatterSimple(contents);
     let researchAreas = frontmatter.researchAreas;
     if (Array.isArray(researchAreas)) {
       researchAreas = researchAreas.filter((a) => a != null && a !== "");
@@ -146,7 +146,7 @@ function buildMembers() {
     }
     let avatar = frontmatter.avatar || null;
     if (avatar && typeof avatar === "string" && !avatar.startsWith("http") && !avatar.startsWith("/")) {
-      avatar = `/content/people/${avatar}`;
+      avatar = `/contents/people/${avatar}`;
     }
     members.push({
       id: frontmatter.id || id,
@@ -164,7 +164,7 @@ function buildMembers() {
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(members, null, 2), "utf8");
-  console.log(`Built members.json: ${members.length} items from content/people/*.md`);
+  console.log(`Built members.json: ${members.length} items from contents/people/*.md`);
 }
 
 buildProfessor();

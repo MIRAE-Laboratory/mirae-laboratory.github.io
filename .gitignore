@@ -1,5 +1,9 @@
-public/content/.obsidian
-public/content/copilot
+.idea/
+.env
+workflows/
+public/contents/.obsidian
+public/contents/copilot
+
 # dependencies
 /node_modules
 /.pnp
@@ -23,3 +27,6 @@ public/content/copilot
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# TODO
+TODO.md

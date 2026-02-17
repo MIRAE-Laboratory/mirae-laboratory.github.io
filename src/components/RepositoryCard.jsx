@@ -16,12 +16,9 @@ const StyledCard = styled.div`
     height: var(--card-height);
     border: var(--border);
     transition: all 0.2s ease-in-out;
-    background: ${({ theme }) =>
-      theme.name === "light" ? "" : "var(--bs-gray)"};
-    box-shadow: ${({ theme }) =>
-      theme.name === "light"
-        ? "0 3px 10px rgb(0 0 0 / 0.2)"
-        : "0 3px 10px rgb(255 255 255 / 0.2)"};
+    background: #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    color: #212529;
 
     .card-img-top {
       height: 50%;
@@ -31,24 +28,22 @@ const StyledCard = styled.div`
     .card-link {
       text-decoration: none;
       font-size: 1.5rem;
+      color: #007bff;
 
       &:hover {
-        color: ${({ theme }) =>
-          theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
+        color: #0056b3;
       }
     }
 
     .card-footer {
       border-top: var(--border);
-      background: ${({ theme }) =>
-        theme.name === "light" ? "" : "var(--bs-gray-dark)"};
+      background: #ffffff;
 
       .card-link {
-        color: ${({ theme }) =>
-          theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
+        color: #007bff;
 
         &:hover {
-          color: var(--bs-primary);
+          color: #0056b3;
         }
       }
     }
@@ -69,7 +64,7 @@ const propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-const ProjectCard = ({ demo, description, image, name, url }) => {
+const RepositoryCard = ({ demo, description, image, name, url }) => {
   return (
     <StyledCard>
       <Card>
@@ -100,7 +95,7 @@ const ProjectCard = ({ demo, description, image, name, url }) => {
   );
 };
 
-ProjectCard.propTypes = propTypes;
+RepositoryCard.propTypes = propTypes;
 // #endregion
 
-export default ProjectCard;
+export default RepositoryCard;

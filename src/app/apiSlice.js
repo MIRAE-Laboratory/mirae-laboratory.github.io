@@ -15,12 +15,12 @@ export const apiSlice = createApi({
     getSocials: builder.query({
       query: () => `/users/${githubUsername}/social_accounts`,
     }),
-    // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-    getProjects: builder.query({
+    // https://docs.github.com/en/rest/repos/repos?apiVersion-2022-11-28#list-repositories-for-a-user
+    getRepositories: builder.query({
       query: () => `/users/${githubUsername}/repos`,
     }),
   }),
 });
 
-export const { useGetUsersQuery, useGetSocialsQuery, useGetProjectsQuery } =
+export const { useGetUsersQuery, useGetSocialsQuery, useGetRepositoriesQuery } =
   apiSlice;

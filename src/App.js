@@ -5,22 +5,23 @@ import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMode, setMode } from "./app/appSlice";
 import {
-  setProjects,
-  setMainProjects,
-  selectProjects,
-} from "./app/projectsSlice";
-import { useGetUsersQuery, useGetProjectsQuery } from "./app/apiSlice";
-import PropTypes from "prop-types";
+  setRepositories,
+  setMainRepositories,
+  selectRepositories,
+} from "./app/repositoriesSlice";
+import { useGetUsersQuery, useGetRepositoriesQuery } from "./app/apiSlice";
 // Router
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
 import Repositories from "./pages/Repositories";
 import Professor from "./pages/Professor";
 import People from "./pages/People";
-import Publications from "./pages/Publications";
+import Achievements from "./pages/Achievements";
 import Archive from "./pages/Archive";
+import ArchiveDetail from "./pages/ArchiveDetail";
 import ContactPage from "./pages/Contact";
+import Tools from "./pages/Tools";
 import NotFound from "./pages/NotFound";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -33,114 +34,81 @@ import { Container } from "react-bootstrap";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 // Config
-import { footerTheme, navLogo } from "./config";
+import { footerTheme, navLogo, filteredRepositories, repositoryCardImages } from "./config";
 // Util
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
 
 // #region component
-const propTypes = {
-  filteredProjects: PropTypes.arrayOf(PropTypes.string),
-  projectCardImages: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      image: PropTypes.node.isRequired,
-    })
-  ),
-};
-const defaultProps = {
-  filteredProjects: [],
-  projectCardImages: [],
-};
-
-const App = ({ projectCardImages, filteredProjects }) => {
+const App = () => {
   const theme = useSelector(selectMode);
-  const projects = useSelector(selectProjects);
+  const repositories = useSelector(selectRepositories);
   const dispatch = useDispatch();
   const { isLoading, isSuccess, isError, error } = useGetUsersQuery();
-  const { data: projectsData } = useGetProjectsQuery();
+  const { data: repositoriesData } = useGetRepositoriesQuery();
   let content;
 
-  // Set all projects state
+  // Set all repositories state
   React.useEffect(() => {
-    const tempData = [];
-    if (projectsData !== undefined && projectsData.length !== 0) {
-      projectsData.forEach((element) => {
-        const tempObj = {
-          id: null,
-          homepage: null,
-          description: null,
-          image: null,
-          name: null,
-          html_url: null,
-        };
-        tempObj.id = element.id;
-        tempObj.homepage = element.homepage;
-        tempObj.description = element.description;
-        tempObj.name = element.name;
-        tempObj.html_url = element.html_url;
-        tempData.push(tempObj);
-      });
-      if (
-        projectCardImages !== (undefined && null) &&
-        projectCardImages.length !== 0
-      ) {
-        projectCardImages.forEach((element) => {
-          tempData.forEach((ele) => {
-            if (element.name.toLowerCase() === ele.name.toLowerCase()) {
-              ele.image = element.image;
-            }
-          });
-        });
-      }
-      dispatch(setProjects(tempData));
-    }
-  }, [projectsData, projectCardImages, dispatch]);
+    if (!repositoriesData || repositoriesData.length === 0) return;
 
-  // Set main projects state
-  React.useEffect(() => {
-    if (projects.length !== 0) {
-      if (
-        filteredProjects !== (undefined && null) &&
-        filteredProjects.length !== 0
-      ) {
-        const tempArray = projects.filter((obj) =>
-          filteredProjects.includes(obj.name)
+    const tempData = repositoriesData.map(({ id, homepage, description, name, html_url }) => ({
+      id,
+      homepage,
+      description,
+      image: null,
+      name,
+      html_url,
+    }));
+
+    // Apply custom images if provided
+    if (repositoryCardImages?.length > 0) {
+      repositoryCardImages.forEach(({ name, image }) => {
+        const repository = tempData.find(
+          (r) => r.name.toLowerCase() === name.toLowerCase()
         );
-        tempArray.length !== 0
-          ? dispatch(setMainProjects([...tempArray]))
-          : dispatch(setMainProjects([...projects.slice(0, 3)]));
-      } else {
-        dispatch(setMainProjects([...projects.slice(0, 3)]));
-      }
+        if (repository) repository.image = image;
+      });
     }
-  }, [projects, filteredProjects, dispatch]);
+
+    dispatch(setRepositories(tempData));
+  }, [repositoriesData, dispatch]);
+
+  // Set main repositories state
+  React.useEffect(() => {
+    if (repositories.length === 0) return;
+
+    const mainRepositories =
+      filteredRepositories?.length > 0
+        ? repositories.filter((r) => filteredRepositories.includes(r.name))
+        : repositories.slice(0, 3);
+
+    dispatch(setMainRepositories(mainRepositories));
+  }, [repositories, dispatch]);
 
   // Theme
   const setThemes = React.useCallback(
-    (theme) => {
-      if (theme) {
-        dispatch(setMode(theme));
-        setTheme(theme);
-      } else {
-        dispatch(setMode(getPreferredTheme()));
-        setTheme(getPreferredTheme());
-      }
+    (newTheme) => {
+      const themeToSet = newTheme || getPreferredTheme();
+      dispatch(setMode(themeToSet));
+      setTheme(themeToSet);
     },
     [dispatch]
   );
 
   React.useEffect(() => {
     setThemes();
-  }, [setThemes]);
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
       const storedTheme = getStoredTheme();
       if (storedTheme !== "light" && storedTheme !== "dark") {
         setThemes();
       }
-    });
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [setThemes]);
 
   if (isLoading) {
     content = (
@@ -152,17 +120,19 @@ const App = ({ projectCardImages, filteredProjects }) => {
     content = (
       <>
         <Element name={"Home"} id="home">
-          <NavBar Logo={navLogo} callBack={(theme) => setThemes(theme)} />
+          <NavBar Logo={navLogo} callBack={(t) => setThemes(t)} />
         </Element>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/Professor" element={<Professor />} />
           <Route path="/People" element={<People />} />
-          <Route path="/Publications" element={<Publications />} />
+          <Route path="/Achievements" element={<Achievements />} />
           <Route path="/Archive" element={<Archive />} />
+          <Route path="/Archive/item/:slug" element={<ArchiveDetail />} />
           <Route path="/Archive/:categorySlug" element={<Archive />} />
           <Route path="/Repositories" element={<Repositories />} />
           <Route path="/Contact" element={<ContactPage />} />
+          <Route path="/Tools" element={<Tools />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer mode={footerTheme} />
@@ -174,7 +144,7 @@ const App = ({ projectCardImages, filteredProjects }) => {
         <h2>
           {error.status !== "FETCH_ERROR"
             ? `${error.status}: ${error.data.message} - check githubUsername in src/config.js`
-            : `${error.status} - check URLs in  src/app/apiSlice.js`}
+            : `${error.status} - check URLs in src/app/apiSlice.js`}
         </h2>
       </Container>
     );
@@ -182,20 +152,16 @@ const App = ({ projectCardImages, filteredProjects }) => {
 
   return (
     <ErrorBoundary FallbackComponent={AppFallback}>
-      {/* https://reactrouter.com/en/main/router-components/hash-router#future */}
-      <HashRouter future={{ v7_startTransition: true }}>
+      <BrowserRouter future={{ v7_startTransition: true }}>
         <ThemeProvider theme={{ name: theme }}>
           <ScrollToTop />
           <GlobalStyles />
           {content}
         </ThemeProvider>
-      </HashRouter>
+      </BrowserRouter>
     </ErrorBoundary>
   );
 };
-
-App.propTypes = propTypes;
-App.defaultProps = defaultProps;
 // #endregion
 
 export default App;

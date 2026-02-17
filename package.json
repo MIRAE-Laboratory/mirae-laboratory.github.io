@@ -74,6 +74,7 @@
     "postcss": "^8.4.31",
     "webpack-dev-server": "^5.2.1",
     "braces": "^3.0.3",
-    "micromatch": "^4.0.8"
+    "micromatch": "^4.0.8",
+    "lodash-es": "^4.17.23"
   }
 }

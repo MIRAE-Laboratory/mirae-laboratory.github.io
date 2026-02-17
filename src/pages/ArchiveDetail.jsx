@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useId } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Container, Spinner, Card, Badge, Button } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import mermaid from "mermaid";
-import Title from "../components/Title";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { updateTitle } from "../utils";
 import { siteName } from "../config";

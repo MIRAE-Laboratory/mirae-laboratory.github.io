@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// State
-import { useSelector } from "react-redux";
-import { selectMode } from "../app/appSlice";
 import PropTypes from "prop-types";
 // Router
 import { Link, useLocation } from "react-router-dom";
@@ -76,7 +73,6 @@ const defaultProps = {
 };
 
 const NavBar = ({ Logo, callBack, closeDelay }) => {
-  const theme = useSelector(selectMode);
   const [isExpanded, setisExpanded] = React.useState(false);
   const { pathname } = useLocation();
 

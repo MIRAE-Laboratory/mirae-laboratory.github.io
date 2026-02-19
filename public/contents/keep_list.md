@@ -1,0 +1,10 @@
+https://www.sciencedirect.com/science/article/pii/S0957417423030531
+https://www.tandfonline.com/doi/abs/10.1080/09349847.2014.934496
+https://www.sciencedirect.com/science/article/pii/S0888327018305569
+https://www.sciencedirect.com/science/article/pii/S1738573322004909
+https://www.tandfonline.com/doi/abs/10.1080/09349847.2016.1261213
+https://www.mdpi.com/2076-3417/9/6/1191
+https://onlinelibrary.wiley.com/doi/full/10.1155/2014/731621
+https://www.sciencedirect.com/science/article/pii/S0003682X2300484X
+https://www.mdpi.com/2075-4701/10/1/38
+https://www.sciencedirect.com/science/article/pii/S0263224125008085

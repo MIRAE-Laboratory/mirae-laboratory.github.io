@@ -10,6 +10,14 @@ import { siteName } from "../config";
 
 const baseUrl = process.env.PUBLIC_URL || "";
 
+/** 본문에 섞인 HTML 태그를 제거해 마크다운만 남김 (열람 시 HTML 코드가 보이지 않도록) */
+function stripHtmlFromMarkdown(text) {
+  if (!text || typeof text !== "string") return text;
+  return text
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, "");
+}
+
 mermaid.initialize({ startOnLoad: false, theme: "neutral" });
 
 const MermaidBlock = ({ source }) => {
@@ -122,9 +130,9 @@ const ArchiveDetail = () => {
           }
           
           setFrontmatter(fm);
-          setContent(body);
+          setContent(stripHtmlFromMarkdown(body));
         } else {
-          setContent(text);
+          setContent(stripHtmlFromMarkdown(text));
         }
         setError(null);
       })

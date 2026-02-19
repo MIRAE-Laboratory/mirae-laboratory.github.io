@@ -1,6 +1,83 @@
 [
   {
     "id": "archive-1",
+    "slug": "aitimes240216sora",
+    "title": "오픈AI, 텍스트로 1분 영상 만드는 ‘소라’ 공개...“상상하는 모든 것 구현”",
+    "date": "2024-02-16",
+    "category": "Generative AI",
+    "tags": [
+      "OpenAI",
+      "Sora",
+      "Generative_AI",
+      "Video_Generation",
+      "AI_Model",
+      "AI_Safety"
+    ],
+    "authors": [
+      "임대준"
+    ],
+    "source": "https://www.aitimes.com/news/articleView.html?idxno=203708",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "오픈AI가 텍스트 명령어를 통해 최대 1분 길이의 고화질 영상을 생성하는 새로운 AI 모델 '소라(Sora)'를 공개했습니다.\n복잡한 장면, 구체적인 캐릭터 움직임, 배경의 물리적 상호작용을 정밀하게 묘사하여 기존 영상 생성 AI의 한계를 극복했습니다.\n현재 안전성 검증을 위한 레드팀과 시각 예술 전문가들에게 선공개되어 피드백을 수렴 중이며 일반 공개 일정은 미정입니다.",
+    "TLDR": "오픈AI가 텍스트 명령어를 통해 최대 1분 길이의 고화질 영상을 생성하는 새로운 AI 모델 '소라(Sora)'를 공개했습니다.\n복잡한 장면, 구체적인 캐릭터 움직임, 배경의 물리적 상호작용을 정밀하게 묘사하여 기존 영상 생성 AI의 한계를 극복했습니다.\n현재 안전성 검증을 위한 레드팀과 시각 예술 전문가들에게 선공개되어 피드백을 수렴 중이며 일반 공개 일정은 미정입니다.",
+    "type": "News",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-2",
+    "slug": "aitimes250218grok3",
+    "title": "머스크 '그록-3', 세계에서 가장 강력한 AI...훈련에 H100 10만개 투입",
+    "date": "2025-02-18",
+    "category": "Generative AI",
+    "tags": [
+      "xAI",
+      "Grok-3",
+      "Elon_Musk",
+      "Colossus",
+      "Generative_AI",
+      "LLM",
+      "AI_Benchmark"
+    ],
+    "authors": [
+      "임대준 기자"
+    ],
+    "source": "https://www.aitimes.com/news/articleView.html?idxno=206913",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "일론 머스크의 xAI가 세계 최강의 성능을 표방하는 차세대 대규모 언어 모델 '그록-3(Grok-3)'를 공식 출시함.\n엔비디아 H100 GPU 10만 개를 투입한 슈퍼컴퓨터 '콜로서스'에서 훈련되어 기존 선도 모델들을 능가하는 벤치마크 결과를 기록함.\n추론 능력을 극대화한 '리즈닝' 모드와 실시간 웹 정보를 분석하는 '딥서치' 기능을 탑재하여 X 유료 사용자에게 제공됨.",
+    "TLDR": "일론 머스크의 xAI가 세계 최강의 성능을 표방하는 차세대 대규모 언어 모델 '그록-3(Grok-3)'를 공식 출시함.\n엔비디아 H100 GPU 10만 개를 투입한 슈퍼컴퓨터 '콜로서스'에서 훈련되어 기존 선도 모델들을 능가하는 벤치마크 결과를 기록함.\n추론 능력을 극대화한 '리즈닝' 모드와 실시간 웹 정보를 분석하는 '딥서치' 기능을 탑재하여 X 유료 사용자에게 제공됨.",
+    "type": "News",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-3",
+    "slug": "asiae2501141xneo",
+    "title": "AI 로봇기업 1X 테크놀로지스, 가정용 휴머노이드 '네오(NEO)' 2026년 미국 출시",
+    "date": "2025-01-14",
+    "category": "Physical AI",
+    "tags": [
+      "1X_Technologies",
+      "NEO",
+      "Humanoid_Robot",
+      "Physical_AI",
+      "Home_Service_Robot",
+      "AI_Subscription"
+    ],
+    "authors": [],
+    "source": "https://n.news.naver.com/mnews/ranking/article/277/0005673257?sid=001",
+    "country": null,
+    "institute": "1X Technologies",
+    "correspondingAuthor": null,
+    "abstract": "1X 테크놀로지스가 집안일과 소통이 가능한 가정용 휴머노이드 '네오(NEO)'를 2026년 초 미국 시장에 출시함.\n가격은 일시불 2만 달러 또는 월 499달러 구독형이며, 이번 주부터 보증금 200달러로 사전 예약을 시작함.\n시청각 지능을 활용한 실시간 반응 및 원격 학습 기능을 갖췄으나, 안전성과 자율성에 대한 대중의 반응은 엇갈림.",
+    "TLDR": "1X 테크놀로지스가 집안일과 소통이 가능한 가정용 휴머노이드 '네오(NEO)'를 2026년 초 미국 시장에 출시함.\n가격은 일시불 2만 달러 또는 월 499달러 구독형이며, 이번 주부터 보증금 200달러로 사전 예약을 시작함.\n시청각 지능을 활용한 실시간 반응 및 원격 학습 기능을 갖췄으나, 안전성과 자율성에 대한 대중의 반응은 엇갈림.",
+    "type": "News",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-4",
     "slug": "cladue2026complete",
     "title": "GPT-5.2가 이론물리학에서 새로운 결과를 도출",
     "date": "2025-05-16",
@@ -23,7 +100,36 @@
     "language": "Korean"
   },
   {
-    "id": "archive-2",
+    "id": "archive-5",
+    "slug": "deng231222cybersec",
+    "title": "A Survey of Generative AI for Cybersecurity: Potential, Pitfalls, and Prospects",
+    "date": "2023-12-22",
+    "category": "Cybersecurity",
+    "tags": [
+      "generative_ai",
+      "cybersecurity",
+      "llm",
+      "ai_security",
+      "machine_learning"
+    ],
+    "authors": [
+      "Shiduo Deng",
+      "Wenbo Jiang",
+      "Zeyu Wu",
+      "Wei Huang",
+      "Shui Yu"
+    ],
+    "source": "https://ieeexplore.ieee.org/abstract/document/10391266",
+    "country": "China",
+    "institute": "Huazhong University of Science and Technology",
+    "correspondingAuthor": "Wenbo Jiang",
+    "abstract": "생성형 AI(GenAI)가 사이버 보안 분야에서 갖는 공격과 방어의 양면성을 체계적으로 분석한 서베이 논문입니다.\n피싱, 악성코드 생성 등의 공격 시나리오와 취약점 탐지, 위협 분석 등의 방어적 활용 사례를 구체적으로 제시합니다.\nGenAI 모델 고유의 보안 취약점과 프라이버시 문제를 해결하기 위한 기술적 가이드라인 및 미래 연구 방향을 제안합니다.",
+    "TLDR": "생성형 AI(GenAI)가 사이버 보안 분야에서 갖는 공격과 방어의 양면성을 체계적으로 분석한 서베이 논문입니다.\n피싱, 악성코드 생성 등의 공격 시나리오와 취약점 탐지, 위협 분석 등의 방어적 활용 사례를 구체적으로 제시합니다.\nGenAI 모델 고유의 보안 취약점과 프라이버시 문제를 해결하기 위한 기술적 가이드라인 및 미래 연구 방향을 제안합니다.",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-6",
     "slug": "dt240515anthropicdefense",
     "title": "앤트로픽 ‘윤리적 AI’ 입장 고수…미 국방부, 오픈AI·구글·xAI와 협업 논의",
     "date": "2024-05-15",
@@ -49,7 +155,33 @@
     "language": "Korean"
   },
   {
-    "id": "archive-3",
+    "id": "archive-7",
+    "slug": "hada250218aionui",
+    "title": "AionUi - 오픈소스 멀티 AI 에이전트 데스크톱",
+    "date": "2025-02-18",
+    "category": "Agentic AI",
+    "tags": [
+      "AionUi",
+      "AI_Agent",
+      "Open_Source",
+      "Desktop_App",
+      "Productivity",
+      "Automation"
+    ],
+    "authors": [
+      "xguru"
+    ],
+    "source": "https://news.hada.io/topic?id=26764",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "여러 AI 모델과 CLI 도구를 통합하여 하나의 GUI에서 관리할 수 있는 오픈소스 데스크톱 앱입니다.\n맥, 윈도우, 리눅스를 지원하며 텔레그램 원격 접속 및 스케줄링 기반 업무 자동화 기능을 제공합니다.\n다양한 파일 포맷 지원 및 스마트 파일 관리, AI 이미지 생성 기능을 갖춘 업무용 AI 어시스턴트입니다.",
+    "TLDR": "여러 AI 모델과 CLI 도구를 통합하여 하나의 GUI에서 관리할 수 있는 오픈소스 데스크톱 앱입니다.\n맥, 윈도우, 리눅스를 지원하며 텔레그램 원격 접속 및 스케줄링 기반 업무 자동화 기능을 제공합니다.\n다양한 파일 포맷 지원 및 스마트 파일 관리, AI 이미지 생성 기능을 갖춘 업무용 AI 어시스턴트입니다.",
+    "type": "Repository",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-8",
     "slug": "hada250516gptphysics",
     "title": "GPT-5.2가 이론물리학에서 새로운 결과를 도출",
     "date": "2025-05-16",
@@ -72,7 +204,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-4",
+    "id": "archive-9",
     "slug": "hellodd250111ust",
     "title": "[신년인터뷰] 강대임 UST 총장 \"출연연·UST는 원팀...학생 창업 생태계 구축\"",
     "date": "2025-01-11",
@@ -97,7 +229,114 @@
     "language": "Korean"
   },
   {
-    "id": "archive-5",
+    "id": "archive-10",
+    "slug": "kdnuggets251119llmbooks",
+    "title": "LLM 엔지니어를 위한 무료 필독서 5권",
+    "date": "2025-11-19",
+    "category": "Generative AI",
+    "tags": [
+      "LLM",
+      "Generative_AI",
+      "Machine_Learning",
+      "NLP",
+      "TPU",
+      "AI_Security",
+      "Interpretability"
+    ],
+    "authors": [
+      "davespark"
+    ],
+    "source": "https://search.app/oBEqb",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "LLM의 기초 이론부터 시스템 최적화, 보안, 해석 가능성까지 아우르는 5권의 무료 전문 서적을 소개합니다.\nGoogle의 TPU 활용 가이드와 고전적인 NLP 교과서 최신판 등 실무와 이론의 균형을 맞춘 리스트를 제공합니다.\n사이버 보안 위협 대응 및 모델 내부 작동 원리 분석을 위한 심화 연구 자료를 포함하고 있습니다.",
+    "TLDR": "LLM의 기초 이론부터 시스템 최적화, 보안, 해석 가능성까지 아우르는 5권의 무료 전문 서적을 소개합니다.\nGoogle의 TPU 활용 가이드와 고전적인 NLP 교과서 최신판 등 실무와 이론의 균형을 맞춘 리스트를 제공합니다.\n사이버 보안 위협 대응 및 모델 내부 작동 원리 분석을 위한 심화 연구 자료를 포함하고 있습니다.",
+    "type": "Article",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-11",
+    "slug": "lee250219vibecoding",
+    "title": "바이브 코딩: 안드레이 카르파티가 제시한 자연어 기반 AI 코딩 패러다임",
+    "date": "2025-02-19",
+    "category": "Generative AI",
+    "tags": [
+      "바이브_코딩",
+      "안드레이_카르파티",
+      "생성형_AI",
+      "자연어_프로그래밍",
+      "AI_코딩",
+      "콜린스_사전"
+    ],
+    "authors": [
+      "이정환"
+    ],
+    "source": "https://search.app/jCjTV",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "안드레이 카르파티가 제시한 '바이브 코딩'은 자연어 입력만으로 AI가 코드를 생성하는 새로운 개발 방식이다.\n콜린스 사전 등에서 주목받으며 소프트웨어 개발의 핵심이 언어 문법에서 사용자 의도로 이동하고 있음을 보여준다.\n코딩 전문 지식 없이도 '느낌(Vibe)'을 전달하여 결과물을 얻는 프로그래밍의 대중화 시대를 상징한다.",
+    "TLDR": "안드레이 카르파티가 제시한 '바이브 코딩'은 자연어 입력만으로 AI가 코드를 생성하는 새로운 개발 방식이다.\n콜린스 사전 등에서 주목받으며 소프트웨어 개발의 핵심이 언어 문법에서 사용자 의도로 이동하고 있음을 보여준다.\n코딩 전문 지식 없이도 '느낌(Vibe)'을 전달하여 결과물을 얻는 프로그래밍의 대중화 시대를 상징한다.",
+    "type": "News",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-12",
+    "slug": "lim240219sedunet",
+    "title": "1조원 들인 ‘S-에듀넷’ 개통 1년...교사는 “불편”, 학생은 “안 써”",
+    "date": "2024-02-19",
+    "category": "Education",
+    "tags": [
+      "AI_교육",
+      "S-에듀넷",
+      "서울시교육청",
+      "에듀테크",
+      "공교육_혁신",
+      "디지털_교과서"
+    ],
+    "authors": [
+      "임대준"
+    ],
+    "source": "https://www.aitimes.com/news/articleView.html?idxno=206868",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "서울시교육청이 막대한 예산을 투입한 AI 교육 플랫폼 'S-에듀넷'이 개통 1년에도 불구하고 현장에서 외면받고 있음.\n교사들은 시스템의 복잡성과 행정 부담을 지적하며, 학생들은 사교육 플랫폼 대비 낮은 완성도로 인해 사용을 기피함.\n1조 원 규모의 인프라 구축 비용 대비 실효성 논란이 일고 있으며, AI 기능의 고도화와 UI 개선이 시급한 과제로 떠오름.",
+    "TLDR": "서울시교육청이 막대한 예산을 투입한 AI 교육 플랫폼 'S-에듀넷'이 개통 1년에도 불구하고 현장에서 외면받고 있음.\n교사들은 시스템의 복잡성과 행정 부담을 지적하며, 학생들은 사교육 플랫폼 대비 낮은 완성도로 인해 사용을 기피함.\n1조 원 규모의 인프라 구축 비용 대비 실효성 논란이 일고 있으며, AI 기능의 고도화와 UI 개선이 시급한 과제로 떠오름.",
+    "type": "News",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-13",
+    "slug": "lu220628auvtracking",
+    "title": "Deep Reinforcement Learning-based Trajectory Tracking Control for Underactuated Autonomous Underwater Vehicles",
+    "date": "2022-06-28",
+    "category": "Physical AI",
+    "tags": [
+      "deep_reinforcement_learning",
+      "autonomous_underwater_vehicles",
+      "trajectory_tracking",
+      "TD3_algorithm",
+      "underactuated_systems",
+      "robotics"
+    ],
+    "authors": [
+      "Yu-Sheng Lu",
+      "Chih-Chiang Chen",
+      "Cheng-An Ho"
+    ],
+    "source": "https://ieeexplore.ieee.org/abstract/document/9810961",
+    "country": "Taiwan",
+    "institute": "National Taiwan University of Science and Technology",
+    "correspondingAuthor": null,
+    "abstract": "저구동(Underactuated) 수중 자율 이동정(AUV)의 정밀한 궤적 추적을 위한 심층 강화학습 제어 프레임워크 제안.\nTD3(Twin Delayed Deep Deterministic Policy Gradient) 알고리즘을 적용하여 모델 불확실성 및 외부 교란에 대한 강인성 확보.\n시뮬레이션을 통해 기존 DDPG 및 PID 제어기 대비 우수한 추적 성능과 수렴 안정성을 입증함.",
+    "TLDR": "저구동(Underactuated) 수중 자율 이동정(AUV)의 정밀한 궤적 추적을 위한 심층 강화학습 제어 프레임워크 제안.\nTD3(Twin Delayed Deep Deterministic Policy Gradient) 알고리즘을 적용하여 모델 불확실성 및 외부 교란에 대한 강인성 확보.\n시뮬레이션을 통해 기존 DDPG 및 PID 제어기 대비 우수한 추적 성능과 수렴 안정성을 입증함.",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-14",
     "slug": "microsoft260209copilotsecurity",
     "title": "Copilot Studio agent security: Top 10 risks you can detect and prevent",
     "date": "2026-02-12",
@@ -120,7 +359,131 @@
     "language": "Korean"
   },
   {
-    "id": "archive-6",
+    "id": "archive-15",
+    "slug": "nature250212simndt",
+    "title": "A novel text-based simulation control architecture leveraging large language models and ground AI",
+    "date": "2025-02-12",
+    "category": "Paper",
+    "tags": [
+      "LLM",
+      "ground_AI",
+      "ultrasonic_simulation",
+      "SimNDT",
+      "multi-agent_system",
+      "automation"
+    ],
+    "authors": [],
+    "source": "https://www.nature.com/articles/s41598-025-97498-y",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "LLM과 Ground AI를 활용하여 자연어 명령으로 초음파 시뮬레이션을 제어하는 새로운 텍스트 기반 아키텍처를 제안함.\n기존 GUI 방식 대비 시뮬레이션 설정 시간을 약 75% 단축하여 복잡한 공학 시뮬레이션의 효율성을 크게 개선함.\n멀티 에이전트 협업 및 자기 검토 메커니즘을 통해 시나리오 생성 오류율을 23.89%에서 1.48%로 대폭 낮춤.",
+    "TLDR": "LLM과 Ground AI를 활용하여 자연어 명령으로 초음파 시뮬레이션을 제어하는 새로운 텍스트 기반 아키텍처를 제안함.\n기존 GUI 방식 대비 시뮬레이션 설정 시간을 약 75% 단축하여 복잡한 공학 시뮬레이션의 효율성을 크게 개선함.\n멀티 에이전트 협업 및 자기 검토 메커니즘을 통해 시나리오 생성 오류율을 23.89%에서 1.48%로 대폭 낮춤.",
+    "type": "Journal",
+    "language": "English"
+  },
+  {
+    "id": "archive-16",
+    "slug": "nature250213sensorrecovery",
+    "title": "Recursive autoencoder-based data recovery for multivariate sensor networks",
+    "date": "2025-02-13",
+    "category": "Physical AI",
+    "tags": [
+      "autoencoder",
+      "data_recovery",
+      "sensor_networks",
+      "multivariate_data",
+      "recursive_learning",
+      "industrial_ai"
+    ],
+    "authors": [],
+    "source": "https://www.nature.com/articles/s41598-025-98374-5",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "다채널 센서 데이터의 결측치 및 오류를 복구하기 위해 출력을 다시 입력으로 사용하는 재귀적 오토인코더 알고리즘을 제안함.\n재귀 과정의 개선 정도를 모니터링하여 복구 효율을 최적화하는 동적 종료 기준(Dynamic Termination Criterion)을 도입함.\n실험 결과, 단일 단계 복구 방식보다 정확도가 높으며 복잡한 센서 네트워크 환경에서 데이터 무결성을 보장하는 데 효과적임을 입증함.",
+    "TLDR": "다채널 센서 데이터의 결측치 및 오류를 복구하기 위해 출력을 다시 입력으로 사용하는 재귀적 오토인코더 알고리즘을 제안함.\n재귀 과정의 개선 정도를 모니터링하여 복구 효율을 최적화하는 동적 종료 기준(Dynamic Termination Criterion)을 도입함.\n실험 결과, 단일 단계 복구 방식보다 정확도가 높으며 복잡한 센서 네트워크 환경에서 데이터 무결성을 보장하는 데 효과적임을 입증함.",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-17",
+    "slug": "nature250217autoencoder",
+    "title": "Recursive autoencoder-based multivariate sensor data restoration with dynamic stopping",
+    "date": "2025-02-17",
+    "category": "Paper",
+    "tags": [
+      "autoencoder",
+      "sensor_data_restoration",
+      "recursive_learning",
+      "multivariate_data",
+      "industrial_iot",
+      "data_integrity"
+    ],
+    "authors": [],
+    "source": "https://www.nature.com/articles/s41598-025-98374-5",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "다중 채널 센서 데이터의 결측치 및 손상 문제를 해결하기 위해 오토인코더 기반의 재귀적 데이터 복구 알고리즘을 제안함.\n복원된 출력을 다시 입력으로 사용하는 재귀 전략과 변화량이 미미할 때 정지하는 동적 종료 기준을 통해 정확도를 높임.\n다변량 센서 데이터셋 실험 결과, 기존의 단일 단계 오토인코더 방식보다 높은 복원 정확도와 견고한 성능을 입증함.",
+    "TLDR": "다중 채널 센서 데이터의 결측치 및 손상 문제를 해결하기 위해 오토인코더 기반의 재귀적 데이터 복구 알고리즘을 제안함.\n복원된 출력을 다시 입력으로 사용하는 재귀 전략과 변화량이 미미할 때 정지하는 동적 종료 기준을 통해 정확도를 높임.\n다변량 센서 데이터셋 실험 결과, 기존의 단일 단계 오토인코더 방식보다 높은 복원 정확도와 견고한 성능을 입증함.",
+    "type": "Journal",
+    "language": "English"
+  },
+  {
+    "id": "archive-18",
+    "slug": "nature250217simndt",
+    "title": "A novel text-based simulation control architecture using large language models and ground AI",
+    "date": "2025-02-17",
+    "category": "Simulation AI",
+    "tags": [
+      "LLM",
+      "Simulation_Control",
+      "Ground_AI",
+      "SimNDT",
+      "Ultrasonic_Simulation",
+      "Multi-agent_Systems",
+      "Digital_Twin"
+    ],
+    "authors": [],
+    "source": "https://www.nature.com/articles/s41598-025-97498-y",
+    "country": null,
+    "institute": "Nature Scientific Reports",
+    "correspondingAuthor": null,
+    "abstract": "LLM 기반의 자연어 명령을 통해 초음파 시뮬레이션(SimNDT)을 제어하는 텍스트 기반 아키텍처를 제안함.\n자기 복기 및 다중 에이전트 협업을 포함하는 Ground AI 기법을 통해 시나리오 생성 오류율을 23.89%에서 1.48%로 대폭 낮춤.\n기존 GUI 방식 대비 시뮬레이션 설정 시간을 약 75% 단축하여 디지털 트윈 등 실시간 응용 분야의 효율성을 입증함.",
+    "TLDR": "LLM 기반의 자연어 명령을 통해 초음파 시뮬레이션(SimNDT)을 제어하는 텍스트 기반 아키텍처를 제안함.\n자기 복기 및 다중 에이전트 협업을 포함하는 Ground AI 기법을 통해 시나리오 생성 오류율을 23.89%에서 1.48%로 대폭 낮춤.\n기존 GUI 방식 대비 시뮬레이션 설정 시간을 약 75% 단축하여 디지털 트윈 등 실시간 응용 분야의 효율성을 입증함.",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-19",
+    "slug": "neo260130macstudio",
+    "title": "Mac Studio를 Ollama 호스트로 쓰는 것이 과연 합리적인 선택일까?",
+    "date": "2026-01-30",
+    "category": "Generative AI",
+    "tags": [
+      "Mac_Studio",
+      "Ollama",
+      "Local_LLM",
+      "Apple_Silicon",
+      "NVIDIA_RTX",
+      "GPU_Cluster",
+      "AI_Hardware"
+    ],
+    "authors": [
+      "neo"
+    ],
+    "source": "https://share.google/ATB41PR7u5bHOg16M",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "Mac Studio는 설정 편의성, 전력 효율, 저소음 측면에서 로컬 LLM 운영에 최적화된 선택지로 평가됨.\nRTX 3090 GPU 클러스터는 CUDA 기반의 압도적 연산 성능을 제공하나 높은 전력 소모와 운영 난이도가 수반됨.\n로컬 LLM은 프라이버시 중심의 반복 업무에 적합하며, 고성능 모델은 여전히 클라우드 구독과 병행하는 하이브리드 방식이 일반적임.",
+    "TLDR": "Mac Studio는 설정 편의성, 전력 효율, 저소음 측면에서 로컬 LLM 운영에 최적화된 선택지로 평가됨.\nRTX 3090 GPU 클러스터는 CUDA 기반의 압도적 연산 성능을 제공하나 높은 전력 소모와 운영 난이도가 수반됨.\n로컬 LLM은 프라이버시 중심의 반복 업무에 적합하며, 고성능 모델은 여전히 클라우드 구독과 병행하는 하이브리드 방식이 일반적임.",
+    "type": "Article",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-20",
     "slug": "revfactory240523aioi",
     "title": "AI Open Source Impact (AIOI): AI-Native 오픈소스 기여를 위한 6주 커리큘럼",
     "date": "2024-05-23",
@@ -145,7 +508,35 @@
     "language": "Korean"
   },
   {
-    "id": "archive-7",
+    "id": "archive-21",
+    "slug": "seo141128crack",
+    "title": "Improvement of crack sizing performance by using nonlinear ultrasonic technique",
+    "date": "2014-11-28",
+    "category": "NDT&E",
+    "tags": [
+      "Crack_sizing",
+      "Contact_interface",
+      "Contact_Acoustic_Nonlinearity",
+      "Harmonic_wave_generation",
+      "Pitch-catch_method"
+    ],
+    "authors": [
+      "Hogeon Seo",
+      "Kyung-Young Jhang",
+      "Kyung-Cho Kim",
+      "Dong-Pyo Hong"
+    ],
+    "source": "https://link.springer.com/article/10.1007/s12541-014-0614-4",
+    "country": "South Korea",
+    "institute": "Hanyang University",
+    "correspondingAuthor": "Kyung-Young Jhang",
+    "abstract": "닫힘 균열(Closed crack) 검출을 위해 접촉 음향 비선형성(CAN) 기반의 비선형 초음파 기술(NUT)의 효용성을 실험적으로 검증함.\n구조물의 한쪽 면에서만 접근 가능한 피치-캐치(Pitch-catch) 방식을 사용하여 실제 균열에서의 2차 고조파 발생을 측정함.\n선형 초음파와 비선형 기술을 결합하여 균열의 개방된 부분과 닫힌 부분을 모두 파악함으로써 균열 크기 측정 성능을 크게 향상시킴.",
+    "TLDR": "닫힘 균열(Closed crack) 검출을 위해 접촉 음향 비선형성(CAN) 기반의 비선형 초음파 기술(NUT)의 효용성을 실험적으로 검증함.\n구조물의 한쪽 면에서만 접근 가능한 피치-캐치(Pitch-catch) 방식을 사용하여 실제 균열에서의 2차 고조파 발생을 측정함.\n선형 초음파와 비선형 기술을 결합하여 균열의 개방된 부분과 닫힌 부분을 모두 파악함으로써 균열 크기 측정 성능을 크게 향상시킴.",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-22",
     "slug": "seo2020intra",
     "title": "Intra- And Inter-Epoch Temporal Context Network (IITNet) Using Sub-Epoch Features for Automatic Sleep Scoring on Raw Single-Channel EEG",
     "date": "2020-08-01",
@@ -185,5 +576,114 @@
     "TLDR": "IITNet은 단일 채널 원시 EEG로부터 sub-epoch 수준 특징을 Residual Network로 추출하고, BiLSTM을 통해 intra- 및 inter-epoch 시간 문맥을 학습하여 자동 수면 단계 분류를 수행\nSleepEDF, MASS, SHHS 데이터셋에서 최대 10 epoch까지 확장 실험을 수행한 결과, 정확도 약 84–87%, MF1 약 78–81%, κ 약 0.78–0.81로 최신 기법과 동등한 성능을 달성\n약 4 epoch(2분)만 고려해도 성능이 충분히 향상되었으며, 특히 N1·N2·REM 단계의 F1이 유의하게 개선되어, 최근 2분 EEG 활용이 효율성과 신뢰성 측면에서 합리적임을 보임",
     "type": "Paper",
     "language": "English"
+  },
+  {
+    "id": "archive-23",
+    "slug": "suk241119calm",
+    "title": "LLM의 시대가 가고 CALM의 시대가 온다",
+    "date": "2024-11-19",
+    "category": "Generative AI",
+    "tags": [
+      "LLM",
+      "CALM",
+      "AI",
+      "텐센트",
+      "칭화대",
+      "인공지능",
+      "벡터_예측"
+    ],
+    "authors": [
+      "Suk Hyun K."
+    ],
+    "source": "https://www.linkedin.com/posts/suk-hyun-k-31ba9b369_tsatmi-qzustwtps-llm-activity-7391569501068316672-e8Sn?utm_source=share&utm_medium=member_desktop&rcm=ACoAABP29JEBXb3L3IGz3S241iD4_fxC7Fuop24",
+    "country": "China",
+    "institute": "Tencent AI, Tsinghua University",
+    "correspondingAuthor": null,
+    "abstract": "기존 LLM의 토큰 단위 예측 한계를 극복하기 위해 연속적 벡터 단위로 예측하는 CALM 모델 제안\n텐센트 AI와 칭화대가 공동 개발하여 연산량을 44% 절감하고 토큰 예측 단계를 4배 단축\n이산적 기호 나열에서 벗어나 의미의 흐름(아이디어 단위)으로 사고하는 새로운 패러다임 제시",
+    "TLDR": "기존 LLM의 토큰 단위 예측 한계를 극복하기 위해 연속적 벡터 단위로 예측하는 CALM 모델 제안\n텐센트 AI와 칭화대가 공동 개발하여 연산량을 44% 절감하고 토큰 예측 단계를 4배 단축\n이산적 기호 나열에서 벗어나 의미의 흐름(아이디어 단위)으로 사고하는 새로운 패러다임 제시",
+    "type": "Article",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-24",
+    "slug": "yna260217unitree",
+    "title": "유니트리, 지난해 군무 이어 무술학교 어린이들과 합동공연",
+    "date": "2026-02-17",
+    "category": "Physical AI",
+    "tags": [
+      "휴머노이드",
+      "유니트리",
+      "Unitree",
+      "로봇_굴기",
+      "춘완",
+      "로보틱스",
+      "중국_기술"
+    ],
+    "authors": [
+      "권숙희"
+    ],
+    "source": "https://www.yna.co.kr/view/AKR20260217015100009?input=1195z",
+    "country": "China",
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "중국 유니트리(Unitree)의 휴머노이드 로봇이 2026년 CCTV 춘제 갈라쇼에서 어린이들과 고난도 무술 합동 공연을 선보임.\n전 세계 최초로 공개된 군집 제어 기술을 통해 빠른 동작 전환과 취권, 쌍절곤, 2~3m 높이의 도마 점프 및 안정적 착지를 구현함.\n유니트리 CEO 왕싱싱은 휴머노이드의 핵심이 기술 과시를 넘어 인간을 위한 봉사와 생산력 진보에 있음을 강조함.",
+    "TLDR": "중국 유니트리(Unitree)의 휴머노이드 로봇이 2026년 CCTV 춘제 갈라쇼에서 어린이들과 고난도 무술 합동 공연을 선보임.\n전 세계 최초로 공개된 군집 제어 기술을 통해 빠른 동작 전환과 취권, 쌍절곤, 2~3m 높이의 도마 점프 및 안정적 착지를 구현함.\n유니트리 CEO 왕싱싱은 휴머노이드의 핵심이 기술 과시를 넘어 인간을 위한 봉사와 생산력 진보에 있음을 강조함.",
+    "type": "News",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-25",
+    "slug": "yozm260219vibecoding",
+    "title": "바이브 코딩(Vibe Coding)의 최근 흐름과 실무 적용 사례",
+    "date": "2026-02-19",
+    "category": "Generative AI",
+    "tags": [
+      "바이브_코딩",
+      "Vibe_Coding",
+      "AI_코딩",
+      "생성형_AI",
+      "클로드",
+      "커서",
+      "개발_패러다임",
+      "기술_부채"
+    ],
+    "authors": [
+      "요즘IT"
+    ],
+    "source": "https://yozm.wishket.com/magazine/detail/3611/",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "바이브 코딩은 실험 단계를 넘어 프로덕션 배포와 실무 도구로 정착하며 개발 패러다임의 근본적인 변화를 이끌고 있음.\n개발자의 역할은 단순 코드 구현자에서 AI가 원활히 작동할 수 있는 환경과 규칙을 설계하는 플랫폼 엔지니어로 진화 중임.\n클로드, 커서 등 AI 도구 생태계가 성숙해짐에 따라 비개발자의 참여가 확대되고 한국산 글로벌 도구의 활약이 두드러짐.",
+    "TLDR": "바이브 코딩은 실험 단계를 넘어 프로덕션 배포와 실무 도구로 정착하며 개발 패러다임의 근본적인 변화를 이끌고 있음.\n개발자의 역할은 단순 코드 구현자에서 AI가 원활히 작동할 수 있는 환경과 규칙을 설계하는 플랫폼 엔지니어로 진화 중임.\n클로드, 커서 등 AI 도구 생태계가 성숙해짐에 따라 비개발자의 참여가 확대되고 한국산 글로벌 도구의 활약이 두드러짐.",
+    "type": "Article",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-26",
+    "slug": "zdnet251027worldmodel",
+    "title": "얀 르쿤 \"5년 내 LLM 한계…AI의 다음 혁명은 월드 모델\"",
+    "date": "2025-10-27",
+    "category": "Perception AI",
+    "tags": [
+      "얀_르쿤",
+      "메타",
+      "월드_모델",
+      "JEPA",
+      "LLM",
+      "인공지능",
+      "과학기술정보통신부"
+    ],
+    "authors": [
+      "남혁우"
+    ],
+    "source": "https://zdnet.co.kr/view/?no=20251027181617",
+    "country": null,
+    "institute": null,
+    "correspondingAuthor": null,
+    "abstract": "현재의 LLM은 세계에 대한 이해 없이 언어적 패턴만 모사하며 5년 내 기술적 한계에 직면할 것임.\n인간 수준 지능 도달을 위해 물리적 세계를 관찰·예측하는 '월드 모델'과 JEPA 아키텍처가 대안으로 제시됨.\nAI는 텍스트 기반 학습을 넘어 영상과 물리 환경을 통한 자기지도학습으로 세계의 규칙을 내면화해야 함.",
+    "TLDR": "현재의 LLM은 세계에 대한 이해 없이 언어적 패턴만 모사하며 5년 내 기술적 한계에 직면할 것임.\n인간 수준 지능 도달을 위해 물리적 세계를 관찰·예측하는 '월드 모델'과 JEPA 아키텍처가 대안으로 제시됨.\nAI는 텍스트 기반 학습을 넘어 영상과 물리 환경을 통한 자기지도학습으로 세계의 규칙을 내면화해야 함.",
+    "type": "News",
+    "language": "Korean"
   }
 ]

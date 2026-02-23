@@ -18,3 +18,5 @@ https://search.app/jCjTV
 https://search.app/oBEqb
 https://n.news.naver.com/mnews/ranking/article/277/0005673257?sid=001
 https://zdnet.co.kr/view/?no=20251027181617
+https://www.palantir.com/docs/foundry/architecture-center/aip-architecture
+https://codelabs.developers.google.com/building-with-google-antigravity

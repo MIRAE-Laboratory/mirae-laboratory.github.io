@@ -17,11 +17,31 @@ source: https://info.ndtis.kr/ushm/board/qna/main.do
 institute: MIRAE Laboratory
 ---
 # 참고문헌
+
 -  [한국비파괴검사협회 - 2025 비파괴검사 실태 조사 보고서 (2026-01-02)](https://info.ndtis.kr/resources/pdf/web/viewer.html?file=/download/byNameStream/BoardContentsInfo/20260102091238028_ULhq/)
  - [Harvard Business Review - Agentic AI Expectations, Readiness, Results (2026-01-23, 2026)](https://hbr.org/sponsored/2026/01/agentic-ai-expectations-readiness-results)
 
 # SUNO로 만든 "한국비파괴검사협회 창립 20주년 축하 트로트"
+
 [![Video Label](http://img.youtube.com/vi/z8m0_K_apJ0/0.jpg)](https://youtu.be/z8m0_K_apJ0?t=0s) Video Label
+
+---
+
+# Google Notebook LM으로 만든 슬라이드
+
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(1).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(2).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(3).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(4).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(5).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(6).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(7).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(8).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(9).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(10).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(11).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(12).jpg]]
+![[https://raw.githubusercontent.com/MIRAE-Laboratory/Lectures/refs/heads/main/2026_KANDT%20Agentic_NDT_Strategy/Agentic_NDT_Strategy_%20(13).jpg]]
 
 ---
 # Google Notebook LM으로 만든 토크쇼

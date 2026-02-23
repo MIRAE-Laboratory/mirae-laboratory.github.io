@@ -10,12 +10,29 @@ import { siteName } from "../config";
 
 const baseUrl = process.env.PUBLIC_URL || "";
 
-/** 본문에 섞인 HTML 태그를 제거해 마크다운만 남김 (열람 시 HTML 코드가 보이지 않도록) */
+/** 본문 정규화: Obsidian 위키 이미지 변환 + HTML 태그 제거 */
 function stripHtmlFromMarkdown(text) {
   if (!text || typeof text !== "string") return text;
   return text
+    // <br> → 줄바꿈
     .replace(/<br\s*\/?>/gi, "\n")
+    // 나머지 HTML 태그 제거
     .replace(/<[^>]+>/g, "");
+}
+
+/** YouTube URL에서 video ID 추출 */
+function extractYouTubeId(url) {
+  if (!url) return null;
+  const patterns = [
+    /youtu\.be\/([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+  ];
+  for (const re of patterns) {
+    const m = url.match(re);
+    if (m) return m[1];
+  }
+  return null;
 }
 
 mermaid.initialize({ startOnLoad: false, theme: "neutral" });
@@ -253,6 +270,28 @@ const ArchiveDetail = () => {
                       <code className={className} {...props}>
                         {children}
                       </code>
+                    );
+                  },
+                  // YouTube 링크 감지 → 인라인 재생 iframe으로 변환
+                  a({ href, children }) {
+                    const ytId = extractYouTubeId(href);
+                    if (ytId) {
+                      return (
+                        <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", marginBottom: "1em" }}>
+                          <iframe
+                            src={`https://www.youtube.com/embed/${ytId}`}
+                            title="YouTube video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                          />
+                        </div>
+                      );
+                    }
+                    return (
+                      <a href={href} target="_blank" rel="noopener noreferrer">
+                        {children}
+                      </a>
                     );
                   },
                 }}

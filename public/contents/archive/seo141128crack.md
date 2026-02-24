@@ -1,36 +1,51 @@
 ---
 date: 2014-11-28
-title: "Improvement of crack sizing performance by using nonlinear ultrasonic technique"
-category: NDT&E
+title: Improvement of crack sizing performance by using nonlinear ultrasonic technique
+category: Paper
 type: Paper
 language: English
 tldr:
-- 닫힘 균열(Closed crack) 검출을 위해 접촉 음향 비선형성(CAN) 기반의 비선형 초음파 기술(NUT)의 효용성을 실험적으로 검증함.
-- 구조물의 한쪽 면에서만 접근 가능한 피치-캐치(Pitch-catch) 방식을 사용하여 실제 균열에서의 2차 고조파 발생을 측정함.
-- 선형 초음파와 비선형 기술을 결합하여 균열의 개방된 부분과 닫힌 부분을 모두 파악함으로써 균열 크기 측정 성능을 크게 향상시킴.
+  - CAN(contact acoustic nonlinearity) 기반 비선형 초음파 기법(NUT)의 실제 균열 적용성을 pitch-catch(단면 접근) 구성에서 실험적으로 검증
+  - 2차 고조파 성분이 닫힘(closed) 영역 존재를 명확히 반영함을 보였고, 선형+비선형 초음파 결합으로 균열 크기 추정 성능을 향상
+  - “모델/인공 접촉면 + through-transmission”에 치우친 기존 한계를 넘어, 단면 접근 조건에서의 실구조 적용 가능성을 제시
 tags:
-- Crack_sizing
-- Contact_interface
-- Contact_Acoustic_Nonlinearity
-- Harmonic_wave_generation
-- Pitch-catch_method
-source: https://link.springer.com/article/10.1007/s12541-014-0614-4
+  - Nonlinear_Ultrasonics
+  - Contact_Acoustic_Nonlinearity
+  - Harmonic_Generation
+  - Closed_Crack
+  - Crack_Sizing
+  - Pitch-Catch
+  - NDT
+source: https://doi.org/10.1007/s12541-014-0614-4
 country: South Korea
-institute: Hanyang University
+institute: Hanyang University; Korea Institute of Nuclear Safety; Chonbuk National University
 authors:
-- Hogeon Seo
-- Kyung-Young Jhang
-- Kyung-Cho Kim
-- Dong-Pyo Hong
+  - Hogeon Seo
+  - Kyung-Young Jhang
+  - Kyung-Cho Kim
+  - Dong-Pyo Hong
 correspondingAuthor: Kyung-Young Jhang
 ---
+> [!Abstract]
+> The nonlinear ultrasonic technique (NUT) based on the contact acoustic nonlinearity (CAN) has been considered as a promising method for the closed crack detection. However, most of the previous studies were limited to the modeling of the second-order harmonic wave generation at contacted interfaces and its verification by testing artificially contacted interfaces in the through-transmission method.
+> In this study, we investigated experimentally the contact acoustic nonlinearity at a real crack by using the measurement system constructed in the pitch-catch method that permits the transducers to access the only single side of a test structure. Results showed that the magnitude of the second-order harmonic wave represented the existence of the closed area clearly and that the crack sizing performance was greatly improved by the combination of the linear and nonlinear ultrasonic techniques.
 
-# Improvement of crack sizing performance by using nonlinear ultrasonic technique
+## Originality (핵심 독창성)
 
-이 연구는 접촉 음향 비선형성(CAN)을 활용하여 기존 선형 초음파 방식으로는 탐지가 어려운 닫힘 균열의 크기를 정밀하게 측정하는 기법을 제안하고 실험적으로 입증했습니다.
+- 닫힘 균열(closed crack) 문제를 **실균열 + 단면 접근(pitch-catch)** 조건에서 다룬다. 기존의 인공 접촉면/through-transmission 중심 흐름을 벗어난다.
+    
+- 선형 + 비선형 초음파를 결합해 **균열 크기 추정 성능 향상**을 목표로 둔다.
+    
 
-* 비선형 초음파 기술(NUT)을 실제 균열에 적용하여, 접촉 계면에서 발생하는 2차 고조파(Second-order harmonic wave)의 거동을 분석함.
-* 투과법에 의존하던 기존 연구와 달리, 변환기를 단일 면에만 배치하는 피치-캐치(Pitch-catch) 방식을 사용하여 현장 적용성을 높임.
-* 실험 결과, 2차 고조파의 진폭 크기가 균열의 닫힘 영역(Closed area)의 존재를 명확하게 나타내는 지표임을 확인 함.
-* 선형 초음파 기술로 측정된 균열 정보에 비선형 데이터를 통합함으로써, 전체적인 균열 크기(Crack sizing) 측정의 정확도를 대폭 개선함.
-* 접촉 음향 비선형성 모델을 기반으로 실제 피로 균열 등 비파괴 검사 분야에서의 균열 정량화 성능 향상 가능성을 제시함.
+## Novelty (기술적 새로움)
+
+- contact acoustic nonlinearity에서 발생하는 **2차 고조파(Second harmonic)** 크기를 닫힘 영역 존재와 연결해 활용한다.
+    
+- pitch-catch 구성으로 실제 구조물 적용성을 강조한다.
+    
+
+## Contribution (주요 기여)
+
+- 실험적으로 2차 고조파가 닫힘 영역을 명확히 반영함을 보이고, 선형+비선형 결합이 크기 추정에 유효함을 제시한다.
+    
+- 단면 접근이 필요한 현장 조건에서 NUT 적용 가능성을 강화한다.

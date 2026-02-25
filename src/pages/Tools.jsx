@@ -17,6 +17,7 @@ const capitalizeWords = (text) => {
 const TOOL_SECTIONS = [
   { id: "tool-capitalize", label: "Capitalize" },
   { id: "tool-qr", label: "QR 코드 생성" },
+  { id: "tool-favicon", label: "Favicon 생성" },
 ];
 
 const Tools = () => {
@@ -29,10 +30,18 @@ const Tools = () => {
   const [qrError, setQrError] = useState(null);
   const [qrCopied, setQrCopied] = useState(false);
 
+  const [faviconFile, setFaviconFile] = useState(null);
+  const [faviconPreview, setFaviconPreview] = useState(null);
+  const [favicon16, setFavicon16] = useState(null);
+  const [favicon32, setFavicon32] = useState(null);
+  const [faviconError, setFaviconError] = useState(null);
+
   const sectionCapitalizeRef = useRef(null);
   const sectionQrRef = useRef(null);
+  const sectionFaviconRef = useRef(null);
   const inputCapitalizeRef = useRef(null);
   const inputQrRef = useRef(null);
+  const inputFaviconRef = useRef(null);
 
   const scrollToSection = useCallback((sectionRef, inputRef) => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -100,6 +109,74 @@ const Tools = () => {
     a.click();
   }, [qrDataUrl]);
 
+  const generateFaviconFromImage = useCallback((file) => {
+    if (!file || !file.type.startsWith("image/")) {
+      setFaviconError("이미지 파일을 선택해 주세요.");
+      setFavicon16(null);
+      setFavicon32(null);
+      setFaviconPreview(null);
+      return;
+    }
+    setFaviconError(null);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const url = e.target?.result;
+      setFaviconPreview(url);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        try {
+          const sizes = [16, 32];
+          const dataUrls = {};
+          sizes.forEach((size) => {
+            const canvas = document.createElement("canvas");
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, size, size);
+            dataUrls[size] = canvas.toDataURL("image/png");
+          });
+          setFavicon16(dataUrls[16]);
+          setFavicon32(dataUrls[32]);
+        } catch (err) {
+          setFaviconError("Favicon 생성에 실패했습니다.");
+          setFavicon16(null);
+          setFavicon32(null);
+        }
+      };
+      img.onerror = () => {
+        setFaviconError("이미지를 불러올 수 없습니다.");
+        setFavicon16(null);
+        setFavicon32(null);
+      };
+      img.src = url;
+    };
+    reader.readAsDataURL(file);
+  }, []);
+
+  const handleFaviconFileChange = useCallback(
+    (e) => {
+      const file = e.target?.files?.[0];
+      setFaviconFile(file || null);
+      if (file) generateFaviconFromImage(file);
+      else {
+        setFaviconPreview(null);
+        setFavicon16(null);
+        setFavicon32(null);
+        setFaviconError(null);
+      }
+    },
+    [generateFaviconFromImage]
+  );
+
+  const downloadFavicon = useCallback((dataUrl, filename) => {
+    if (!dataUrl) return;
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = filename;
+    a.click();
+  }, []);
+
   return (
     <main className="section py-5">
       <Container>
@@ -118,6 +195,13 @@ const Tools = () => {
             onClick={() => scrollToSection(sectionQrRef, inputQrRef)}
           >
             QR 코드 생성
+          </Button>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={() => scrollToSection(sectionFaviconRef, inputFaviconRef)}
+          >
+            Favicon 생성
           </Button>
         </div>
 
@@ -209,6 +293,68 @@ const Tools = () => {
                         저장
                       </Button>
                     </div>
+                  </div>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col lg={6} className="mb-4" ref={sectionFaviconRef}>
+            <Card className="shadow-sm h-100" id={TOOL_SECTIONS[2].id}>
+              <Card.Header as="h5" className="bg-light">
+                Favicon 생성
+              </Card.Header>
+              <Card.Body>
+                <p className="small text-muted mb-2">
+                  이미지를 올리면 16×16, 32×32 favicon PNG를 만들어 다운로드할 수 있습니다.
+                </p>
+                <Form.Control
+                  ref={inputFaviconRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFaviconFileChange}
+                  className="mb-3"
+                />
+                {faviconError && (
+                  <div className="small text-danger mb-2">{faviconError}</div>
+                )}
+                {faviconPreview && (
+                  <div className="mb-3">
+                    <span className="small text-muted d-block mb-1">미리보기</span>
+                    <img
+                      src={faviconPreview}
+                      alt="업로드 미리보기"
+                      style={{ maxWidth: "120px", maxHeight: "120px", objectFit: "contain" }}
+                      className="d-block border rounded"
+                    />
+                  </div>
+                )}
+                {(favicon16 || favicon32) && (
+                  <div className="d-flex flex-wrap gap-2 align-items-center">
+                    {favicon16 && (
+                      <div className="d-flex align-items-center gap-2">
+                        <img src={favicon16} alt="16x16" width={16} height={16} className="border" />
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          onClick={() => downloadFavicon(favicon16, "favicon-16x16.png")}
+                        >
+                          16×16 저장
+                        </Button>
+                      </div>
+                    )}
+                    {favicon32 && (
+                      <div className="d-flex align-items-center gap-2">
+                        <img src={favicon32} alt="32x32" width={32} height={32} className="border" />
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          onClick={() => downloadFavicon(favicon32, "favicon-32x32.png")}
+                        >
+                          32×32 저장
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </Card.Body>

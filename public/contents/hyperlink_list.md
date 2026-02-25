@@ -1,3 +1,4 @@
+https://news.hada.io/topic?id=24957&fbclid=IwY2xjawQJU19leHRuA2FlbQIxMQBicmlkETJjb2dsNjFIQXFvbXJhdWJlc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuDJ70qFry8uF2RYJmJi1SSCwTIyWMv8qP3lzYWvAr4RxwoxYxyzJJvt0xKl_aem_Kdk_M0MDPPhPMmhO6TNLuw
 https://tonylee.im/ko/blog/openai-harness-engineering-five-principles-codex/
 https://codelabs.developers.google.com/building-with-google-antigravity
 https://www.chosun.com/economy/science/2026/02/18/GNLILN6TNFCHRGPEFMKOEDGC5I/

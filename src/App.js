@@ -133,6 +133,7 @@ const App = () => {
           <Route path="/Repositories" element={<Repositories />} />
           <Route path="/Contact" element={<ContactPage />} />
           <Route path="/Tools" element={<Tools />} />
+          <Route path="/Tool" element={<Tools />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer mode={footerTheme} />

@@ -30,7 +30,6 @@ const Tools = () => {
   const [qrError, setQrError] = useState(null);
   const [qrCopied, setQrCopied] = useState(false);
 
-  const [faviconFile, setFaviconFile] = useState(null);
   const [faviconPreview, setFaviconPreview] = useState(null);
   const [favicon16, setFavicon16] = useState(null);
   const [favicon32, setFavicon32] = useState(null);
@@ -157,7 +156,6 @@ const Tools = () => {
   const handleFaviconFileChange = useCallback(
     (e) => {
       const file = e.target?.files?.[0];
-      setFaviconFile(file || null);
       if (file) generateFaviconFromImage(file);
       else {
         setFaviconPreview(null);

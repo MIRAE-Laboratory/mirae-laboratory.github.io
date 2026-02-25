@@ -14,8 +14,52 @@ const capitalizeWords = (text) => {
     .join(" ");
 };
 
+/** Data URL의 base64를 바이트 배열로 변환 */
+const dataUrlToBytes = (dataUrl) => {
+  const base64 = dataUrl.split(",")[1];
+  if (!base64) return new Uint8Array(0);
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+};
+
+/** 16×16, 32×32 PNG 데이터 URL로 favicon.ico 바이너리 생성 (ICO는 내부에 PNG 포함 가능) */
+const buildIcoBlob = (png16DataUrl, png32DataUrl) => {
+  const png16 = dataUrlToBytes(png16DataUrl);
+  const png32 = dataUrlToBytes(png32DataUrl);
+  const headerSize = 6;
+  const entrySize = 16;
+  const numImages = 2;
+  const offsetFirst = headerSize + entrySize * numImages;
+  const offset32 = offsetFirst + png16.length;
+  const totalSize = offset32 + png32.length;
+  const buf = new ArrayBuffer(totalSize);
+  const view = new DataView(buf);
+  let off = 0;
+  view.setUint16(off, 0, true); off += 2;
+  view.setUint16(off, 1, true); off += 2; // type 1 = ICO
+  view.setUint16(off, numImages, true); off += 2;
+  const writeEntry = (width, height, size, offset) => {
+    view.setUint8(off, width); off += 1;
+    view.setUint8(off, height); off += 1;
+    view.setUint8(off, 0); off += 1;
+    view.setUint8(off, 0); off += 1;
+    view.setUint16(off, 1, true); off += 2;
+    view.setUint16(off, 32, true); off += 2;
+    view.setUint32(off, size, true); off += 4;
+    view.setUint32(off, offset, true); off += 4;
+  };
+  writeEntry(16, 16, png16.length, offsetFirst);
+  writeEntry(32, 32, png32.length, offset32);
+  new Uint8Array(buf).set(png16, offsetFirst);
+  new Uint8Array(buf).set(png32, offset32);
+  return new Blob([buf], { type: "image/x-icon" });
+};
+
 const TOOL_SECTIONS = [
   { id: "tool-capitalize", label: "Capitalize" },
+  { id: "tool-lowercase", label: "모두 소문자화" },
   { id: "tool-qr", label: "QR 코드 생성" },
   { id: "tool-favicon", label: "Favicon 생성" },
 ];
@@ -24,6 +68,10 @@ const Tools = () => {
   const [capitalizeInput, setCapitalizeInput] = useState("");
   const [capitalizeResult, setCapitalizeResult] = useState("");
   const [capitalizeCopied, setCapitalizeCopied] = useState(false);
+
+  const [lowercaseInput, setLowercaseInput] = useState("");
+  const [lowercaseResult, setLowercaseResult] = useState("");
+  const [lowercaseCopied, setLowercaseCopied] = useState(false);
 
   const [qrUrl, setQrUrl] = useState("");
   const [qrDataUrl, setQrDataUrl] = useState(null);
@@ -36,9 +84,11 @@ const Tools = () => {
   const [faviconError, setFaviconError] = useState(null);
 
   const sectionCapitalizeRef = useRef(null);
+  const sectionLowercaseRef = useRef(null);
   const sectionQrRef = useRef(null);
   const sectionFaviconRef = useRef(null);
   const inputCapitalizeRef = useRef(null);
+  const inputLowercaseRef = useRef(null);
   const inputQrRef = useRef(null);
   const inputFaviconRef = useRef(null);
 
@@ -55,6 +105,12 @@ const Tools = () => {
     setCapitalizeResult(capitalizeWords(capitalizeInput));
   }, [capitalizeInput]);
 
+  useEffect(() => {
+    setLowercaseResult(
+      typeof lowercaseInput === "string" ? lowercaseInput.toLowerCase() : ""
+    );
+  }, [lowercaseInput]);
+
   const handleCapitalizeCopy = useCallback(async () => {
     if (!capitalizeResult) return;
     try {
@@ -65,6 +121,17 @@ const Tools = () => {
       console.error("Copy failed:", err);
     }
   }, [capitalizeResult]);
+
+  const handleLowercaseCopy = useCallback(async () => {
+    if (!lowercaseResult) return;
+    try {
+      await navigator.clipboard.writeText(lowercaseResult);
+      setLowercaseCopied(true);
+      setTimeout(() => setLowercaseCopied(false), 2000);
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  }, [lowercaseResult]);
 
   const generateQr = useCallback(async () => {
     const url = (qrUrl || "").trim();
@@ -125,6 +192,11 @@ const Tools = () => {
       img.crossOrigin = "anonymous";
       img.onload = () => {
         try {
+          const w = img.naturalWidth || img.width;
+          const h = img.naturalHeight || img.height;
+          const cropSize = Math.min(w, h);
+          const srcX = (w - cropSize) / 2;
+          const srcY = (h - cropSize) / 2;
           const sizes = [16, 32];
           const dataUrls = {};
           sizes.forEach((size) => {
@@ -132,7 +204,7 @@ const Tools = () => {
             canvas.width = size;
             canvas.height = size;
             const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, size, size);
+            ctx.drawImage(img, srcX, srcY, cropSize, cropSize, 0, 0, size, size);
             dataUrls[size] = canvas.toDataURL("image/png");
           });
           setFavicon16(dataUrls[16]);
@@ -167,13 +239,20 @@ const Tools = () => {
     [generateFaviconFromImage]
   );
 
-  const downloadFavicon = useCallback((dataUrl, filename) => {
-    if (!dataUrl) return;
-    const a = document.createElement("a");
-    a.href = dataUrl;
-    a.download = filename;
-    a.click();
-  }, []);
+  const downloadFaviconIco = useCallback(() => {
+    if (!favicon16 || !favicon32) return;
+    try {
+      const blob = buildIcoBlob(favicon16, favicon32);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "favicon.ico";
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      setFaviconError("favicon.ico 저장에 실패했습니다.");
+    }
+  }, [favicon16, favicon32]);
 
   return (
     <main className="section py-5">
@@ -186,6 +265,13 @@ const Tools = () => {
             onClick={() => scrollToSection(sectionCapitalizeRef, inputCapitalizeRef)}
           >
             Capitalize
+          </Button>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={() => scrollToSection(sectionLowercaseRef, inputLowercaseRef)}
+          >
+            모두 소문자화
           </Button>
           <Button
             variant="outline-primary"
@@ -244,8 +330,48 @@ const Tools = () => {
             </Card>
           </Col>
 
-          <Col lg={6} className="mb-4" ref={sectionQrRef}>
+          <Col lg={6} className="mb-4" ref={sectionLowercaseRef}>
             <Card className="shadow-sm h-100" id={TOOL_SECTIONS[1].id}>
+              <Card.Header as="h5" className="bg-light">
+                모두 소문자화
+              </Card.Header>
+              <Card.Body>
+                <p className="small text-muted mb-2">
+                  문장을 입력하면 전체를 소문자로 바꾼 결과를 보여줍니다. (Capitalize의 반대)
+                </p>
+                <Form.Control
+                  ref={inputLowercaseRef}
+                  as="textarea"
+                  rows={2}
+                  placeholder="입력할 문장..."
+                  value={lowercaseInput}
+                  onChange={(e) => setLowercaseInput(e.target.value)}
+                  className="mb-3"
+                />
+                {lowercaseResult && (
+                  <>
+                    <Form.Control
+                      as="textarea"
+                      rows={2}
+                      readOnly
+                      value={lowercaseResult}
+                      className="mb-2 bg-light"
+                    />
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={handleLowercaseCopy}
+                    >
+                      {lowercaseCopied ? "복사됨" : "복사"}
+                    </Button>
+                  </>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col lg={6} className="mb-4" ref={sectionQrRef}>
+            <Card className="shadow-sm h-100" id={TOOL_SECTIONS[2].id}>
               <Card.Header as="h5" className="bg-light">
                 QR 코드 생성
               </Card.Header>
@@ -298,13 +424,13 @@ const Tools = () => {
           </Col>
 
           <Col lg={6} className="mb-4" ref={sectionFaviconRef}>
-            <Card className="shadow-sm h-100" id={TOOL_SECTIONS[2].id}>
+            <Card className="shadow-sm h-100" id={TOOL_SECTIONS[3].id}>
               <Card.Header as="h5" className="bg-light">
                 Favicon 생성
               </Card.Header>
               <Card.Body>
                 <p className="small text-muted mb-2">
-                  이미지를 올리면 16×16, 32×32 favicon PNG를 만들어 다운로드할 수 있습니다.
+                  이미지를 올리면 16×16, 32×32가 포함된 favicon.ico 파일을 만들어 다운로드할 수 있습니다.
                 </p>
                 <Form.Control
                   ref={inputFaviconRef}
@@ -327,32 +453,17 @@ const Tools = () => {
                     />
                   </div>
                 )}
-                {(favicon16 || favicon32) && (
+                {favicon16 && favicon32 && (
                   <div className="d-flex flex-wrap gap-2 align-items-center">
-                    {favicon16 && (
-                      <div className="d-flex align-items-center gap-2">
-                        <img src={favicon16} alt="16x16" width={16} height={16} className="border" />
-                        <Button
-                          variant="outline-primary"
-                          size="sm"
-                          onClick={() => downloadFavicon(favicon16, "favicon-16x16.png")}
-                        >
-                          16×16 저장
-                        </Button>
-                      </div>
-                    )}
-                    {favicon32 && (
-                      <div className="d-flex align-items-center gap-2">
-                        <img src={favicon32} alt="32x32" width={32} height={32} className="border" />
-                        <Button
-                          variant="outline-primary"
-                          size="sm"
-                          onClick={() => downloadFavicon(favicon32, "favicon-32x32.png")}
-                        >
-                          32×32 저장
-                        </Button>
-                      </div>
-                    )}
+                    <img src={favicon16} alt="16x16" width={16} height={16} className="border" />
+                    <img src={favicon32} alt="32x32" width={32} height={32} className="border" />
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={downloadFaviconIco}
+                    >
+                      favicon.ico 저장
+                    </Button>
                   </div>
                 )}
               </Card.Body>

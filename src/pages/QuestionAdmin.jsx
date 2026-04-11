@@ -91,7 +91,7 @@ const QuestionAdmin = () => {
       const questionList = questions
         .map((q, i) => `${i + 1}. ${q.text}`)
         .join("\n");
-      const prompt = `Below is a list of questions submitted by an audience. Please analyze them and extract exactly ${summaryCount} key questions that best represent the core concerns and themes. Output only the questions, one per line, without numbering, in the same language as the originals.\n\nQuestions:\n${questionList}`;
+      const prompt = `Below is a list of questions submitted by an audience. Analyze ALL questions holistically — identify common themes, recurring concerns, and underlying interests across the entire set. Then synthesize exactly ${summaryCount} comprehensive, integrated questions that capture the essence of what the audience collectively wants to know. Do NOT simply pick or copy existing questions. Instead, create new unified questions that merge and represent multiple related questions together. Output only the synthesized questions, one per line, without numbering, in the same language as the originals.\n\nQuestions:\n${questionList}`;
       const result = await callGemini(prompt);
       const trimmed = result.trim();
       setSummaryDraft(trimmed);

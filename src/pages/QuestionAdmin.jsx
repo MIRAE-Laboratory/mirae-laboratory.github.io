@@ -53,6 +53,7 @@ const QuestionAdmin = () => {
   const [generatedDraft, setGeneratedDraft] = useState("");
 
   const [summaryCount, setSummaryCount] = useState(3);
+  const [generateCount, setGenerateCount] = useState(3);
   const [conversationContent, setConversationContent] = useState("");
   const [generationPrompt, setGenerationPrompt] = useState("");
   const [loading, setLoading] = useState(null);
@@ -113,8 +114,8 @@ const QuestionAdmin = () => {
     try {
       const userPrompt = generationPrompt.trim();
       const prompt = userPrompt
-        ? `${userPrompt}\n\nBased on the following conversation content, generate relevant questions. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`
-        : `Based on the following conversation content, generate insightful questions that the audience might want to ask. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`;
+        ? `${userPrompt}\n\nBased on the following conversation content, generate exactly ${generateCount} relevant questions. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`
+        : `Based on the following conversation content, generate exactly ${generateCount} insightful questions that the audience might want to ask. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`;
       const result = await callGemini(prompt);
       const trimmed = result.trim();
       setGeneratedDraft(trimmed);
@@ -125,7 +126,7 @@ const QuestionAdmin = () => {
     } finally {
       setLoading(null);
     }
-  }, [conversationContent, generationPrompt]);
+  }, [conversationContent, generationPrompt, generateCount]);
 
   // --- Manual update handlers ---
   const handleUpdateSummary = useCallback(async () => {
@@ -336,25 +337,37 @@ const QuestionAdmin = () => {
                   className="mb-2"
                   size="sm"
                 />
-                <Button
-                  variant="success"
-                  size="sm"
-                  onClick={handleGenerate}
-                  disabled={
-                    !conversationContent.trim() ||
-                    loading === "generate" ||
-                    !GEMINI_API_KEY
-                  }
-                  className="mb-3"
-                >
-                  {loading === "generate" ? (
-                    <>
-                      <Spinner size="sm" className="me-1" /> Generating...
-                    </>
-                  ) : (
-                    "Generate"
-                  )}
-                </Button>
+                <InputGroup className="mb-3" size="sm">
+                  <InputGroup.Text>Count</InputGroup.Text>
+                  <Form.Control
+                    type="number"
+                    min={1}
+                    value={generateCount}
+                    onChange={(e) =>
+                      setGenerateCount(
+                        Math.max(1, Number(e.target.value) || 1)
+                      )
+                    }
+                    style={{ maxWidth: 80 }}
+                  />
+                  <Button
+                    variant="success"
+                    onClick={handleGenerate}
+                    disabled={
+                      !conversationContent.trim() ||
+                      loading === "generate" ||
+                      !GEMINI_API_KEY
+                    }
+                  >
+                    {loading === "generate" ? (
+                      <>
+                        <Spinner size="sm" className="me-1" /> Generating...
+                      </>
+                    ) : (
+                      "Generate"
+                    )}
+                  </Button>
+                </InputGroup>
                 <Form.Control
                   as="textarea"
                   rows={5}

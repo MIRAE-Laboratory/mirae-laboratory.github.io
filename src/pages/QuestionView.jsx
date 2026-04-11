@@ -4,6 +4,21 @@ import { updateTitle } from "../utils";
 import { siteName } from "../config";
 import { subscribeQuestions, subscribeMeta } from "../firebase";
 
+/** Render text as numbered lines (split by newline, skip empty) */
+const NumberedLines = ({ text }) => {
+  const lines = text.split("\n").filter((l) => l.trim());
+  return (
+    <div style={{ fontSize: "0.9rem", wordBreak: "break-word" }}>
+      {lines.map((line, i) => (
+        <div key={i} className="mb-1">
+          <span className="text-muted me-2">{i + 1}.</span>
+          {line.trim()}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const QuestionView = () => {
   const [questions, setQuestions] = useState([]);
   const [summary, setSummary] = useState("");
@@ -38,17 +53,7 @@ const QuestionView = () => {
               <strong style={{ fontSize: "0.9rem" }}>Summarized Questions</strong>
             </Card.Header>
             <Card.Body className="p-2 p-md-3">
-              <pre
-                className="mb-0"
-                style={{
-                  whiteSpace: "pre-wrap",
-                  fontFamily: "inherit",
-                  fontSize: "0.9rem",
-                  wordBreak: "break-word",
-                }}
-              >
-                {summary}
-              </pre>
+              <NumberedLines text={summary} />
             </Card.Body>
           </Card>
         )}
@@ -60,17 +65,7 @@ const QuestionView = () => {
               <strong style={{ fontSize: "0.9rem" }}>Generated Questions</strong>
             </Card.Header>
             <Card.Body className="p-2 p-md-3">
-              <pre
-                className="mb-0"
-                style={{
-                  whiteSpace: "pre-wrap",
-                  fontFamily: "inherit",
-                  fontSize: "0.9rem",
-                  wordBreak: "break-word",
-                }}
-              >
-                {generated}
-              </pre>
+              <NumberedLines text={generated} />
             </Card.Body>
           </Card>
         )}

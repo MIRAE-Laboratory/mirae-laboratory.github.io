@@ -22,10 +22,12 @@ import {
   deleteAllQuestions,
 } from "../firebase";
 
-const STORAGE_KEY_GEMINI_KEY = "qc_gemini_api_key";
+const GEMINI_API_KEY =
+  process.env.REACT_APP_GEMINI_API_KEY || "";
 
-const callGemini = async (apiKey, prompt) => {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+const callGemini = async (prompt) => {
+  if (!GEMINI_API_KEY) throw new Error("Gemini API key is not configured.");
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${GEMINI_API_KEY}`;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -46,24 +48,20 @@ const QuestionAdmin = () => {
   const [summary, setSummary] = useState("");
   const [generated, setGenerated] = useState("");
 
-  const [apiKey, setApiKey] = useState(
-    () => localStorage.getItem(STORAGE_KEY_GEMINI_KEY) || ""
-  );
+  // Editable drafts (local text before saving)
+  const [summaryDraft, setSummaryDraft] = useState("");
+  const [generatedDraft, setGeneratedDraft] = useState("");
+
   const [summaryCount, setSummaryCount] = useState(3);
   const [conversationContent, setConversationContent] = useState("");
   const [generationPrompt, setGenerationPrompt] = useState("");
-  const [loading, setLoading] = useState(null); // "summary" | "generate" | null
+  const [loading, setLoading] = useState(null);
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     updateTitle(`Question Admin | ${siteName}`);
   }, []);
-
-  // Persist API key locally
-  useEffect(() => {
-    if (apiKey) localStorage.setItem(STORAGE_KEY_GEMINI_KEY, apiKey);
-    else localStorage.removeItem(STORAGE_KEY_GEMINI_KEY);
-  }, [apiKey]);
 
   // Real-time subscription to questions
   useEffect(() => {
@@ -74,8 +72,12 @@ const QuestionAdmin = () => {
   // Real-time subscription to meta (summary & generated)
   useEffect(() => {
     const unsub = subscribeMeta((data) => {
-      setSummary(data.summary || "");
-      setGenerated(data.generated || "");
+      const s = data.summary || "";
+      const g = data.generated || "";
+      setSummary(s);
+      setGenerated(g);
+      setSummaryDraft(s);
+      setGeneratedDraft(g);
     });
     return () => unsub();
   }, []);
@@ -83,19 +85,16 @@ const QuestionAdmin = () => {
   // --- Summarize questions via Gemini ---
   const handleSummarize = useCallback(async () => {
     if (questions.length === 0) return;
-    if (!apiKey.trim()) {
-      setError("Please enter your Gemini API key.");
-      return;
-    }
     setError("");
     setLoading("summary");
     try {
       const questionList = questions
         .map((q, i) => `${i + 1}. ${q.text}`)
         .join("\n");
-      const prompt = `Below is a list of questions submitted by an audience. Please analyze them and extract exactly ${summaryCount} key questions that best represent the core concerns and themes. Output only the numbered list of key questions, in the same language as the originals.\n\nQuestions:\n${questionList}`;
-      const result = await callGemini(apiKey, prompt);
+      const prompt = `Below is a list of questions submitted by an audience. Please analyze them and extract exactly ${summaryCount} key questions that best represent the core concerns and themes. Output only the questions, one per line, without numbering, in the same language as the originals.\n\nQuestions:\n${questionList}`;
+      const result = await callGemini(prompt);
       const trimmed = result.trim();
+      setSummaryDraft(trimmed);
       setSummary(trimmed);
       await updateMeta({ summary: trimmed });
     } catch (err) {
@@ -103,25 +102,22 @@ const QuestionAdmin = () => {
     } finally {
       setLoading(null);
     }
-  }, [questions, summaryCount, apiKey]);
+  }, [questions, summaryCount]);
 
   // --- Generate questions from conversation via Gemini ---
   const handleGenerate = useCallback(async () => {
     const content = conversationContent.trim();
     if (!content) return;
-    if (!apiKey.trim()) {
-      setError("Please enter your Gemini API key.");
-      return;
-    }
     setError("");
     setLoading("generate");
     try {
       const userPrompt = generationPrompt.trim();
       const prompt = userPrompt
-        ? `${userPrompt}\n\nBased on the following conversation content, generate relevant questions.\n\nConversation:\n${content}`
-        : `Based on the following conversation content, generate insightful questions that the audience might want to ask. Output only the numbered list of questions, in the same language as the conversation.\n\nConversation:\n${content}`;
-      const result = await callGemini(apiKey, prompt);
+        ? `${userPrompt}\n\nBased on the following conversation content, generate relevant questions. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`
+        : `Based on the following conversation content, generate insightful questions that the audience might want to ask. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`;
+      const result = await callGemini(prompt);
       const trimmed = result.trim();
+      setGeneratedDraft(trimmed);
       setGenerated(trimmed);
       await updateMeta({ generated: trimmed });
     } catch (err) {
@@ -129,16 +125,31 @@ const QuestionAdmin = () => {
     } finally {
       setLoading(null);
     }
-  }, [conversationContent, generationPrompt, apiKey]);
+  }, [conversationContent, generationPrompt]);
+
+  // --- Manual update handlers ---
+  const handleUpdateSummary = useCallback(async () => {
+    const val = summaryDraft.trim();
+    setSummary(val);
+    await updateMeta({ summary: val });
+  }, [summaryDraft]);
+
+  const handleUpdateGenerated = useCallback(async () => {
+    const val = generatedDraft.trim();
+    setGenerated(val);
+    await updateMeta({ generated: val });
+  }, [generatedDraft]);
 
   // --- Reset handlers ---
   const handleResetSummary = useCallback(async () => {
     setSummary("");
+    setSummaryDraft("");
     await updateMeta({ summary: "" });
   }, []);
 
   const handleResetGenerated = useCallback(async () => {
     setGenerated("");
+    setGeneratedDraft("");
     await updateMeta({ generated: "" });
   }, []);
 
@@ -151,6 +162,19 @@ const QuestionAdmin = () => {
   const handleDeleteQuestion = useCallback(async (id) => {
     await deleteQuestion(id);
   }, []);
+
+  // --- Copy questions ---
+  const handleCopyQuestions = useCallback(async () => {
+    if (questions.length === 0) return;
+    const text = questions.map((q) => q.text).join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  }, [questions]);
 
   // --- Save all as Markdown ---
   const handleSaveMarkdown = useCallback(() => {
@@ -196,20 +220,11 @@ const QuestionAdmin = () => {
           </Button>
         </div>
 
-        {/* Gemini API Key */}
-        <Card className="shadow-sm mb-4">
-          <Card.Body className="py-2">
-            <InputGroup size="sm">
-              <InputGroup.Text>Gemini API Key</InputGroup.Text>
-              <Form.Control
-                type="password"
-                placeholder="Enter your Gemini API key..."
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-              />
-            </InputGroup>
-          </Card.Body>
-        </Card>
+        {!GEMINI_API_KEY && (
+          <Alert variant="warning">
+            Gemini API key is not configured. Set <code>REACT_APP_GEMINI_API_KEY</code> in environment.
+          </Alert>
+        )}
 
         {error && (
           <Alert variant="danger" dismissible onClose={() => setError("")}>
@@ -234,9 +249,9 @@ const QuestionAdmin = () => {
               <Card.Body>
                 <p className="small text-muted mb-2">
                   Extract key questions from {questions.length} submitted
-                  question(s) using Gemini AI.
+                  question(s) using Gemini AI, or edit manually.
                 </p>
-                <InputGroup className="mb-3" size="sm">
+                <InputGroup className="mb-2" size="sm">
                   <InputGroup.Text>Count</InputGroup.Text>
                   <Form.Control
                     type="number"
@@ -253,7 +268,9 @@ const QuestionAdmin = () => {
                     variant="primary"
                     onClick={handleSummarize}
                     disabled={
-                      questions.length === 0 || loading === "summary"
+                      questions.length === 0 ||
+                      loading === "summary" ||
+                      !GEMINI_API_KEY
                     }
                   >
                     {loading === "summary" ? (
@@ -265,21 +282,23 @@ const QuestionAdmin = () => {
                     )}
                   </Button>
                 </InputGroup>
-                {summary ? (
-                  <pre
-                    className="mb-0 p-2 border rounded bg-light"
-                    style={{
-                      whiteSpace: "pre-wrap",
-                      fontFamily: "inherit",
-                    }}
-                  >
-                    {summary}
-                  </pre>
-                ) : (
-                  <p className="text-muted small mb-0">
-                    No summarized questions yet.
-                  </p>
-                )}
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  placeholder="Summarized questions (one per line)..."
+                  value={summaryDraft}
+                  onChange={(e) => setSummaryDraft(e.target.value)}
+                  className="mb-2"
+                  style={{ fontSize: "0.85rem" }}
+                />
+                <Button
+                  variant="outline-primary"
+                  size="sm"
+                  onClick={handleUpdateSummary}
+                  disabled={summaryDraft.trim() === summary}
+                >
+                  Update
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -299,12 +318,11 @@ const QuestionAdmin = () => {
               </Card.Header>
               <Card.Body>
                 <p className="small text-muted mb-2">
-                  Enter conversation content and generate questions using
-                  Gemini AI.
+                  Generate from conversation or edit manually.
                 </p>
                 <Form.Control
                   as="textarea"
-                  rows={4}
+                  rows={3}
                   placeholder="Paste conversation content here..."
                   value={conversationContent}
                   onChange={(e) => setConversationContent(e.target.value)}
@@ -316,14 +334,18 @@ const QuestionAdmin = () => {
                   value={generationPrompt}
                   onChange={(e) => setGenerationPrompt(e.target.value)}
                   className="mb-2"
+                  size="sm"
                 />
                 <Button
                   variant="success"
                   size="sm"
                   onClick={handleGenerate}
                   disabled={
-                    !conversationContent.trim() || loading === "generate"
+                    !conversationContent.trim() ||
+                    loading === "generate" ||
+                    !GEMINI_API_KEY
                   }
+                  className="mb-3"
                 >
                   {loading === "generate" ? (
                     <>
@@ -333,28 +355,42 @@ const QuestionAdmin = () => {
                     "Generate"
                   )}
                 </Button>
-                {generated && (
-                  <pre
-                    className="mt-3 mb-0 p-2 border rounded bg-light"
-                    style={{
-                      whiteSpace: "pre-wrap",
-                      fontFamily: "inherit",
-                    }}
-                  >
-                    {generated}
-                  </pre>
-                )}
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  placeholder="Generated questions (one per line)..."
+                  value={generatedDraft}
+                  onChange={(e) => setGeneratedDraft(e.target.value)}
+                  className="mb-2"
+                  style={{ fontSize: "0.85rem" }}
+                />
+                <Button
+                  variant="outline-success"
+                  size="sm"
+                  onClick={handleUpdateGenerated}
+                  disabled={generatedDraft.trim() === generated}
+                >
+                  Update
+                </Button>
               </Card.Body>
             </Card>
           </Col>
         </Row>
 
-        {/* --- Registered questions --- */}
+        {/* --- Submitted questions --- */}
         <Card className="shadow-sm">
           <Card.Header className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center gap-2">
               <strong>Submitted Questions</strong>
               <Badge bg="secondary">{questions.length}</Badge>
+              <Button
+                variant="outline-secondary"
+                size="sm"
+                onClick={handleCopyQuestions}
+                disabled={questions.length === 0}
+              >
+                {copied ? "Copied!" : "Copy"}
+              </Button>
             </div>
             <Button
               variant="outline-danger"

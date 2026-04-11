@@ -24,7 +24,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Enterprise edition requires explicit database ID
+const db = getFirestore(app, "default");
 
 // --- Collections ---
 const questionsCol = () => collection(db, "qc_questions");

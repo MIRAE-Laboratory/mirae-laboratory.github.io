@@ -78,6 +78,40 @@
   },
   {
     "id": "archive-4",
+    "slug": "choi231101symmetry",
+    "title": "Symmetry-informed surrogates with data-free constraint for real-time acoustic wave propagation",
+    "date": "2023-11-01",
+    "category": "Paper",
+    "tags": [
+      "Surrogate_Model",
+      "Acoustic_Wave_Propagation",
+      "Applied_Acoustics",
+      "Symmetry_Constraint",
+      "Physics-Informed_Residual",
+      "Implicit_Representation",
+      "COMSOL",
+      "FEM",
+      "Real-Time",
+      "Flaw_Detection",
+      "Generalization",
+      "Open_Access"
+    ],
+    "authors": [
+      "Hee-Sun Choi",
+      "Yonggyun Yu",
+      "Hogeon Seo"
+    ],
+    "source": "https://doi.org/10.1016/j.apacoust.2023.109686",
+    "country": "Not specified",
+    "institute": "Not specified (ScienceDirect landing page)",
+    "correspondingAuthor": "Not specified (ScienceDirect landing page)",
+    "abstract": "음향(초음파) 파동전파를 암시적 표현(implicit representation)으로 학습하는 DNN surrogate를 제안하고, 음향의 대칭성(symmetry constraint)을 활용한 physics-informed training residual을 도입\nCOMSOL 기반 FEM 대비 R²가 98% 이상이며, 추론 속도는 약 215배 빠르다고 보고\n데이터 라벨/참조해 없이도 적용 가능한 “data-free” 제약 기반 residual로 일반화 성능을 전 입력 방향에서 강화하고, 결함 탐지(real-time flaw detection) 응용 가능성을 제시",
+    "TLDR": "음향(초음파) 파동전파를 암시적 표현(implicit representation)으로 학습하는 DNN surrogate를 제안하고, 음향의 대칭성(symmetry constraint)을 활용한 physics-informed training residual을 도입\nCOMSOL 기반 FEM 대비 R²가 98% 이상이며, 추론 속도는 약 215배 빠르다고 보고\n데이터 라벨/참조해 없이도 적용 가능한 “data-free” 제약 기반 residual로 일반화 성능을 전 입력 방향에서 강화하고, 결함 탐지(real-time flaw detection) 응용 가능성을 제시",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-5",
     "slug": "cladue2026complete",
     "title": "GPT-5.2가 이론물리학에서 새로운 결과를 도출",
     "date": "2025-05-16",
@@ -100,7 +134,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-5",
+    "id": "archive-6",
     "slug": "deng231222cybersec",
     "title": "A Survey of Generative AI for Cybersecurity: Potential, Pitfalls, and Prospects",
     "date": "2023-12-22",
@@ -129,7 +163,7 @@
     "language": "English"
   },
   {
-    "id": "archive-6",
+    "id": "archive-7",
     "slug": "dt240515anthropicdefense",
     "title": "앤트로픽 ‘윤리적 AI’ 입장 고수…미 국방부, 오픈AI·구글·xAI와 협업 논의",
     "date": "2024-05-15",
@@ -155,7 +189,31 @@
     "language": "Korean"
   },
   {
-    "id": "archive-7",
+    "id": "archive-8",
+    "slug": "google260223antigravity",
+    "title": "Building with Google Antigravity",
+    "date": "2026-02-23",
+    "category": "Agentic AI",
+    "tags": [
+      "google_antigravity",
+      "agentic_ide",
+      "software_engineering",
+      "flask",
+      "automation",
+      "web_development"
+    ],
+    "authors": [],
+    "source": "https://codelabs.developers.google.com/building-with-google-antigravity",
+    "country": "USA",
+    "institute": "Google",
+    "correspondingAuthor": null,
+    "abstract": "Google Antigravity는 자연어 지침을 통해 웹 리서치부터 풀스택 앱 개발까지 수행하는 에이전트 기반 IDE입니다.\n사용자는 Agent Manager와 Editor를 오가며 뉴스 요약, Flask 기반 동적 웹사이트, 생산성 앱 등을 자동 생성할 수 있습니다.\n태스크 리스트, 구현 계획, 실행 과정 녹화(Media Artifact) 등 상세한 작업 결과물을 제공하여 투명성을 확보합니다.",
+    "TLDR": "Google Antigravity는 자연어 지침을 통해 웹 리서치부터 풀스택 앱 개발까지 수행하는 에이전트 기반 IDE입니다.\n사용자는 Agent Manager와 Editor를 오가며 뉴스 요약, Flask 기반 동적 웹사이트, 생산성 앱 등을 자동 생성할 수 있습니다.\n태스크 리스트, 구현 계획, 실행 과정 녹화(Media Artifact) 등 상세한 작업 결과물을 제공하여 투명성을 확보합니다.",
+    "type": "Tutorial",
+    "language": "English"
+  },
+  {
+    "id": "archive-9",
     "slug": "hada250218aionui",
     "title": "AionUi - 오픈소스 멀티 AI 에이전트 데스크톱",
     "date": "2025-02-18",
@@ -181,7 +239,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-8",
+    "id": "archive-10",
     "slug": "hada250516gptphysics",
     "title": "GPT-5.2가 이론물리학에서 새로운 결과를 도출",
     "date": "2025-05-16",
@@ -204,7 +262,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-9",
+    "id": "archive-11",
     "slug": "hellodd250111ust",
     "title": "[신년인터뷰] 강대임 UST 총장 \"출연연·UST는 원팀...학생 창업 생태계 구축\"",
     "date": "2025-01-11",
@@ -229,7 +287,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-10",
+    "id": "archive-12",
     "slug": "kdnuggets251119llmbooks",
     "title": "LLM 엔지니어를 위한 무료 필독서 5권",
     "date": "2025-11-19",
@@ -256,7 +314,74 @@
     "language": "Korean"
   },
   {
-    "id": "archive-11",
+    "id": "archive-13",
+    "slug": "kim250411aiorchestration",
+    "title": "Artificial intelligence orchestration for text-based ultrasonic simulation via self-review by multi-large language model agents",
+    "date": "2025-04-11",
+    "category": "Paper",
+    "tags": [
+      "LLM",
+      "Multi-Agent",
+      "Self-Review",
+      "Ground_AI",
+      "Ultrasonic_Simulation",
+      "SimNDT",
+      "Text-Based_Control",
+      "Natural_Language_Commands",
+      "Function_Calling",
+      "Scenario_Generation",
+      "Error_Reduction",
+      "Digital_Twin",
+      "Automation"
+    ],
+    "authors": [
+      "Soyeon Kim",
+      "Yonggyun Yu",
+      "Hogeon Seo"
+    ],
+    "source": "https://doi.org/10.1038/s41598-025-97498-y",
+    "country": "Republic of Korea",
+    "institute": "Korea Atomic Energy Research Institute; University of Science & Technology",
+    "correspondingAuthor": "Hogeon Seo",
+    "abstract": "SimNDT 초음파 시뮬레이션을 자연어로 제어하기 위해, 프로그램 기능을 함수 단위로 모듈화하고 LLM이 텍스트 명령을 실행 가능한 시나리오로 변환하는 구조를 제안\nGUI/스크립트 기반 대비 평균 시뮬레이션 설정 시간을 약 75% 단축하여, 반복 시뮬레이션이 필요한 디지털 트윈 등 시간 민감 응용에서 효율성을 크게 개선\nLLM 시나리오 생성 실패를 줄이기 위해 self-review 및 다중 에이전트 협업(ground AI)을 도입하여, 벡터 출력 길이 불일치 등 오류율을 23.89%에서 1.48%로 감소",
+    "TLDR": "SimNDT 초음파 시뮬레이션을 자연어로 제어하기 위해, 프로그램 기능을 함수 단위로 모듈화하고 LLM이 텍스트 명령을 실행 가능한 시나리오로 변환하는 구조를 제안\nGUI/스크립트 기반 대비 평균 시뮬레이션 설정 시간을 약 75% 단축하여, 반복 시뮬레이션이 필요한 디지털 트윈 등 시간 민감 응용에서 효율성을 크게 개선\nLLM 시나리오 생성 실패를 줄이기 위해 self-review 및 다중 에이전트 협업(ground AI)을 도입하여, 벡터 출력 길이 불일치 등 오류율을 23.89%에서 1.48%로 감소",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-14",
+    "slug": "lee240415sleepyco",
+    "title": "SleePyCo: Automatic sleep scoring with feature pyramid and contrastive learning",
+    "date": "2024-04-15",
+    "category": "Paper",
+    "tags": [
+      "Automatic_Sleep_Scoring",
+      "Single-Channel_EEG",
+      "Feature_Pyramid",
+      "Supervised_Contrastive_Learning",
+      "Multiscale_Representation",
+      "GitHub",
+      "Expert_Systems_with_Applications",
+      "Open_Access"
+    ],
+    "authors": [
+      "Seongju Lee",
+      "Yeonguk Yu",
+      "Seunghyeok Back",
+      "Hogeon Seo",
+      "Kyoobin Lee"
+    ],
+    "source": "https://doi.org/10.1016/j.eswa.2023.122551",
+    "country": "Not specified (ScienceDirect landing page)",
+    "institute": "Not specified (ScienceDirect landing page)",
+    "correspondingAuthor": "Not specified (ScienceDirect landing page)",
+    "abstract": "단일 채널 EEG 기반 자동 수면단계 분류에서, multi-scale EEG 패턴을 다루기 위해 feature pyramid와 전용 backbone(SleePyCo-backbone)을 제안\nsupervised contrastive learning을 결합하여, 유사 단계 간(특히 N1/REM) 구분력을 높이는 표현 학습을 수행\n4개 공개 데이터셋 비교에서 기존 단일채널 EEG 기반 프레임워크 대비 일관되게 성능 우위를 보고하며, 코드 공개를 제공",
+    "TLDR": "단일 채널 EEG 기반 자동 수면단계 분류에서, multi-scale EEG 패턴을 다루기 위해 feature pyramid와 전용 backbone(SleePyCo-backbone)을 제안\nsupervised contrastive learning을 결합하여, 유사 단계 간(특히 N1/REM) 구분력을 높이는 표현 학습을 수행\n4개 공개 데이터셋 비교에서 기존 단일채널 EEG 기반 프레임워크 대비 일관되게 성능 우위를 보고하며, 코드 공개를 제공",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-15",
     "slug": "lee250219vibecoding",
     "title": "바이브 코딩: 안드레이 카르파티가 제시한 자연어 기반 AI 코딩 패러다임",
     "date": "2025-02-19",
@@ -282,7 +407,41 @@
     "language": "Korean"
   },
   {
-    "id": "archive-12",
+    "id": "archive-16",
+    "slug": "lee250421restoration",
+    "title": "Restoration of multi-channel signal loss using autoencoder with recursive input strategy",
+    "date": "2025-04-21",
+    "category": "Paper",
+    "tags": [
+      "Autoencoder",
+      "Missing_Data",
+      "Data_Restoration",
+      "Multi-Channel",
+      "Multivariate_Sensor_Data",
+      "Recursive_Input_Strategy",
+      "Dynamic_Termination",
+      "Iterative_Refinement",
+      "Sensor_Networks",
+      "Data_Integrity",
+      "Industrial_AI",
+      "RMSE"
+    ],
+    "authors": [
+      "Jaejun Lee",
+      "Yonggyun Yu",
+      "Hogeon Seo"
+    ],
+    "source": "https://doi.org/10.1038/s41598-025-98374-5",
+    "country": "Republic of Korea",
+    "institute": "Korea Atomic Energy Research Institute; University of Science & Technology",
+    "correspondingAuthor": "Hogeon Seo",
+    "abstract": "다채널 센서 데이터에서 무작위·연속적인 결손/오염이 발생할 때 채널 간 상관을 충분히 반영하지 못하는 기존 복원 한계를 문제로 설정\n오토인코더 출력(복원값)을 다시 입력으로 재귀적으로 넣어 추정치를 점진적으로 개선하는 복원 알고리즘과, 개선이 미미해지면 자동 종료하는 동적 종료 기준을 제안\n다양한 다변량 센서 데이터/결손 시나리오에서 단발성(one-shot) 오토인코더 복원보다 정확도와 계산 효율을 모두 개선하여, 복잡 센서 네트워크의 데이터 무결성 확보에 적합함을 보임",
+    "TLDR": "다채널 센서 데이터에서 무작위·연속적인 결손/오염이 발생할 때 채널 간 상관을 충분히 반영하지 못하는 기존 복원 한계를 문제로 설정\n오토인코더 출력(복원값)을 다시 입력으로 재귀적으로 넣어 추정치를 점진적으로 개선하는 복원 알고리즘과, 개선이 미미해지면 자동 종료하는 동적 종료 기준을 제안\n다양한 다변량 센서 데이터/결손 시나리오에서 단발성(one-shot) 오토인코더 복원보다 정확도와 계산 효율을 모두 개선하여, 복잡 센서 네트워크의 데이터 무결성 확보에 적합함을 보임",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-17",
     "slug": "lim240219sedunet",
     "title": "1조원 들인 ‘S-에듀넷’ 개통 1년...교사는 “불편”, 학생은 “안 써”",
     "date": "2024-02-19",
@@ -308,7 +467,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-13",
+    "id": "archive-18",
     "slug": "lu220628auvtracking",
     "title": "Deep Reinforcement Learning-based Trajectory Tracking Control for Underactuated Autonomous Underwater Vehicles",
     "date": "2022-06-28",
@@ -336,7 +495,7 @@
     "language": "English"
   },
   {
-    "id": "archive-14",
+    "id": "archive-19",
     "slug": "microsoft260209copilotsecurity",
     "title": "Copilot Studio agent security: Top 10 risks you can detect and prevent",
     "date": "2026-02-12",
@@ -359,7 +518,29 @@
     "language": "Korean"
   },
   {
-    "id": "archive-15",
+    "id": "archive-20",
+    "slug": "miraelab250223agenticndt",
+    "title": "Agentic AI 시대를 준비하는 지능형 비파괴평가 기술의 발전 방향",
+    "date": "2025-02-23",
+    "category": "NDT&E",
+    "tags": [
+      "NDT",
+      "Agentic_AI",
+      "SUNO",
+      "Google_NotebookLM"
+    ],
+    "authors": [],
+    "source": "https://info.ndtis.kr/ushm/board/qna/main.do",
+    "country": null,
+    "institute": "MIRAE Laboratory",
+    "correspondingAuthor": null,
+    "abstract": "SUNO로 만든 \"한국비파괴검사협회 창립 20주년 축하 트로트\nAgentic AI 시대를 준비하는 지능형 비파괴평가 기술의 발전 방향에 대해 \"한국비파괴검사협회 - 2025 비파괴검사 실태 조사 보고서\"와 \"Harvard Business Review - Agentic AI Expectations, Readiness, Results\"를 바탕으로 Google Notebook LM을 통해 정리\nGoogle Notebook LM으로 만든 토크쇼, 영상, 보고서 생성",
+    "TLDR": "SUNO로 만든 \"한국비파괴검사협회 창립 20주년 축하 트로트\nAgentic AI 시대를 준비하는 지능형 비파괴평가 기술의 발전 방향에 대해 \"한국비파괴검사협회 - 2025 비파괴검사 실태 조사 보고서\"와 \"Harvard Business Review - Agentic AI Expectations, Readiness, Results\"를 바탕으로 Google Notebook LM을 통해 정리\nGoogle Notebook LM으로 만든 토크쇼, 영상, 보고서 생성",
+    "type": "Example",
+    "language": "Korean"
+  },
+  {
+    "id": "archive-21",
     "slug": "nature250212simndt",
     "title": "A novel text-based simulation control architecture leveraging large language models and ground AI",
     "date": "2025-02-12",
@@ -383,7 +564,7 @@
     "language": "English"
   },
   {
-    "id": "archive-16",
+    "id": "archive-22",
     "slug": "nature250213sensorrecovery",
     "title": "Recursive autoencoder-based data recovery for multivariate sensor networks",
     "date": "2025-02-13",
@@ -407,7 +588,7 @@
     "language": "English"
   },
   {
-    "id": "archive-17",
+    "id": "archive-23",
     "slug": "nature250217autoencoder",
     "title": "Recursive autoencoder-based multivariate sensor data restoration with dynamic stopping",
     "date": "2025-02-17",
@@ -431,32 +612,7 @@
     "language": "English"
   },
   {
-    "id": "archive-18",
-    "slug": "nature250217simndt",
-    "title": "A novel text-based simulation control architecture using large language models and ground AI",
-    "date": "2025-02-17",
-    "category": "Simulation AI",
-    "tags": [
-      "LLM",
-      "Simulation_Control",
-      "Ground_AI",
-      "SimNDT",
-      "Ultrasonic_Simulation",
-      "Multi-agent_Systems",
-      "Digital_Twin"
-    ],
-    "authors": [],
-    "source": "https://www.nature.com/articles/s41598-025-97498-y",
-    "country": null,
-    "institute": "Nature Scientific Reports",
-    "correspondingAuthor": null,
-    "abstract": "LLM 기반의 자연어 명령을 통해 초음파 시뮬레이션(SimNDT)을 제어하는 텍스트 기반 아키텍처를 제안함.\n자기 복기 및 다중 에이전트 협업을 포함하는 Ground AI 기법을 통해 시나리오 생성 오류율을 23.89%에서 1.48%로 대폭 낮춤.\n기존 GUI 방식 대비 시뮬레이션 설정 시간을 약 75% 단축하여 디지털 트윈 등 실시간 응용 분야의 효율성을 입증함.",
-    "TLDR": "LLM 기반의 자연어 명령을 통해 초음파 시뮬레이션(SimNDT)을 제어하는 텍스트 기반 아키텍처를 제안함.\n자기 복기 및 다중 에이전트 협업을 포함하는 Ground AI 기법을 통해 시나리오 생성 오류율을 23.89%에서 1.48%로 대폭 낮춤.\n기존 GUI 방식 대비 시뮬레이션 설정 시간을 약 75% 단축하여 디지털 트윈 등 실시간 응용 분야의 효율성을 입증함.",
-    "type": "Paper",
-    "language": "English"
-  },
-  {
-    "id": "archive-19",
+    "id": "archive-24",
     "slug": "neo260130macstudio",
     "title": "Mac Studio를 Ollama 호스트로 쓰는 것이 과연 합리적인 선택일까?",
     "date": "2026-01-30",
@@ -483,7 +639,32 @@
     "language": "Korean"
   },
   {
-    "id": "archive-20",
+    "id": "archive-25",
+    "slug": "palantir260220aiparchitecture",
+    "title": "AIP architecture overview",
+    "date": "2026-02-20",
+    "category": "Agentic AI",
+    "tags": [
+      "Palantir",
+      "AIP",
+      "AIArchitecture",
+      "LLMIntegration",
+      "Ontology",
+      "AgenticAI",
+      "Governance"
+    ],
+    "authors": [],
+    "source": "https://www.palantir.com/docs/foundry/architecture-center/aip-architecture",
+    "country": null,
+    "institute": "Palantir Technologies",
+    "correspondingAuthor": null,
+    "abstract": "Palantir AIP는 LLM을 비즈니스 운영 환경에 안전하게 통합하고 관리하기 위한 12가지 핵심 역량의 엔드투엔드 아키텍처를 제공합니다.\n기업의 데이터와 로직을 온톨로지(Ontology)로 구조화하여 AI 에이전트가 실제 운영 업무를 수행할 수 있는 '명사와 동사' 체계를 구축합니다.\n보안, 관측성, 개발 환경 및 에이전트 라이프사이클 관리 도구를 통합하여 실험 단계를 넘어선 실질적인 AI 제품 배포를 지원합니다.",
+    "TLDR": "Palantir AIP는 LLM을 비즈니스 운영 환경에 안전하게 통합하고 관리하기 위한 12가지 핵심 역량의 엔드투엔드 아키텍처를 제공합니다.\n기업의 데이터와 로직을 온톨로지(Ontology)로 구조화하여 AI 에이전트가 실제 운영 업무를 수행할 수 있는 '명사와 동사' 체계를 구축합니다.\n보안, 관측성, 개발 환경 및 에이전트 라이프사이클 관리 도구를 통합하여 실험 단계를 넘어선 실질적인 AI 제품 배포를 지원합니다.",
+    "type": "Platform",
+    "language": "English"
+  },
+  {
+    "id": "archive-26",
     "slug": "revfactory240523aioi",
     "title": "AI Open Source Impact (AIOI): AI-Native 오픈소스 기여를 위한 6주 커리큘럼",
     "date": "2024-05-23",
@@ -508,17 +689,83 @@
     "language": "Korean"
   },
   {
-    "id": "archive-21",
+    "id": "archive-27",
+    "slug": "ryu230201development",
+    "title": "Development of deep autoencoder-based anomaly detection system for HANARO",
+    "date": "2023-02-01",
+    "category": "Paper",
+    "tags": [
+      "Anomaly_Detection",
+      "Autoencoder",
+      "Nuclear_Engineering_and_Technology",
+      "Research_Reactor",
+      "HANARO",
+      "KAERI",
+      "Sensor_Data",
+      "Monitoring_System",
+      "Prototype_Implementation",
+      "Open_Access"
+    ],
+    "authors": [
+      "Seunghyoung Ryu",
+      "Byoungil Jeon",
+      "Hogeon Seo",
+      "Minwoo Lee",
+      "Jin-Won Shin",
+      "Yonggyun Yu"
+    ],
+    "source": "https://doi.org/10.1016/j.net.2022.10.009",
+    "country": "South Korea",
+    "institute": "Not specified (ScienceDirect landing page; KAERI mentioned in abstract)",
+    "correspondingAuthor": "Not specified (ScienceDirect landing page)",
+    "abstract": "KAERI의 다목적 연구로(HANARO) 안정 운전을 지원하기 위해, 다중 센서 데이터를 수집·시각화·상태분석·이상탐지까지 포함하는 딥러닝 기반 통합 시스템을 제안\ndeep autoencoder 기반 이상탐지 모델과 함께 통신/시각화/이상탐지 모듈로 구성된 프로토타입을 2021년에 현장 구현했다고 보고\n과거 데이터 및 합성 이상(synthetic anomalies) 평가에서 19건 이상 사건 중 12건을 사전 또는 적시에 탐지했다고 제시",
+    "TLDR": "KAERI의 다목적 연구로(HANARO) 안정 운전을 지원하기 위해, 다중 센서 데이터를 수집·시각화·상태분석·이상탐지까지 포함하는 딥러닝 기반 통합 시스템을 제안\ndeep autoencoder 기반 이상탐지 모델과 함께 통신/시각화/이상탐지 모듈로 구성된 프로토타입을 2021년에 현장 구현했다고 보고\n과거 데이터 및 합성 이상(synthetic anomalies) 평가에서 19건 이상 사건 중 12건을 사전 또는 적시에 탐지했다고 제시",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-28",
+    "slug": "ryu240401can",
+    "title": "Can Untrained Neural Networks Detect Anomalies?",
+    "date": "2024-04-01",
+    "category": "Paper",
+    "tags": [
+      "Anomaly_Detection",
+      "Untrained_Neural_Network",
+      "Random_Projection",
+      "Mahalanobis_Distance",
+      "Tabular_Data",
+      "Image_Data",
+      "Industrial_Informatics"
+    ],
+    "authors": [
+      "Seunghyoung Ryu",
+      "Yonggyun Yu",
+      "Hogeon Seo"
+    ],
+    "source": "https://doi.org/10.1109/TII.2023.3345461",
+    "country": "Not specified (metadata page)",
+    "institute": "Sejong University (metadata page)",
+    "correspondingAuthor": "Not specified (metadata page)",
+    "abstract": "학습되지 않은 신경망(UNN)을 비선형 랜덤 프로젝션으로 사용하고, Mahalanobis distance 기반 점수로 이상탐지를 수행하는 접근을 제안\n12개 tabular + 2개 image 데이터셋에서 12개 기존 AD 모델(딥러닝 SOTA 포함)과 비교해 “학습 없이도 경쟁력 있는” 성능을 보고\n다만 학습의 필요성도 명확히 제시하며, “untrained baseline”을 넘어서는 성능 향상을 위해서는 학습이 중요하다는 결론을 제시",
+    "TLDR": "학습되지 않은 신경망(UNN)을 비선형 랜덤 프로젝션으로 사용하고, Mahalanobis distance 기반 점수로 이상탐지를 수행하는 접근을 제안\n12개 tabular + 2개 image 데이터셋에서 12개 기존 AD 모델(딥러닝 SOTA 포함)과 비교해 “학습 없이도 경쟁력 있는” 성능을 보고\n다만 학습의 필요성도 명확히 제시하며, “untrained baseline”을 넘어서는 성능 향상을 위해서는 학습이 중요하다는 결론을 제시",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-29",
     "slug": "seo141128crack",
     "title": "Improvement of crack sizing performance by using nonlinear ultrasonic technique",
     "date": "2014-11-28",
-    "category": "NDT&E",
+    "category": "Paper",
     "tags": [
-      "Crack_sizing",
-      "Contact_interface",
+      "Nonlinear_Ultrasonics",
       "Contact_Acoustic_Nonlinearity",
-      "Harmonic_wave_generation",
-      "Pitch-catch_method"
+      "Harmonic_Generation",
+      "Closed_Crack",
+      "Crack_Sizing",
+      "Pitch-Catch",
+      "NDT"
     ],
     "authors": [
       "Hogeon Seo",
@@ -526,17 +773,59 @@
       "Kyung-Cho Kim",
       "Dong-Pyo Hong"
     ],
-    "source": "https://link.springer.com/article/10.1007/s12541-014-0614-4",
+    "source": "https://doi.org/10.1007/s12541-014-0614-4",
     "country": "South Korea",
-    "institute": "Hanyang University",
+    "institute": "Hanyang University; Korea Institute of Nuclear Safety; Chonbuk National University",
     "correspondingAuthor": "Kyung-Young Jhang",
-    "abstract": "닫힘 균열(Closed crack) 검출을 위해 접촉 음향 비선형성(CAN) 기반의 비선형 초음파 기술(NUT)의 효용성을 실험적으로 검증함.\n구조물의 한쪽 면에서만 접근 가능한 피치-캐치(Pitch-catch) 방식을 사용하여 실제 균열에서의 2차 고조파 발생을 측정함.\n선형 초음파와 비선형 기술을 결합하여 균열의 개방된 부분과 닫힌 부분을 모두 파악함으로써 균열 크기 측정 성능을 크게 향상시킴.",
-    "TLDR": "닫힘 균열(Closed crack) 검출을 위해 접촉 음향 비선형성(CAN) 기반의 비선형 초음파 기술(NUT)의 효용성을 실험적으로 검증함.\n구조물의 한쪽 면에서만 접근 가능한 피치-캐치(Pitch-catch) 방식을 사용하여 실제 균열에서의 2차 고조파 발생을 측정함.\n선형 초음파와 비선형 기술을 결합하여 균열의 개방된 부분과 닫힌 부분을 모두 파악함으로써 균열 크기 측정 성능을 크게 향상시킴.",
+    "abstract": "CAN(contact acoustic nonlinearity) 기반 비선형 초음파 기법(NUT)의 실제 균열 적용성을 pitch-catch(단면 접근) 구성에서 실험적으로 검증\n2차 고조파 성분이 닫힘(closed) 영역 존재를 명확히 반영함을 보였고, 선형+비선형 초음파 결합으로 균열 크기 추정 성능을 향상\n“모델/인공 접촉면 + through-transmission”에 치우친 기존 한계를 넘어, 단면 접근 조건에서의 실구조 적용 가능성을 제시",
+    "TLDR": "CAN(contact acoustic nonlinearity) 기반 비선형 초음파 기법(NUT)의 실제 균열 적용성을 pitch-catch(단면 접근) 구성에서 실험적으로 검증\n2차 고조파 성분이 닫힘(closed) 영역 존재를 명확히 반영함을 보였고, 선형+비선형 초음파 결합으로 균열 크기 추정 성능을 향상\n“모델/인공 접촉면 + through-transmission”에 치우친 기존 한계를 넘어, 단면 접근 조건에서의 실구조 적용 가능성을 제시",
     "type": "Paper",
     "language": "English"
   },
   {
-    "id": "archive-22",
+    "id": "archive-30",
+    "slug": "seo200801intra",
+    "title": "Intra- And Inter-Epoch Temporal Context Network (IITNet) Using Sub-Epoch Features for Automatic Sleep Scoring on Raw Single-Channel EEG",
+    "date": "2020-08-01",
+    "category": "Paper",
+    "tags": [
+      "deep_learning",
+      "GitHub",
+      "Automatic_Sleep_Scoring",
+      "Raw_Single-Channel_EEG",
+      "Epoch",
+      "Sub-Epoch",
+      "Intra-Epoch_Temporal_Context",
+      "Inter-Epoch_Temporal_Context",
+      "Temporal_Context_Learning",
+      "Residual_Neural_Network",
+      "Bidirectional_LSTM",
+      "Sequence_Length",
+      "SleepEDF_Dataset",
+      "MASS_Dataset",
+      "SHHS_Dataset",
+      "Accuracy",
+      "Macro_F1",
+      "Cohens_Kappa"
+    ],
+    "authors": [
+      "Hogeon Seo",
+      "Seunghyeok Back",
+      "Seongju Lee",
+      "Deokhwan Park",
+      "Tae Kim"
+    ],
+    "source": "https://doi.org/10.1016/j.bspc.2020.102037",
+    "country": "South Korea",
+    "institute": "Gwangju Institute of Science and Technology",
+    "correspondingAuthor": "Kyoobin Lee",
+    "abstract": "IITNet은 단일 채널 원시 EEG로부터 sub-epoch 수준 특징을 Residual Network로 추출하고, BiLSTM을 통해 intra- 및 inter-epoch 시간 문맥을 학습하여 자동 수면 단계 분류를 수행\nSleepEDF, MASS, SHHS 데이터셋에서 최대 10 epoch까지 확장 실험을 수행한 결과, 정확도 약 84–87%, MF1 약 78–81%, κ 약 0.78–0.81로 최신 기법과 동등한 성능을 달성\n약 4 epoch(2분)만 고려해도 성능이 충분히 향상되었으며, 특히 N1·N2·REM 단계의 F1이 유의하게 개선되어, 최근 2분 EEG 활용이 효율성과 신뢰성 측면에서 합리적임을 보임",
+    "TLDR": "IITNet은 단일 채널 원시 EEG로부터 sub-epoch 수준 특징을 Residual Network로 추출하고, BiLSTM을 통해 intra- 및 inter-epoch 시간 문맥을 학습하여 자동 수면 단계 분류를 수행\nSleepEDF, MASS, SHHS 데이터셋에서 최대 10 epoch까지 확장 실험을 수행한 결과, 정확도 약 84–87%, MF1 약 78–81%, κ 약 0.78–0.81로 최신 기법과 동등한 성능을 달성\n약 4 epoch(2분)만 고려해도 성능이 충분히 향상되었으며, 특히 N1·N2·REM 단계의 F1이 유의하게 개선되어, 최근 2분 EEG 활용이 효율성과 신뢰성 측면에서 합리적임을 보임",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-31",
     "slug": "seo2020intra",
     "title": "Intra- And Inter-Epoch Temporal Context Network (IITNet) Using Sub-Epoch Features for Automatic Sleep Scoring on Raw Single-Channel EEG",
     "date": "2020-08-01",
@@ -578,7 +867,72 @@
     "language": "English"
   },
   {
-    "id": "archive-23",
+    "id": "archive-32",
+    "slug": "seo230601probability",
+    "title": "Probability propagation for faster and efficient point cloud segmentation using a neural network",
+    "date": "2023-06-01",
+    "category": "Paper",
+    "tags": [
+      "Point_Cloud_Segmentation",
+      "Pattern_Recognition_Letters",
+      "Probability_Propagation",
+      "Stochastic_Upsampling",
+      "Edge_AI",
+      "ShapeNet",
+      "Sampling",
+      "mIoU",
+      "Inference_Speed",
+      "Open_Access"
+    ],
+    "authors": [
+      "Hogeon Seo",
+      "Sangjun Noh",
+      "Sungho Shin",
+      "Kyoobin Lee"
+    ],
+    "source": "https://doi.org/10.1016/j.patrec.2023.04.010",
+    "country": "Not specified",
+    "institute": "Not specified (ScienceDirect landing page)",
+    "correspondingAuthor": "Not specified (ScienceDirect landing page)",
+    "abstract": "포인트 클라우드 분할에서 “반복 샘플링-추론”으로 인한 느린 inference를 문제로 두고, 샘플 포인트에서 예측된 확률을 주변 점으로 전파하는 stochastic upsampling(Probability Propagation, PP)을 제안\nShapeNet에서 다양한 샘플링 비율/방법과 확률 매핑 분포를 비교하고, NN+PP가 NN 단독보다 빠르고 정확하다고 보고\n5% farthest point sampling 조건에서 instance mIoU가 2.457%p 개선되고, 속도는 102배 빠르다고 제시(엣지 AI 적합성 강조)",
+    "TLDR": "포인트 클라우드 분할에서 “반복 샘플링-추론”으로 인한 느린 inference를 문제로 두고, 샘플 포인트에서 예측된 확률을 주변 점으로 전파하는 stochastic upsampling(Probability Propagation, PP)을 제안\nShapeNet에서 다양한 샘플링 비율/방법과 확률 매핑 분포를 비교하고, NN+PP가 NN 단독보다 빠르고 정확하다고 보고\n5% farthest point sampling 조건에서 instance mIoU가 2.457%p 개선되고, 속도는 102배 빠르다고 제시(엣지 AI 적합성 강조)",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-33",
+    "slug": "seo250901defect",
+    "title": "Defect estimation using surrogate-based Monte Carlo Bayesian optimization",
+    "date": "2025-09-01",
+    "category": "Paper",
+    "tags": [
+      "Surrogate_Model",
+      "Monte_Carlo",
+      "Bayesian_Optimization",
+      "NDT",
+      "Ultrasonic_Testing",
+      "Acoustic_Wave_Propagation",
+      "Similarity_Metric",
+      "R2",
+      "Noisy_Environment",
+      "Real-Time",
+      "Open_Access"
+    ],
+    "authors": [
+      "Hogeon Seo",
+      "Yonggyun Yu"
+    ],
+    "source": "https://doi.org/10.1016/j.measurement.2025.117449",
+    "country": "Not specified (see full text/PDF)",
+    "institute": "Not specified (ScienceDirect landing page)",
+    "correspondingAuthor": "Not specified (ScienceDirect landing page)",
+    "abstract": "유한요소 기반 파동전파를 신경망 surrogate로 근사하고, Monte Carlo Bayesian optimization으로 결함 깊이/폭을 직접 추정하는 “Composite AI” 접근을 제안\nsurrogate가 FE 해석 대비 70,000배 이상 빠르며, 신호처리 알고리즘 없이도 목표 출력과의 유사도 최적화로 결함 치수를 추정\n저 SNR(잡음 환경)에서도 깊이 98.5%, 폭 90%를 1 mm 이하 오차 기준으로 달성하며, R² 기반 유사도 지표가 안정적으로 작동함을 보고",
+    "TLDR": "유한요소 기반 파동전파를 신경망 surrogate로 근사하고, Monte Carlo Bayesian optimization으로 결함 깊이/폭을 직접 추정하는 “Composite AI” 접근을 제안\nsurrogate가 FE 해석 대비 70,000배 이상 빠르며, 신호처리 알고리즘 없이도 목표 출력과의 유사도 최적화로 결함 치수를 추정\n저 SNR(잡음 환경)에서도 깊이 98.5%, 폭 90%를 1 mm 이하 오차 기준으로 달성하며, R² 기반 유사도 지표가 안정적으로 작동함을 보고",
+    "type": "Paper",
+    "language": "English"
+  },
+  {
+    "id": "archive-34",
     "slug": "suk241119calm",
     "title": "LLM의 시대가 가고 CALM의 시대가 온다",
     "date": "2024-11-19",
@@ -605,7 +959,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-24",
+    "id": "archive-35",
     "slug": "yna260217unitree",
     "title": "유니트리, 지난해 군무 이어 무술학교 어린이들과 합동공연",
     "date": "2026-02-17",
@@ -632,7 +986,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-25",
+    "id": "archive-36",
     "slug": "yozm260219vibecoding",
     "title": "바이브 코딩(Vibe Coding)의 최근 흐름과 실무 적용 사례",
     "date": "2026-02-19",
@@ -660,7 +1014,7 @@
     "language": "Korean"
   },
   {
-    "id": "archive-26",
+    "id": "archive-37",
     "slug": "zdnet251027worldmodel",
     "title": "얀 르쿤 \"5년 내 LLM 한계…AI의 다음 혁명은 월드 모델\"",
     "date": "2025-10-27",

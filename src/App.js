@@ -43,7 +43,7 @@ import { footerTheme, navLogo, filteredRepositories, repositoryCardImages } from
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
 
 // Paths where NavBar and Footer should be hidden
-const CHROMELESS_PATHS = ["/qc", "/qca", "/qcv"];
+const CHROMELESS_PATHS = ["/question_board", "/question_board_admin", "/question_board_view"];
 
 const AppLayout = ({ setThemes }) => {
   const { pathname } = useLocation();
@@ -69,9 +69,9 @@ const AppLayout = ({ setThemes }) => {
         <Route path="/Tools" element={<Tools />} />
         <Route path="/Tool" element={<Tools />} />
         <Route path="/note" element={<NoteRedirect />} />
-        <Route path="/qc" element={<QuestionCollect />} />
-        <Route path="/qca" element={<QuestionAdmin />} />
-        <Route path="/qcv" element={<QuestionView />} />
+        <Route path="/question_board" element={<QuestionCollect />} />
+        <Route path="/question_board_admin" element={<QuestionAdmin />} />
+        <Route path="/question_board_view" element={<QuestionView />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!hideChrome && <Footer mode={footerTheme} />}

@@ -26,6 +26,7 @@ import NotFound from "./pages/NotFound";
 import NoteRedirect from "./pages/NoteRedirect";
 import QuestionCollect from "./pages/QuestionCollect";
 import QuestionAdmin from "./pages/QuestionAdmin";
+import QuestionView from "./pages/QuestionView";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
 import AppFallback from "./components/AppFallback";
@@ -42,7 +43,7 @@ import { footerTheme, navLogo, filteredRepositories, repositoryCardImages } from
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
 
 // Paths where NavBar and Footer should be hidden
-const CHROMELESS_PATHS = ["/qc", "/qca"];
+const CHROMELESS_PATHS = ["/qc", "/qca", "/qcv"];
 
 const AppLayout = ({ setThemes }) => {
   const { pathname } = useLocation();
@@ -70,6 +71,7 @@ const AppLayout = ({ setThemes }) => {
         <Route path="/note" element={<NoteRedirect />} />
         <Route path="/qc" element={<QuestionCollect />} />
         <Route path="/qca" element={<QuestionAdmin />} />
+        <Route path="/qcv" element={<QuestionView />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!hideChrome && <Footer mode={footerTheme} />}

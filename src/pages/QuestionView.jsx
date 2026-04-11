@@ -1,28 +1,23 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Container, Card, Form, Button, Badge } from "react-bootstrap";
-import ScrollToTopButton from "../components/ScrollToTopButton";
+import React, { useState, useEffect } from "react";
+import { Container, Card, Badge } from "react-bootstrap";
 import { updateTitle } from "../utils";
 import { siteName } from "../config";
-import { subscribeQuestions, subscribeMeta, addQuestion } from "../firebase";
+import { subscribeQuestions, subscribeMeta } from "../firebase";
 
-const QuestionCollect = () => {
-  const [input, setInput] = useState("");
+const QuestionView = () => {
   const [questions, setQuestions] = useState([]);
   const [summary, setSummary] = useState("");
   const [generated, setGenerated] = useState("");
-  const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    updateTitle(`Question Collect | ${siteName}`);
+    updateTitle(`Questions | ${siteName}`);
   }, []);
 
-  // Real-time subscription to questions
   useEffect(() => {
     const unsub = subscribeQuestions((data) => setQuestions(data));
     return () => unsub();
   }, []);
 
-  // Real-time subscription to meta (summary & generated)
   useEffect(() => {
     const unsub = subscribeMeta((data) => {
       setSummary(data.summary || "");
@@ -31,62 +26,12 @@ const QuestionCollect = () => {
     return () => unsub();
   }, []);
 
-  const handleSend = useCallback(async () => {
-    const text = input.trim();
-    if (!text || sending) return;
-    setSending(true);
-    try {
-      await addQuestion(text);
-      setInput("");
-    } catch (err) {
-      console.error("Failed to send question:", err);
-    } finally {
-      setSending(false);
-    }
-  }, [input, sending]);
-
-  const handleKeyDown = useCallback(
-    (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        handleSend();
-      }
-    },
-    [handleSend]
-  );
-
   return (
     <main className="py-3 py-md-5" style={{ minHeight: "100vh" }}>
-      <Container className="px-3 px-md-4" style={{ maxWidth: 720 }}>
-        <h5 className="mb-3 text-center">Question Collect</h5>
+      <Container className="px-3 px-md-4" style={{ maxWidth: 800 }}>
+        <h5 className="mb-4 text-center">Questions</h5>
 
-        {/* Input area - sticky on mobile */}
-        <Card className="shadow-sm mb-3">
-          <Card.Body className="p-2 p-md-3">
-            <Form.Control
-              as="textarea"
-              rows={2}
-              placeholder="Enter your question..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="mb-2"
-              style={{ fontSize: "16px" }}
-            />
-            <div className="d-flex justify-content-end">
-              <Button
-                variant="primary"
-                onClick={handleSend}
-                disabled={!input.trim() || sending}
-                className="px-4"
-              >
-                {sending ? "Sending..." : "Send"}
-              </Button>
-            </div>
-          </Card.Body>
-        </Card>
-
-        {/* Summary section */}
+        {/* Summary */}
         {summary && (
           <Card className="shadow-sm mb-3 border-primary">
             <Card.Header className="bg-primary text-white py-2 px-3">
@@ -108,7 +53,7 @@ const QuestionCollect = () => {
           </Card>
         )}
 
-        {/* Generated questions section */}
+        {/* Generated */}
         {generated && (
           <Card className="shadow-sm mb-3 border-success">
             <Card.Header className="bg-success text-white py-2 px-3">
@@ -130,7 +75,7 @@ const QuestionCollect = () => {
           </Card>
         )}
 
-        {/* Questions list */}
+        {/* Submitted Questions */}
         <div className="mb-2 d-flex align-items-center gap-2">
           <strong style={{ fontSize: "0.95rem" }}>Submitted Questions</strong>
           <Badge bg="secondary">{questions.length}</Badge>
@@ -139,10 +84,13 @@ const QuestionCollect = () => {
         {questions.length === 0 ? (
           <p className="text-muted small">No questions submitted yet.</p>
         ) : (
-          questions.map((q) => (
+          questions.map((q, i) => (
             <Card key={q.id} className="shadow-sm mb-2">
               <Card.Body className="py-2 px-3">
                 <div style={{ wordBreak: "break-word", whiteSpace: "pre-wrap" }}>
+                  <span className="text-muted me-2" style={{ fontSize: "0.8rem" }}>
+                    {questions.length - i}.
+                  </span>
                   {q.text}
                 </div>
                 <div className="text-end mt-1">
@@ -155,9 +103,8 @@ const QuestionCollect = () => {
           ))
         )}
       </Container>
-      <ScrollToTopButton />
     </main>
   );
 };
 
-export default QuestionCollect;
+export default QuestionView;

@@ -24,6 +24,8 @@ import ContactPage from "./pages/Contact";
 import Tools from "./pages/Tools";
 import NotFound from "./pages/NotFound";
 import NoteRedirect from "./pages/NoteRedirect";
+import QuestionCollect from "./pages/QuestionCollect";
+import QuestionAdmin from "./pages/QuestionAdmin";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
 import AppFallback from "./components/AppFallback";
@@ -136,6 +138,8 @@ const App = () => {
           <Route path="/Tools" element={<Tools />} />
           <Route path="/Tool" element={<Tools />} />
           <Route path="/note" element={<NoteRedirect />} />
+          <Route path="/qc" element={<QuestionCollect />} />
+          <Route path="/qca" element={<QuestionAdmin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer mode={footerTheme} />

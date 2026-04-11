@@ -11,7 +11,7 @@ import {
 } from "./app/repositoriesSlice";
 import { useGetUsersQuery, useGetRepositoriesQuery } from "./app/apiSlice";
 // Router
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
 import Repositories from "./pages/Repositories";
@@ -40,6 +40,42 @@ import Footer from "./components/Footer";
 import { footerTheme, navLogo, filteredRepositories, repositoryCardImages } from "./config";
 // Util
 import { getStoredTheme, getPreferredTheme, setTheme } from "./utils";
+
+// Paths where NavBar and Footer should be hidden
+const CHROMELESS_PATHS = ["/qc", "/qca"];
+
+const AppLayout = ({ setThemes }) => {
+  const { pathname } = useLocation();
+  const hideChrome = CHROMELESS_PATHS.includes(pathname.toLowerCase());
+
+  return (
+    <>
+      {!hideChrome && (
+        <Element name={"Home"} id="home">
+          <NavBar Logo={navLogo} callBack={(t) => setThemes(t)} />
+        </Element>
+      )}
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/Professor" element={<Professor />} />
+        <Route path="/People" element={<People />} />
+        <Route path="/Achievements" element={<Achievements />} />
+        <Route path="/Archive" element={<Archive />} />
+        <Route path="/Archive/item/:slug" element={<ArchiveDetail />} />
+        <Route path="/Archive/:categorySlug" element={<Archive />} />
+        <Route path="/Repositories" element={<Repositories />} />
+        <Route path="/Contact" element={<ContactPage />} />
+        <Route path="/Tools" element={<Tools />} />
+        <Route path="/Tool" element={<Tools />} />
+        <Route path="/note" element={<NoteRedirect />} />
+        <Route path="/qc" element={<QuestionCollect />} />
+        <Route path="/qca" element={<QuestionAdmin />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      {!hideChrome && <Footer mode={footerTheme} />}
+    </>
+  );
+};
 
 // #region component
 const App = () => {
@@ -120,31 +156,7 @@ const App = () => {
       </Container>
     );
   } else if (isSuccess) {
-    content = (
-      <>
-        <Element name={"Home"} id="home">
-          <NavBar Logo={navLogo} callBack={(t) => setThemes(t)} />
-        </Element>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/Professor" element={<Professor />} />
-          <Route path="/People" element={<People />} />
-          <Route path="/Achievements" element={<Achievements />} />
-          <Route path="/Archive" element={<Archive />} />
-          <Route path="/Archive/item/:slug" element={<ArchiveDetail />} />
-          <Route path="/Archive/:categorySlug" element={<Archive />} />
-          <Route path="/Repositories" element={<Repositories />} />
-          <Route path="/Contact" element={<ContactPage />} />
-          <Route path="/Tools" element={<Tools />} />
-          <Route path="/Tool" element={<Tools />} />
-          <Route path="/note" element={<NoteRedirect />} />
-          <Route path="/qc" element={<QuestionCollect />} />
-          <Route path="/qca" element={<QuestionAdmin />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer mode={footerTheme} />
-      </>
-    );
+    content = <AppLayout setThemes={setThemes} />;
   } else if (isError) {
     content = (
       <Container className="d-flex vh-100 align-items-center justify-content-center">

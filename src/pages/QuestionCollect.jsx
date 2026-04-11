@@ -3,64 +3,47 @@ import { Container, Card, Form, Button, Badge } from "react-bootstrap";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { updateTitle } from "../utils";
 import { siteName } from "../config";
-
-const STORAGE_KEY_QUESTIONS = "qc_questions";
-const STORAGE_KEY_SUMMARY = "qc_summary";
-const STORAGE_KEY_GENERATED = "qc_generated";
-
-const loadFromStorage = (key, fallback) => {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch {
-    return fallback;
-  }
-};
+import { subscribeQuestions, subscribeMeta, addQuestion } from "../firebase";
 
 const QuestionCollect = () => {
   const [input, setInput] = useState("");
-  const [questions, setQuestions] = useState(() =>
-    loadFromStorage(STORAGE_KEY_QUESTIONS, [])
-  );
-  const [summary, setSummary] = useState(() =>
-    loadFromStorage(STORAGE_KEY_SUMMARY, "")
-  );
-  const [generated, setGenerated] = useState(() =>
-    loadFromStorage(STORAGE_KEY_GENERATED, "")
-  );
+  const [questions, setQuestions] = useState([]);
+  const [summary, setSummary] = useState("");
+  const [generated, setGenerated] = useState("");
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     updateTitle(`Question Collect | ${siteName}`);
   }, []);
 
-  // Listen for storage changes from /qca page
+  // Real-time subscription to questions
   useEffect(() => {
-    const handler = (e) => {
-      if (e.key === STORAGE_KEY_QUESTIONS) {
-        setQuestions(e.newValue ? JSON.parse(e.newValue) : []);
-      } else if (e.key === STORAGE_KEY_SUMMARY) {
-        setSummary(e.newValue || "");
-      } else if (e.key === STORAGE_KEY_GENERATED) {
-        setGenerated(e.newValue || "");
-      }
-    };
-    window.addEventListener("storage", handler);
-    return () => window.removeEventListener("storage", handler);
+    const unsub = subscribeQuestions((data) => setQuestions(data));
+    return () => unsub();
   }, []);
 
-  const handleSend = useCallback(() => {
+  // Real-time subscription to meta (summary & generated)
+  useEffect(() => {
+    const unsub = subscribeMeta((data) => {
+      setSummary(data.summary || "");
+      setGenerated(data.generated || "");
+    });
+    return () => unsub();
+  }, []);
+
+  const handleSend = useCallback(async () => {
     const text = input.trim();
-    if (!text) return;
-    const newQ = {
-      id: Date.now(),
-      text,
-      createdAt: new Date().toISOString(),
-    };
-    const updated = [newQ, ...questions];
-    setQuestions(updated);
-    localStorage.setItem(STORAGE_KEY_QUESTIONS, JSON.stringify(updated));
-    setInput("");
-  }, [input, questions]);
+    if (!text || sending) return;
+    setSending(true);
+    try {
+      await addQuestion(text);
+      setInput("");
+    } catch (err) {
+      console.error("Failed to send question:", err);
+    } finally {
+      setSending(false);
+    }
+  }, [input, sending]);
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -83,7 +66,7 @@ const QuestionCollect = () => {
             <Form.Control
               as="textarea"
               rows={3}
-              placeholder="질문을 입력하세요..."
+              placeholder="Enter your question..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -94,9 +77,9 @@ const QuestionCollect = () => {
                 variant="primary"
                 size="sm"
                 onClick={handleSend}
-                disabled={!input.trim()}
+                disabled={!input.trim() || sending}
               >
-                Send
+                {sending ? "Sending..." : "Send"}
               </Button>
             </div>
           </Card.Body>
@@ -106,7 +89,7 @@ const QuestionCollect = () => {
         {summary && (
           <Card className="shadow-sm mb-4 border-primary">
             <Card.Header className="bg-primary text-white d-flex align-items-center gap-2">
-              <strong>요약된 질문</strong>
+              <strong>Summarized Questions</strong>
               <Badge bg="light" text="dark">
                 Summary
               </Badge>
@@ -126,7 +109,7 @@ const QuestionCollect = () => {
         {generated && (
           <Card className="shadow-sm mb-4 border-success">
             <Card.Header className="bg-success text-white d-flex align-items-center gap-2">
-              <strong>생성된 질문</strong>
+              <strong>Generated Questions</strong>
               <Badge bg="light" text="dark">
                 Generated
               </Badge>
@@ -144,12 +127,12 @@ const QuestionCollect = () => {
 
         {/* Questions list */}
         <div className="mb-2 d-flex align-items-center gap-2">
-          <strong>등록된 질문</strong>
+          <strong>Submitted Questions</strong>
           <Badge bg="secondary">{questions.length}</Badge>
         </div>
 
         {questions.length === 0 ? (
-          <p className="text-muted small">아직 등록된 질문이 없습니다.</p>
+          <p className="text-muted small">No questions submitted yet.</p>
         ) : (
           questions.map((q) => (
             <Card key={q.id} className="shadow-sm mb-2">

@@ -179,16 +179,16 @@ const QuestionAdmin = () => {
 
   // --- Save all as Markdown ---
   const handleSaveMarkdown = useCallback(() => {
-    let md = `# Question Collect Report\n\n`;
+    let md = `# Question Board Report\n\n`;
     md += `> Generated: ${new Date().toLocaleString("ko-KR")}\n\n`;
 
     if (summary) {
-      md += `## Summarized Questions\n\n${summary}\n\n`;
+      md += `## Questions summarized from the collected questions\n\n${summary}\n\n`;
     }
     if (generated) {
-      md += `## Generated Questions\n\n${generated}\n\n`;
+      md += `## Questions suggested by AI Agent\n\n${generated}\n\n`;
     }
-    md += `## Submitted Questions (${questions.length})\n\n`;
+    md += `## Questions collected from the audience (${questions.length})\n\n`;
     if (questions.length > 0) {
       questions.forEach((q, i) => {
         const date = new Date(q.createdAt).toLocaleString("ko-KR");
@@ -202,7 +202,7 @@ const QuestionAdmin = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `question-collect-${new Date().toISOString().slice(0, 10)}.md`;
+    a.download = `question-board-${new Date().toISOString().slice(0, 10)}.md`;
     a.click();
     URL.revokeObjectURL(url);
   }, [summary, generated, questions]);
@@ -238,7 +238,7 @@ const QuestionAdmin = () => {
           <Col lg={6} className="mb-4">
             <Card className="shadow-sm h-100 border-primary">
               <Card.Header className="bg-primary text-white d-flex justify-content-between align-items-center">
-                <strong>Summarize Questions</strong>
+                <strong>Questions summarized from the collected questions</strong>
                 <Button
                   variant="outline-light"
                   size="sm"
@@ -308,7 +308,7 @@ const QuestionAdmin = () => {
           <Col lg={6} className="mb-4">
             <Card className="shadow-sm h-100 border-success">
               <Card.Header className="bg-success text-white d-flex justify-content-between align-items-center">
-                <strong>Generate Questions</strong>
+                <strong>Questions suggested by AI Agent</strong>
                 <Button
                   variant="outline-light"
                   size="sm"
@@ -394,7 +394,7 @@ const QuestionAdmin = () => {
         <Card className="shadow-sm">
           <Card.Header className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center gap-2">
-              <strong>Submitted Questions</strong>
+              <strong>Questions collected from the audience</strong>
               <Badge bg="secondary">{questions.length}</Badge>
               <Button
                 variant="outline-secondary"

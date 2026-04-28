@@ -1,5 +1,4 @@
-# MIRAE Laboratory Website
-
+# MIRAE Laboratory Website (updated on 2026-04-29 08:27)
 연구실 웹사이트 프로젝트입니다.
 
 ## 프로젝트 구조

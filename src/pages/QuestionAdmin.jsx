@@ -114,8 +114,8 @@ const QuestionAdmin = () => {
     try {
       const userPrompt = generationPrompt.trim();
       const prompt = userPrompt
-        ? `${userPrompt}\n\nBased on the following conversation content, generate exactly ${generateCount} relevant questions. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`
-        : `Based on the following conversation content, generate exactly ${generateCount} insightful questions that the audience might want to ask. Output only the questions, one per line, without numbering, in the same language as the conversation.\n\nConversation:\n${content}`;
+        ? `${userPrompt}\n\nBased on the following conversation content, generate exactly ${generateCount} relevant questions. Output only the questions, one per line (less than 15 words each), without numbering, in the same language as the conversation.\n\nConversation:\n${content}`
+        : `Based on the following conversation content, generate exactly ${generateCount} insightful questions that the audience might want to ask. Output only the questions, one per line (less than 15 words each), without numbering, in the same language as the conversation.\n\nConversation:\n${content}`;
       const result = await callGemini(prompt);
       const trimmed = result.trim();
       setGeneratedDraft(trimmed);

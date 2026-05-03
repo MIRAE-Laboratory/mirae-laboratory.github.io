@@ -92,7 +92,7 @@ const QuestionAdmin = () => {
       const questionList = questions
         .map((q, i) => `${i + 1}. ${q.text}`)
         .join("\n");
-      const prompt = `Below is a list of questions submitted by an audience. Analyze ALL questions holistically — identify common themes, recurring concerns, and underlying interests across the entire set. Then synthesize exactly ${summaryCount} comprehensive, integrated questions that capture the essence of what the audience collectively wants to know. Do NOT simply pick or copy existing questions. Instead, create new unified questions that merge and represent multiple related questions together. Output only the synthesized questions, one per line, without numbering, in the same language as the originals.\n\nQuestions:\n${questionList}`;
+      const prompt = `Below is a list of questions submitted by an audience. Analyze ALL questions holistically — identify common themes, recurring concerns, and underlying interests across the entire set. Then synthesize exactly ${summaryCount} comprehensive, integrated questions that capture the essence of what the audience collectively wants to know. Do NOT simply pick or copy existing questions. Instead, create new unified questions that merge and represent multiple related questions together. Output only the synthesized questions, one per line (less than 15 words each), without numbering, in the same language as the originals.\n\nQuestions:\n${questionList}`;
       const result = await callGemini(prompt);
       const trimmed = result.trim();
       setSummaryDraft(trimmed);
@@ -286,7 +286,7 @@ const QuestionAdmin = () => {
                 <Form.Control
                   as="textarea"
                   rows={5}
-                  placeholder="Summarized questions (one per line)..."
+                  placeholder="Summarized questions (one per line with less than 15 words each)..."
                   value={summaryDraft}
                   onChange={(e) => setSummaryDraft(e.target.value)}
                   className="mb-2"
@@ -371,7 +371,7 @@ const QuestionAdmin = () => {
                 <Form.Control
                   as="textarea"
                   rows={5}
-                  placeholder="Generated questions (one per line)..."
+                  placeholder="Generated questions (one per line with less than 15 words each)..."
                   value={generatedDraft}
                   onChange={(e) => setGeneratedDraft(e.target.value)}
                   className="mb-2"

@@ -468,7 +468,9 @@ const PdfSigner = ({ pdfBytes }) => {
   const padCanvasRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const padRef = useRef(null);
-  const [pdfJsDoc, setPdfJsDoc] = useState(null);
+  const pdfJsDocRef = useRef(null);
+  const pdfPageDimsRef = useRef({ w: 595, h: 842 });
+  const signPosRef = useRef({ x: 50, y: 50, width: 200, height: 80 });
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [signPos, setSignPos] = useState({ x: 50, y: 50, width: 200, height: 80 });
@@ -477,29 +479,54 @@ const PdfSigner = ({ pdfBytes }) => {
   const [pendingBytes, setPendingBytes] = useState(null);
   const [previewStale, setPreviewStale] = useState(false);
 
+  // Keep signPosRef in sync
+  useEffect(() => { signPosRef.current = signPos; }, [signPos]);
+
+  // Renders page + blue dashed position rect
+  const renderPageWithRect = useCallback(async (pageNum, pos) => {
+    const doc = pdfJsDocRef.current;
+    const canvas = previewCanvasRef.current;
+    if (!doc || !canvas) return;
+    const page = await doc.getPage(pageNum);
+    const baseVp = page.getViewport({ scale: 1 });
+    pdfPageDimsRef.current = { w: baseVp.width, h: baseVp.height };
+    const viewport = page.getViewport({ scale: 1.5 });
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    await page.render({ canvasContext: canvas.getContext("2d"), viewport }).promise;
+    const sx = canvas.width / baseVp.width;
+    const sy = canvas.height / baseVp.height;
+    const ctx = canvas.getContext("2d");
+    ctx.save();
+    ctx.setLineDash([6, 3]);
+    ctx.strokeStyle = "rgba(30, 100, 255, 0.85)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(pos.x * sx, pos.y * sy, pos.width * sx, pos.height * sy);
+    ctx.font = "bold 11px sans-serif";
+    ctx.fillStyle = "rgba(30, 100, 255, 0.85)";
+    ctx.fillText("서명 위치", pos.x * sx + 4, pos.y * sy + 14);
+    ctx.restore();
+  }, []);
+
   useEffect(() => {
     pdfjsLib
       .getDocument({ data: pdfBytes.slice() })
       .promise.then((doc) => {
-        setPdfJsDoc(doc);
+        pdfJsDocRef.current = doc;
         setTotalPages(doc.numPages);
+        setCurrentPage(1);
+        setPendingBytes(null);
+        setPreviewStale(false);
+        renderPageWithRect(1, signPosRef.current);
       });
-  }, [pdfBytes]);
+  }, [pdfBytes, renderPageWithRect]);
 
-  // Render plain page (no signature) when page changes or on load
   useEffect(() => {
-    if (!pdfJsDoc || !previewCanvasRef.current) return;
+    if (!pdfJsDocRef.current) return;
     setPendingBytes(null);
     setPreviewStale(false);
-    pdfJsDoc.getPage(currentPage).then((page) => {
-      const viewport = page.getViewport({ scale: 1.5 });
-      const canvas = previewCanvasRef.current;
-      if (!canvas) return;
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      page.render({ canvasContext: canvas.getContext("2d"), viewport });
-    });
-  }, [pdfJsDoc, currentPage]);
+    renderPageWithRect(currentPage, signPosRef.current);
+  }, [currentPage, renderPageWithRect]);
 
   useEffect(() => {
     if (!padCanvasRef.current) return;
@@ -524,17 +551,8 @@ const PdfSigner = ({ pdfBytes }) => {
     padRef.current?.clear();
     setIsEmpty(true);
     setPendingBytes(null);
-    // Re-render plain page
-    if (pdfJsDoc && previewCanvasRef.current) {
-      pdfJsDoc.getPage(currentPage).then((page) => {
-        const viewport = page.getViewport({ scale: 1.5 });
-        const canvas = previewCanvasRef.current;
-        if (!canvas) return;
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        page.render({ canvasContext: canvas.getContext("2d"), viewport });
-      });
-    }
+    setPreviewStale(false);
+    renderPageWithRect(currentPage, signPosRef.current);
   };
 
   const markStale = () => {
@@ -542,56 +560,68 @@ const PdfSigner = ({ pdfBytes }) => {
     setPendingBytes(null);
   };
 
-  // Insert: render page + overlay signature, prepare PDF bytes
+  // Click on preview → set signature center to clicked point
+  const handlePreviewClick = useCallback((e) => {
+    const canvas = previewCanvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const cx = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const cy = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const { w, h } = pdfPageDimsRef.current;
+    const px = Math.round(cx * w / canvas.width);
+    const py = Math.round(cy * h / canvas.height);
+    const pos = signPosRef.current;
+    const newPos = {
+      ...pos,
+      x: Math.round(px - pos.width / 2),
+      y: Math.round(py - pos.height / 2),
+    };
+    setSignPos(newPos);
+    signPosRef.current = newPos;
+    markStale();
+    renderPageWithRect(currentPage, newPos);
+  }, [currentPage, renderPageWithRect]);
+
   const insertPreview = async () => {
     const pad = padRef.current;
     if (!pad || pad.isEmpty()) return;
     setProcessing(true);
     try {
       const sigDataUrl = pad.toDataURL("image/png");
-
-      // Get PDF page dimensions (in points at scale 1)
-      const pdfJsPage = await pdfJsDoc.getPage(currentPage);
-      const baseViewport = pdfJsPage.getViewport({ scale: 1 });
-      const pdfW = baseViewport.width;
-      const pdfH = baseViewport.height;
-
-      // Render page to preview canvas
-      const renderScale = 1.5;
-      const viewport = pdfJsPage.getViewport({ scale: renderScale });
+      const doc = pdfJsDocRef.current;
+      const pdfJsPage = await doc.getPage(currentPage);
+      const baseVp = pdfJsPage.getViewport({ scale: 1 });
+      const pdfW = baseVp.width;
+      const pdfH = baseVp.height;
+      const viewport = pdfJsPage.getViewport({ scale: 1.5 });
       const canvas = previewCanvasRef.current;
       canvas.width = viewport.width;
       canvas.height = viewport.height;
       await pdfJsPage.render({ canvasContext: canvas.getContext("2d"), viewport }).promise;
-
-      // Overlay signature on canvas
       const scaleX = canvas.width / pdfW;
       const scaleY = canvas.height / pdfH;
       const sigImg = new Image();
       sigImg.src = sigDataUrl;
       await new Promise((resolve) => { sigImg.onload = resolve; });
+      const pos = signPosRef.current;
       canvas.getContext("2d").drawImage(
         sigImg,
-        signPos.x * scaleX,
-        signPos.y * scaleY,
-        signPos.width * scaleX,
-        signPos.height * scaleY
+        pos.x * scaleX, pos.y * scaleY,
+        pos.width * scaleX, pos.height * scaleY
       );
-
-      // Build PDF bytes with embedded signature
       const base64 = sigDataUrl.split(",")[1];
       const pngBytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
-      const doc = await PDFDocument.load(pdfBytes);
-      const pngImage = await doc.embedPng(pngBytes);
-      const page = doc.getPages()[currentPage - 1];
+      const pdfDoc = await PDFDocument.load(pdfBytes);
+      const pngImage = await pdfDoc.embedPng(pngBytes);
+      const page = pdfDoc.getPages()[currentPage - 1];
       const { height: pageHeight } = page.getSize();
       page.drawImage(pngImage, {
-        x: signPos.x,
-        y: pageHeight - signPos.y - signPos.height,
-        width: signPos.width,
-        height: signPos.height,
+        x: pos.x,
+        y: pageHeight - pos.y - pos.height,
+        width: pos.width,
+        height: pos.height,
       });
-      setPendingBytes(await doc.save());
+      setPendingBytes(await pdfDoc.save());
       setPreviewStale(false);
     } finally {
       setProcessing(false);
@@ -608,8 +638,11 @@ const PdfSigner = ({ pdfBytes }) => {
         size="sm"
         value={signPos[key]}
         onChange={(e) => {
-          setSignPos((prev) => ({ ...prev, [key]: +e.target.value }));
+          const newPos = { ...signPosRef.current, [key]: +e.target.value };
+          setSignPos(newPos);
+          signPosRef.current = newPos;
           markStale();
+          renderPageWithRect(currentPage, newPos);
         }}
       />
     </Form.Group>
@@ -642,7 +675,7 @@ const PdfSigner = ({ pdfBytes }) => {
           <Button
             size="sm"
             variant="outline-secondary"
-            onClick={() => { setCurrentPage((p) => Math.max(1, p - 1)); markStale(); }}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
           >
             ◀
@@ -654,16 +687,15 @@ const PdfSigner = ({ pdfBytes }) => {
             min={1}
             max={totalPages}
             style={{ width: 70, textAlign: "center" }}
-            onChange={(e) => {
-              setCurrentPage(Math.min(totalPages, Math.max(1, +e.target.value)));
-              markStale();
-            }}
+            onChange={(e) =>
+              setCurrentPage(Math.min(totalPages, Math.max(1, +e.target.value)))
+            }
           />
           <span className="text-muted">/ {totalPages}</span>
           <Button
             size="sm"
             variant="outline-secondary"
-            onClick={() => { setCurrentPage((p) => Math.min(totalPages, p + 1)); markStale(); }}
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
           >
             ▶
@@ -671,8 +703,11 @@ const PdfSigner = ({ pdfBytes }) => {
         </div>
 
         <h6 className="mb-2">③ 서명 위치 (포인트 단위)</h6>
-        {posField("x", "X (왼쪽에서)")}
-        {posField("y", "Y (위에서)")}
+        <div className="text-muted small mb-2">
+          오른쪽 미리보기를 클릭하면 해당 위치가 서명 중앙으로 설정됩니다.
+        </div>
+        {posField("x", "좌에서")}
+        {posField("y", "위에서")}
         {posField("width", "너비")}
         {posField("height", "높이")}
 
@@ -700,14 +735,23 @@ const PdfSigner = ({ pdfBytes }) => {
         )}
       </Col>
       <Col md={7}>
-        <h6>미리보기 — 페이지 {currentPage}</h6>
+        <h6>
+          미리보기 — 페이지 {currentPage}
+          {!pendingBytes && (
+            <span className="text-muted fw-normal ms-2" style={{ fontSize: "0.8em" }}>
+              클릭하여 서명 위치 지정
+            </span>
+          )}
+        </h6>
         <div
           style={{
             overflow: "auto",
             maxHeight: "70vh",
             border: "1px solid var(--bs-border-color)",
             borderRadius: 4,
+            cursor: pendingBytes && !previewStale ? "default" : "crosshair",
           }}
+          onClick={pendingBytes && !previewStale ? undefined : handlePreviewClick}
         >
           <canvas ref={previewCanvasRef} style={{ display: "block" }} />
         </div>
@@ -720,6 +764,7 @@ const PdfSigner = ({ pdfBytes }) => {
 const PdfHighlighter = ({ pdfBytes }) => {
   const renderCanvasRef = useRef(null);
   const overlayCanvasRef = useRef(null);
+  const newHlInputRef = useRef(null);
   const [pdfJsDoc, setPdfJsDoc] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -728,6 +773,7 @@ const PdfHighlighter = ({ pdfBytes }) => {
   const startPointRef = useRef(null);
   const [scale] = useState(1.5);
   const [processing, setProcessing] = useState(false);
+  const [lastAddedIdx, setLastAddedIdx] = useState(null);
 
   useEffect(() => {
     pdfjsLib
@@ -762,34 +808,43 @@ const PdfHighlighter = ({ pdfBytes }) => {
       ctx.clearRect(0, 0, overlay.width, overlay.height);
       highlights
         .filter((h) => h.page === currentPage)
-        .forEach(({ x, y, w, h }) => {
+        .forEach(({ x, y, w, h, text }) => {
           ctx.fillStyle = "rgba(255, 220, 0, 0.45)";
           ctx.fillRect(x, y, w, h);
+          if (text) {
+            ctx.font = "bold 12px sans-serif";
+            const tw = ctx.measureText(text).width + 10;
+            const th = 18;
+            const ty = y > th + 2 ? y - th - 2 : y + h + 2;
+            ctx.fillStyle = "rgba(255, 245, 150, 0.95)";
+            ctx.fillRect(x, ty, tw, th);
+            ctx.strokeStyle = "rgba(200, 160, 0, 0.7)";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(x, ty, tw, th);
+            ctx.fillStyle = "#333";
+            ctx.fillText(text, x + 5, ty + 13);
+          }
         });
       if (previewRect) {
         ctx.fillStyle = "rgba(255, 220, 0, 0.35)";
         ctx.strokeStyle = "rgba(200, 160, 0, 0.9)";
         ctx.lineWidth = 1;
-        ctx.fillRect(
-          previewRect.x,
-          previewRect.y,
-          previewRect.w,
-          previewRect.h
-        );
-        ctx.strokeRect(
-          previewRect.x,
-          previewRect.y,
-          previewRect.w,
-          previewRect.h
-        );
+        ctx.fillRect(previewRect.x, previewRect.y, previewRect.w, previewRect.h);
+        ctx.strokeRect(previewRect.x, previewRect.y, previewRect.w, previewRect.h);
       }
     },
     [highlights, currentPage]
   );
 
+  useEffect(() => { redraw(); }, [redraw]);
+
+  // Auto-focus the annotation input of the last added highlight
   useEffect(() => {
-    redraw();
-  }, [redraw]);
+    if (lastAddedIdx !== null && newHlInputRef.current) {
+      newHlInputRef.current.focus();
+      newHlInputRef.current.select();
+    }
+  }, [lastAddedIdx]);
 
   const getPos = (e) => {
     const canvas = overlayCanvasRef.current;
@@ -830,25 +885,42 @@ const PdfHighlighter = ({ pdfBytes }) => {
     const h = Math.abs(pos.y - sp.y);
     if (w > 5 && h > 5) {
       const overlay = overlayCanvasRef.current;
-      setHighlights((prev) => [
-        ...prev,
-        {
-          page: currentPage,
-          x: Math.min(sp.x, pos.x),
-          y: Math.min(sp.y, pos.y),
-          w,
-          h,
-          cw: overlay.width,
-          ch: overlay.height,
-        },
-      ]);
+      setHighlights((prev) => {
+        const next = [
+          ...prev,
+          {
+            page: currentPage,
+            x: Math.min(sp.x, pos.x),
+            y: Math.min(sp.y, pos.y),
+            w, h,
+            cw: overlay.width,
+            ch: overlay.height,
+            text: "",
+          },
+        ];
+        setLastAddedIdx(next.length - 1);
+        return next;
+      });
     }
     setIsDrawing(false);
     startPointRef.current = null;
   };
 
-  const clearPage = () =>
+  const updateText = (idx, text) => {
+    setHighlights((prev) =>
+      prev.map((h, i) => (i === idx ? { ...h, text } : h))
+    );
+  };
+
+  const removeHighlight = (idx) => {
+    setHighlights((prev) => prev.filter((_, i) => i !== idx));
+    if (lastAddedIdx === idx) setLastAddedIdx(null);
+  };
+
+  const clearPage = () => {
     setHighlights((prev) => prev.filter((h) => h.page !== currentPage));
+    setLastAddedIdx(null);
+  };
 
   const save = async () => {
     setProcessing(true);
@@ -869,6 +941,34 @@ const PdfHighlighter = ({ pdfBytes }) => {
           opacity: 0.45,
           borderWidth: 0,
         });
+        if (hl.text) {
+          // Render text to canvas → embed as PNG (supports all Unicode/Korean)
+          const tc = document.createElement("canvas");
+          const tctx = tc.getContext("2d");
+          tctx.font = "bold 14px sans-serif";
+          const tw = Math.ceil(tctx.measureText(hl.text).width) + 14;
+          tc.width = tw;
+          tc.height = 22;
+          tctx.fillStyle = "rgba(255, 245, 150, 1)";
+          tctx.fillRect(0, 0, tw, 22);
+          tctx.strokeStyle = "rgba(180, 140, 0, 0.8)";
+          tctx.lineWidth = 1;
+          tctx.strokeRect(0.5, 0.5, tw - 1, 21);
+          tctx.font = "bold 14px sans-serif";
+          tctx.fillStyle = "#333";
+          tctx.fillText(hl.text, 7, 16);
+          const dataUrl = tc.toDataURL("image/png");
+          const b64 = dataUrl.split(",")[1];
+          const pngBytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+          const pngImg = await doc.embedPng(pngBytes);
+          const imgW = tw * sx;
+          const imgH = 22 * sy;
+          const imgX = hl.x * sx;
+          const hlTop = ph - hl.y * sy;
+          // Place above the highlight if space, otherwise below
+          const imgY = hlTop + imgH + 2 * sy < ph ? hlTop + 2 * sy : hlTop - hl.h * sy - imgH - 2 * sy;
+          page.drawImage(pngImg, { x: imgX, y: imgY, width: imgW, height: imgH });
+        }
       }
       downloadPdf(await doc.save(), "highlighted.pdf");
     } finally {
@@ -877,44 +977,21 @@ const PdfHighlighter = ({ pdfBytes }) => {
   };
 
   const pageHls = highlights.filter((h) => h.page === currentPage).length;
+  const pageHlIndices = highlights
+    .map((h, i) => ({ ...h, idx: i }))
+    .filter((h) => h.page === currentPage);
 
   return (
     <div>
       <div className="d-flex align-items-center gap-2 mb-3 flex-wrap">
-        <Button
-          size="sm"
-          variant="outline-secondary"
-          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-          disabled={currentPage === 1}
-        >
-          ◀
-        </Button>
-        <span>
-          {currentPage} / {totalPages}
-        </span>
-        <Button
-          size="sm"
-          variant="outline-secondary"
-          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-          disabled={currentPage === totalPages}
-        >
-          ▶
-        </Button>
-        <Badge bg="warning" text="dark">
-          이 페이지 {pageHls}개
-        </Badge>
+        <Button size="sm" variant="outline-secondary" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>◀</Button>
+        <span>{currentPage} / {totalPages}</span>
+        <Button size="sm" variant="outline-secondary" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>▶</Button>
+        <Badge bg="warning" text="dark">이 페이지 {pageHls}개</Badge>
         <Badge bg="secondary">전체 {highlights.length}개</Badge>
+        <Button size="sm" variant="outline-danger" onClick={clearPage} disabled={pageHls === 0}>이 페이지 제거</Button>
         <Button
-          size="sm"
-          variant="outline-danger"
-          onClick={clearPage}
-          disabled={pageHls === 0}
-        >
-          이 페이지 하이라이트 제거
-        </Button>
-        <Button
-          size="sm"
-          variant="success"
+          size="sm" variant="success"
           onClick={save}
           disabled={highlights.length === 0 || processing}
           className="ms-auto"
@@ -923,9 +1000,8 @@ const PdfHighlighter = ({ pdfBytes }) => {
           하이라이트 저장
         </Button>
       </div>
-      <p className="text-muted small mb-2">
-        마우스를 드래그하여 하이라이트 영역을 선택하세요.
-      </p>
+      <p className="text-muted small mb-2">드래그하여 하이라이트 — 그린 후 아래 목록에서 Annotation 문구를 입력하세요.</p>
+
       <div style={{ position: "relative", display: "inline-block" }}>
         <canvas ref={renderCanvasRef} style={{ display: "block" }} />
         <canvas
@@ -940,6 +1016,29 @@ const PdfHighlighter = ({ pdfBytes }) => {
           onTouchEnd={onUp}
         />
       </div>
+
+      {pageHlIndices.length > 0 && (
+        <div className="mt-3">
+          <h6 className="mb-2">현재 페이지 Annotation</h6>
+          {pageHlIndices.map(({ idx, x, y, w, h, text }) => (
+            <div key={idx} className="d-flex align-items-center gap-2 mb-2">
+              <Badge bg="warning" text="dark" style={{ minWidth: 28 }}>#{pageHlIndices.findIndex(p => p.idx === idx) + 1}</Badge>
+              <Form.Control
+                size="sm"
+                placeholder="Annotation 문구 입력..."
+                value={text}
+                ref={idx === lastAddedIdx ? newHlInputRef : null}
+                onChange={(e) => updateText(idx, e.target.value)}
+                style={{ maxWidth: 360 }}
+              />
+              <span className="text-muted small" style={{ whiteSpace: "nowrap" }}>
+                {Math.round(w)}×{Math.round(h)}px
+              </span>
+              <Button size="sm" variant="outline-danger" onClick={() => removeHighlight(idx)}>✕</Button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -100,7 +100,7 @@ const QuestionAdmin = () => {
       await updateMeta({ summary: trimmed });
     } catch (err) {
       setError(`Summary failed: ${err.message}`);
-    } finally {
+    } finally { 
       setLoading(null);
     }
   }, [questions, summaryCount]);

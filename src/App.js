@@ -27,6 +27,7 @@ import NoteRedirect from "./pages/NoteRedirect";
 import QuestionCollect from "./pages/QuestionCollect";
 import QuestionAdmin from "./pages/QuestionAdmin";
 import QuestionView from "./pages/QuestionView";
+import PdfPage from "./pages/PdfPage";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
 import AppFallback from "./components/AppFallback";
@@ -72,6 +73,7 @@ const AppLayout = ({ setThemes }) => {
         <Route path="/question_board" element={<QuestionCollect />} />
         <Route path="/question_board_admin" element={<QuestionAdmin />} />
         <Route path="/question_board_view" element={<QuestionView />} />
+        <Route path="/pdf" element={<PdfPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!hideChrome && <Footer mode={footerTheme} />}

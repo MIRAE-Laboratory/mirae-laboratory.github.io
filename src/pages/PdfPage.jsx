@@ -474,6 +474,8 @@ const PdfSigner = ({ pdfBytes }) => {
   const [signPos, setSignPos] = useState({ x: 50, y: 50, width: 200, height: 80 });
   const [processing, setProcessing] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
+  const [pendingBytes, setPendingBytes] = useState(null);
+  const [previewStale, setPreviewStale] = useState(false);
 
   useEffect(() => {
     pdfjsLib
@@ -484,8 +486,11 @@ const PdfSigner = ({ pdfBytes }) => {
       });
   }, [pdfBytes]);
 
+  // Render plain page (no signature) when page changes or on load
   useEffect(() => {
     if (!pdfJsDoc || !previewCanvasRef.current) return;
+    setPendingBytes(null);
+    setPreviewStale(false);
     pdfJsDoc.getPage(currentPage).then((page) => {
       const viewport = page.getViewport({ scale: 1.5 });
       const canvas = previewCanvasRef.current;
@@ -503,7 +508,11 @@ const PdfSigner = ({ pdfBytes }) => {
     canvas.height = 160;
     const pad = new SignaturePad(canvas, { penColor: "#000000" });
     padRef.current = pad;
-    const onEnd = () => setIsEmpty(pad.isEmpty());
+    const onEnd = () => {
+      setIsEmpty(pad.isEmpty());
+      setPreviewStale(true);
+      setPendingBytes(null);
+    };
     canvas.addEventListener("pointerup", onEnd);
     return () => {
       canvas.removeEventListener("pointerup", onEnd);
@@ -514,30 +523,76 @@ const PdfSigner = ({ pdfBytes }) => {
   const clearPad = () => {
     padRef.current?.clear();
     setIsEmpty(true);
+    setPendingBytes(null);
+    // Re-render plain page
+    if (pdfJsDoc && previewCanvasRef.current) {
+      pdfJsDoc.getPage(currentPage).then((page) => {
+        const viewport = page.getViewport({ scale: 1.5 });
+        const canvas = previewCanvasRef.current;
+        if (!canvas) return;
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        page.render({ canvasContext: canvas.getContext("2d"), viewport });
+      });
+    }
   };
 
-  const embed = async () => {
+  const markStale = () => {
+    setPreviewStale(true);
+    setPendingBytes(null);
+  };
+
+  // Insert: render page + overlay signature, prepare PDF bytes
+  const insertPreview = async () => {
     const pad = padRef.current;
     if (!pad || pad.isEmpty()) return;
     setProcessing(true);
     try {
-      const dataUrl = pad.toDataURL("image/png");
-      const base64 = dataUrl.split(",")[1];
-      const pngBytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+      const sigDataUrl = pad.toDataURL("image/png");
 
+      // Get PDF page dimensions (in points at scale 1)
+      const pdfJsPage = await pdfJsDoc.getPage(currentPage);
+      const baseViewport = pdfJsPage.getViewport({ scale: 1 });
+      const pdfW = baseViewport.width;
+      const pdfH = baseViewport.height;
+
+      // Render page to preview canvas
+      const renderScale = 1.5;
+      const viewport = pdfJsPage.getViewport({ scale: renderScale });
+      const canvas = previewCanvasRef.current;
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      await pdfJsPage.render({ canvasContext: canvas.getContext("2d"), viewport }).promise;
+
+      // Overlay signature on canvas
+      const scaleX = canvas.width / pdfW;
+      const scaleY = canvas.height / pdfH;
+      const sigImg = new Image();
+      sigImg.src = sigDataUrl;
+      await new Promise((resolve) => { sigImg.onload = resolve; });
+      canvas.getContext("2d").drawImage(
+        sigImg,
+        signPos.x * scaleX,
+        signPos.y * scaleY,
+        signPos.width * scaleX,
+        signPos.height * scaleY
+      );
+
+      // Build PDF bytes with embedded signature
+      const base64 = sigDataUrl.split(",")[1];
+      const pngBytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
       const doc = await PDFDocument.load(pdfBytes);
       const pngImage = await doc.embedPng(pngBytes);
       const page = doc.getPages()[currentPage - 1];
       const { height: pageHeight } = page.getSize();
-
       page.drawImage(pngImage, {
         x: signPos.x,
         y: pageHeight - signPos.y - signPos.height,
         width: signPos.width,
         height: signPos.height,
       });
-
-      downloadPdf(await doc.save(), "signed.pdf");
+      setPendingBytes(await doc.save());
+      setPreviewStale(false);
     } finally {
       setProcessing(false);
     }
@@ -545,16 +600,17 @@ const PdfSigner = ({ pdfBytes }) => {
 
   const posField = (key, label) => (
     <Form.Group key={key} className="mb-2 d-flex align-items-center gap-2">
-      <Form.Label className="mb-0" style={{ minWidth: 60 }}>
+      <Form.Label className="mb-0" style={{ minWidth: 70 }}>
         {label}
       </Form.Label>
       <Form.Control
         type="number"
         size="sm"
         value={signPos[key]}
-        onChange={(e) =>
-          setSignPos((prev) => ({ ...prev, [key]: +e.target.value }))
-        }
+        onChange={(e) => {
+          setSignPos((prev) => ({ ...prev, [key]: +e.target.value }));
+          markStale();
+        }}
       />
     </Form.Group>
   );
@@ -562,7 +618,7 @@ const PdfSigner = ({ pdfBytes }) => {
   return (
     <Row className="g-4">
       <Col md={5}>
-        <h6>서명 입력</h6>
+        <h6 className="mb-2">① 서명 입력</h6>
         <div
           className="border rounded mb-2"
           style={{ background: "#fff", lineHeight: 0 }}
@@ -581,37 +637,70 @@ const PdfSigner = ({ pdfBytes }) => {
           지우기
         </Button>
 
-        <h6>서명 위치 (포인트 단위)</h6>
-        {posField("x", "X")}
-        {posField("y", "Y (위에서)")}
-        {posField("width", "너비")}
-        {posField("height", "높이")}
-
-        <Form.Group className="mb-3">
-          <Form.Label>삽입 페이지</Form.Label>
+        <h6 className="mb-2">② 삽입 페이지 선택</h6>
+        <div className="d-flex align-items-center gap-2 mb-4">
+          <Button
+            size="sm"
+            variant="outline-secondary"
+            onClick={() => { setCurrentPage((p) => Math.max(1, p - 1)); markStale(); }}
+            disabled={currentPage === 1}
+          >
+            ◀
+          </Button>
           <Form.Control
             type="number"
             size="sm"
             value={currentPage}
             min={1}
             max={totalPages}
-            onChange={(e) =>
-              setCurrentPage(
-                Math.min(totalPages, Math.max(1, +e.target.value))
-              )
-            }
+            style={{ width: 70, textAlign: "center" }}
+            onChange={(e) => {
+              setCurrentPage(Math.min(totalPages, Math.max(1, +e.target.value)));
+              markStale();
+            }}
           />
-        </Form.Group>
+          <span className="text-muted">/ {totalPages}</span>
+          <Button
+            size="sm"
+            variant="outline-secondary"
+            onClick={() => { setCurrentPage((p) => Math.min(totalPages, p + 1)); markStale(); }}
+            disabled={currentPage === totalPages}
+          >
+            ▶
+          </Button>
+        </div>
 
-        <Button onClick={embed} disabled={isEmpty || processing}>
-          {processing ? (
-            <Spinner size="sm" className="me-2" />
-          ) : null}
-          서명 삽입 및 다운로드
-        </Button>
+        <h6 className="mb-2">③ 서명 위치 (포인트 단위)</h6>
+        {posField("x", "X (왼쪽에서)")}
+        {posField("y", "Y (위에서)")}
+        {posField("width", "너비")}
+        {posField("height", "높이")}
+
+        <div className="d-flex gap-2 mt-3">
+          <Button
+            onClick={insertPreview}
+            disabled={isEmpty || processing}
+            variant={previewStale && pendingBytes ? "warning" : "primary"}
+          >
+            {processing ? <Spinner size="sm" className="me-2" /> : null}
+            {pendingBytes && !previewStale ? "삽입 갱신" : "삽입 미리보기"}
+          </Button>
+          <Button
+            variant="success"
+            disabled={!pendingBytes || previewStale}
+            onClick={() => downloadPdf(pendingBytes, "signed.pdf")}
+          >
+            다운로드
+          </Button>
+        </div>
+        {previewStale && pendingBytes && (
+          <div className="text-warning small mt-2">
+            설정이 변경되었습니다. 삽입 미리보기를 다시 눌러주세요.
+          </div>
+        )}
       </Col>
       <Col md={7}>
-        <h6>미리보기 (페이지 {currentPage})</h6>
+        <h6>미리보기 — 페이지 {currentPage}</h6>
         <div
           style={{
             overflow: "auto",

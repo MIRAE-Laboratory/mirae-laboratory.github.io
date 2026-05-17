@@ -4,12 +4,14 @@ nameEn: Hogeon Seo
 imageUrl: /contents/files/Hogeon_Seo.png
 cvPdfUrl: /contents/files/Hogeon_Seo_CV.pdf
 academicCvPdfUrl: /contents/files/서호건_학술이력서.pdf
-title1: 과학기술연합대학원대학교 · 인공지능 전공 · 부교수
-title2: 한국원자력연구원 · 인공지능응용연구실 · 선임연구원
-title3: 한국비파괴검사학회 · 국제협력이사
+title1: 한국원자력연구원 · 인공지능응용연구실 · 실장
+title2: 과학기술연합대학원대학교 · 인공지능 전공 · 부교수 (전공책임)
+title3: 국가과학기술인력개발원 · 도메인 특화 인공지능 응용 · 객원교수
+title4: 한국비파괴검사학회 · 국제협력이사, 원자력분과위원, 레이저초음파분과위원, 편집위원
+
 contactTel: "042-866-6520"
 contactEmail: hogeony@hogeony.com
-fullProfileUrl: https://miraelab.re.kr/professor
+fullProfileUrl: https://miraelab.ai/professor
 
 researchAreas:
   -
@@ -46,16 +48,20 @@ researchAreas:
 
 education:
   -
+    period: "2026.05 - 현재"
+    role: 객원교수 · 도메인 특화 인공지능 응용
+    org: 국가과학기술인력개발원
+  -
     period: "2023.03 - 현재"
     role: 부교수 · 인공지능 전공
     org: 과학기술연합대학원대학교
   -
     period: "2020.01 - 현재"
-    role: 국제협력이사, 편집위원, 원자력분과위원, 레이저초음파분과위원
+    role: 국제협력이사, 원자력분과위원, 레이저초음파분과위원, 편집위원
     org: 한국비파괴검사학회
   -
     period: "2019.12 - 현재"
-    role: 선임연구원
+    role: 실장
     org: 한국원자력연구원, 인공지능응용연구실
   -
     period: "2018.02 - 2019.11"

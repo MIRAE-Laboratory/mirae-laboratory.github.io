@@ -130,6 +130,9 @@ const Professor = () => {
                 {profile.title3 && (
                   <Card.Subtitle className="text-muted mb-3">{profile.title3}</Card.Subtitle>
                 )}
+                {profile.title4 && (
+                  <Card.Subtitle className="text-muted mb-3">{profile.title4}</Card.Subtitle>
+                )}
                 {profile.contactTel && (
                   <p className="mb-1">
                     <strong>Tel:</strong> {profile.contactTel}

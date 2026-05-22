@@ -57,9 +57,61 @@ const buildIcoBlob = (png16DataUrl, png32DataUrl) => {
   return new Blob([buf], { type: "image/x-icon" });
 };
 
+const composeCompatJamo = (text) => {
+  const CHO  = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+  const JUNG = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+  const JONG = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+  const CMPD = {'ㄱㅅ':'ㄳ','ㄴㅈ':'ㄵ','ㄴㅎ':'ㄶ','ㄹㄱ':'ㄺ','ㄹㅁ':'ㄻ','ㄹㅂ':'ㄼ','ㄹㅅ':'ㄽ','ㄹㅌ':'ㄾ','ㄹㅍ':'ㄿ','ㄹㅎ':'ㅀ','ㅂㅅ':'ㅄ'};
+  const SPLT = {'ㄳ':['ㄱ','ㅅ'],'ㄵ':['ㄴ','ㅈ'],'ㄶ':['ㄴ','ㅎ'],'ㄺ':['ㄹ','ㄱ'],'ㄻ':['ㄹ','ㅁ'],'ㄼ':['ㄹ','ㅂ'],'ㄽ':['ㄹ','ㅅ'],'ㄾ':['ㄹ','ㅌ'],'ㄿ':['ㄹ','ㅍ'],'ㅀ':['ㄹ','ㅎ'],'ㅄ':['ㅂ','ㅅ']};
+  const ci = (c) => CHO.indexOf(c);
+  const ji = (c) => JUNG.indexOf(c);
+  const ki = (c) => JONG.indexOf(c);
+  const syl = (co, ju, jo) => {
+    const c = ci(co), j = ji(ju), k = jo ? ki(jo) : 0;
+    if (c < 0 || j < 0 || k < 0) return co + ju + (jo || '');
+    return String.fromCharCode(0xAC00 + (c * 21 + j) * 28 + k);
+  };
+  const res = [];
+  let s = 0, co = '', ju = '', jo = '';
+  const flush = () => {
+    if (s === 1) res.push(co);
+    else if (s === 2) res.push(syl(co, ju, ''));
+    else if (s === 3) res.push(syl(co, ju, jo));
+    s = 0; co = ''; ju = ''; jo = '';
+  };
+  for (const ch of text) {
+    const v = ji(ch), c = ci(ch), k = ki(ch);
+    if (v < 0 && c < 0 && k <= 0) { flush(); res.push(ch); continue; }
+    if (s === 0) {
+      if (c >= 0) { co = ch; s = 1; } else res.push(ch);
+    } else if (s === 1) {
+      if (v >= 0) { ju = ch; s = 2; }
+      else if (c >= 0) { res.push(co); co = ch; }
+      else { res.push(co); co = ''; s = 0; res.push(ch); }
+    } else if (s === 2) {
+      if (k > 0) { jo = ch; s = 3; }
+      else if (v >= 0) { res.push(syl(co, ju, '')); s = 0; co = ''; ju = ''; res.push(ch); }
+      else if (c >= 0) { res.push(syl(co, ju, '')); co = ch; ju = ''; s = 1; }
+      else { flush(); res.push(ch); }
+    } else {
+      if (v >= 0) {
+        const sp = SPLT[jo];
+        if (sp) { res.push(syl(co, ju, sp[0])); co = sp[1]; ju = ch; jo = ''; s = 2; }
+        else { res.push(syl(co, ju, '')); co = jo; ju = ch; jo = ''; s = 2; }
+      } else {
+        const cmp = CMPD[jo + ch];
+        if (cmp && ki(cmp) > 0) { jo = cmp; }
+        else { res.push(syl(co, ju, jo)); co = c >= 0 ? ch : ''; s = c >= 0 ? 1 : 0; jo = ''; ju = ''; if (c < 0) res.push(ch); }
+      }
+    }
+  }
+  flush();
+  return res.join('');
+};
+
 const composeJamo = (text) => {
   if (!text || typeof text !== "string") return "";
-  return text.normalize("NFC");
+  return composeCompatJamo(text.normalize("NFC"));
 };
 
 const TOOL_SECTIONS = [

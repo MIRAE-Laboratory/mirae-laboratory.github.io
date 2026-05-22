@@ -57,11 +57,17 @@ const buildIcoBlob = (png16DataUrl, png32DataUrl) => {
   return new Blob([buf], { type: "image/x-icon" });
 };
 
+const composeJamo = (text) => {
+  if (!text || typeof text !== "string") return "";
+  return text.normalize("NFC");
+};
+
 const TOOL_SECTIONS = [
   { id: "tool-capitalize", label: "Capitalize" },
   { id: "tool-lowercase", label: "모두 소문자화" },
   { id: "tool-qr", label: "QR 코드 생성" },
   { id: "tool-favicon", label: "Favicon 생성" },
+  { id: "tool-jaso", label: "자소 합성" },
 ];
 
 const Tools = () => {
@@ -83,14 +89,20 @@ const Tools = () => {
   const [favicon32, setFavicon32] = useState(null);
   const [faviconError, setFaviconError] = useState(null);
 
+  const [jasoInput, setJasoInput] = useState("");
+  const [jasoResult, setJasoResult] = useState("");
+  const [jasoCopied, setJasoCopied] = useState(false);
+
   const sectionCapitalizeRef = useRef(null);
   const sectionLowercaseRef = useRef(null);
   const sectionQrRef = useRef(null);
   const sectionFaviconRef = useRef(null);
+  const sectionJasoRef = useRef(null);
   const inputCapitalizeRef = useRef(null);
   const inputLowercaseRef = useRef(null);
   const inputQrRef = useRef(null);
   const inputFaviconRef = useRef(null);
+  const inputJasoRef = useRef(null);
 
   const scrollToSection = useCallback((sectionRef, inputRef) => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -254,6 +266,19 @@ const Tools = () => {
     }
   }, [favicon16, favicon32]);
 
+  const handleJasoCompose = useCallback(async () => {
+    const composed = composeJamo(jasoInput);
+    setJasoResult(composed);
+    if (!composed) return;
+    try {
+      await navigator.clipboard.writeText(composed);
+      setJasoCopied(true);
+      setTimeout(() => setJasoCopied(false), 2000);
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  }, [jasoInput]);
+
   return (
     <main className="section py-5">
       <Container>
@@ -286,6 +311,13 @@ const Tools = () => {
             onClick={() => scrollToSection(sectionFaviconRef, inputFaviconRef)}
           >
             Favicon 생성
+          </Button>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={() => scrollToSection(sectionJasoRef, inputJasoRef)}
+          >
+            자소 합성
           </Button>
         </div>
 
@@ -465,6 +497,53 @@ const Tools = () => {
                       favicon.ico 저장
                     </Button>
                   </div>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col lg={6} className="mb-4" ref={sectionJasoRef}>
+            <Card className="shadow-sm h-100" id={TOOL_SECTIONS[4].id}>
+              <Card.Header as="h5" className="bg-light">
+                자소 합성
+              </Card.Header>
+              <Card.Body>
+                <p className="small text-muted mb-2">
+                  MacOS에서 생성된 파일명이나 텍스트를 Windows에서 열면 한글 자음·모음이 분리되어 보이는
+                  경우가 있습니다. 분리된 텍스트를 붙여넣고 <strong>자소 합성</strong> 버튼을 누르면
+                  정상적인 한글로 합성 후 클립보드에 복사됩니다.
+                </p>
+                <Form.Control
+                  ref={inputJasoRef}
+                  as="textarea"
+                  rows={3}
+                  placeholder="자소가 분리된 텍스트를 붙여넣으세요..."
+                  value={jasoInput}
+                  onChange={(e) => { setJasoInput(e.target.value); setJasoResult(""); setJasoCopied(false); }}
+                  className="mb-2"
+                />
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={handleJasoCompose}
+                  className="mb-3"
+                  disabled={!jasoInput}
+                >
+                  자소 합성
+                </Button>
+                {jasoResult && (
+                  <>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      readOnly
+                      value={jasoResult}
+                      className="mb-2 bg-light"
+                    />
+                    <div className="small text-success">
+                      {jasoCopied ? "클립보드에 복사됐습니다!" : "결과가 클립보드에 복사됩니다."}
+                    </div>
+                  </>
                 )}
               </Card.Body>
             </Card>

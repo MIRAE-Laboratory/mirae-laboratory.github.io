@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "concurrently": "^9.2.4",
+    "concurrently": "^9.2.5",
     "cross-env": "^7.0.3",
     "gh-pages": "^6.1.1",
     "nodemon": "^3.1.9",

@@ -4,3 +4,27 @@
 $blue: #007bff;
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+
+.question-board-page {
+  font-size: 2rem;
+
+  h4 {
+    font-size: calc(2.55rem + 0.6vw);
+  }
+
+  h5 {
+    font-size: 2.5rem;
+  }
+
+  .btn,
+  .form-control,
+  .input-group-text {
+    font-size: 2rem;
+  }
+
+  .small,
+  .btn-sm,
+  .form-control-sm {
+    font-size: 1.75rem;
+  }
+}

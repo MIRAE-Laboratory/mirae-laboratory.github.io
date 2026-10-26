@@ -42,7 +42,10 @@ const QuestionView = () => {
   }, []);
 
   return (
-    <main className="py-3 py-md-5" style={{ minHeight: "100vh" }}>
+    <main
+      className="py-3 py-md-5 question-board-page"
+      style={{ minHeight: "100vh" }}
+    >
       <Container className="px-3 px-md-4" style={{ maxWidth: 800 }}>
         <h5 className="mb-4 text-center">Questions</h5>
 
@@ -50,7 +53,9 @@ const QuestionView = () => {
         {summary && (
           <Card className="shadow-sm mb-3 border-primary">
             <Card.Header className="bg-primary text-white py-2 px-3">
-              <strong style={{ fontSize: "0.9rem" }}>Questions summarized from the collected questions</strong>
+              <strong style={{ fontSize: "1.8rem" }}>
+                Questions summarized from the collected questions
+              </strong>
             </Card.Header>
             <Card.Body className="p-2 p-md-3">
               <NumberedLines text={summary} />
@@ -62,7 +67,9 @@ const QuestionView = () => {
         {generated && (
           <Card className="shadow-sm mb-3 border-success">
             <Card.Header className="bg-success text-white py-2 px-3">
-              <strong style={{ fontSize: "0.9rem" }}>Questions suggested by AI Agent</strong>
+              <strong style={{ fontSize: "1.8rem" }}>
+                Questions suggested by AI Agent
+              </strong>
             </Card.Header>
             <Card.Body className="p-2 p-md-3">
               <NumberedLines text={generated} />
@@ -72,7 +79,9 @@ const QuestionView = () => {
 
         {/* Questions collected from the audience */}
         <div className="mb-2 d-flex align-items-center gap-2">
-          <strong style={{ fontSize: "0.95rem" }}>Questions collected from the audience</strong>
+          <strong style={{ fontSize: "1.9rem" }}>
+            Questions collected from the audience
+          </strong>
           <Badge bg="secondary">{questions.length}</Badge>
         </div>
 
@@ -98,7 +107,10 @@ const QuestionView = () => {
                   {q.text}
                 </div>
                 <div className="text-end mt-1">
-                  <small className="text-muted" style={{ fontSize: "0.75rem" }}>
+                  <small
+                    className="text-muted"
+                    style={{ fontSize: "1.5rem" }}
+                  >
                     {new Date(q.createdAt).toLocaleString("ko-KR")}
                   </small>
                 </div>

@@ -208,7 +208,7 @@ const QuestionAdmin = () => {
   }, [summary, generated, questions]);
 
   return (
-    <main className="section py-5">
+    <main className="section py-5 question-board-page">
       <Container style={{ maxWidth: 900 }}>
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h4 className="mb-0">Question Admin</h4>
@@ -285,7 +285,7 @@ const QuestionAdmin = () => {
                 </InputGroup>
                 <Form.Control
                   as="textarea"
-                  rows={7}
+                  rows={9}
                   placeholder="Summarized questions (one per line with less than 15 words each)..."
                   value={summaryDraft}
                   onChange={(e) => setSummaryDraft(e.target.value)}

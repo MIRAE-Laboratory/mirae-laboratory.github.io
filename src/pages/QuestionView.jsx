@@ -8,7 +8,7 @@ import { subscribeQuestions, subscribeMeta } from "../firebase";
 const NumberedLines = ({ text }) => {
   const lines = text.split("\n").filter((l) => l.trim());
   return (
-    <div style={{ fontSize: "0.9rem", wordBreak: "break-word" }}>
+    <div style={{ fontSize: "1.8rem", wordBreak: "break-word" }}>
       {lines.map((line, i) => (
         <div key={i} className="mb-1">
           <span className="text-muted me-2">{i + 1}.</span>
@@ -82,8 +82,17 @@ const QuestionView = () => {
           questions.map((q, i) => (
             <Card key={q.id} className="shadow-sm mb-2">
               <Card.Body className="py-2 px-3">
-                <div style={{ wordBreak: "break-word", whiteSpace: "pre-wrap" }}>
-                  <span className="text-muted me-2" style={{ fontSize: "0.8rem" }}>
+                <div
+                  style={{
+                    fontSize: "2rem",
+                    wordBreak: "break-word",
+                    whiteSpace: "pre-wrap",
+                  }}
+                >
+                  <span
+                    className="text-muted me-2"
+                    style={{ fontSize: "1.6rem" }}
+                  >
                     {questions.length - i}.
                   </span>
                   {q.text}

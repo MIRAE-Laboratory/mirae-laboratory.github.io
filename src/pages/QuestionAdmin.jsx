@@ -291,7 +291,7 @@ const QuestionAdmin = () => {
                   onChange={(e) => setSummaryDraft(e.target.value)}
                   className="mb-2"
                   style={{
-                    fontSize: "1rem",
+                    fontSize: "2rem",
                     lineHeight: 1.6,
                     padding: "0.75rem",
                   }}
@@ -380,7 +380,7 @@ const QuestionAdmin = () => {
                   onChange={(e) => setGeneratedDraft(e.target.value)}
                   className="mb-2"
                   style={{
-                    fontSize: "1rem",
+                    fontSize: "2rem",
                     lineHeight: 1.6,
                     padding: "0.75rem",
                   }}

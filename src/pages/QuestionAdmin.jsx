@@ -235,8 +235,8 @@ const QuestionAdmin = () => {
 
         <Row>
           {/* --- Summarize section --- */}
-          <Col lg={6} className="mb-4">
-            <Card className="shadow-sm h-100 border-primary">
+          <Col xs={12} className="mb-4">
+            <Card className="shadow-sm border-primary">
               <Card.Header className="bg-primary text-white d-flex justify-content-between align-items-center">
                 <strong>Questions summarized from the collected questions</strong>
                 <Button
@@ -285,12 +285,16 @@ const QuestionAdmin = () => {
                 </InputGroup>
                 <Form.Control
                   as="textarea"
-                  rows={5}
+                  rows={7}
                   placeholder="Summarized questions (one per line with less than 15 words each)..."
                   value={summaryDraft}
                   onChange={(e) => setSummaryDraft(e.target.value)}
                   className="mb-2"
-                  style={{ fontSize: "0.85rem" }}
+                  style={{
+                    fontSize: "1rem",
+                    lineHeight: 1.6,
+                    padding: "0.75rem",
+                  }}
                 />
                 <Button
                   variant="outline-primary"
@@ -305,8 +309,8 @@ const QuestionAdmin = () => {
           </Col>
 
           {/* --- Generate section --- */}
-          <Col lg={6} className="mb-4">
-            <Card className="shadow-sm h-100 border-success">
+          <Col xs={12} className="mb-4">
+            <Card className="shadow-sm border-success">
               <Card.Header className="bg-success text-white d-flex justify-content-between align-items-center">
                 <strong>Questions suggested by AI Agent</strong>
                 <Button
@@ -370,12 +374,16 @@ const QuestionAdmin = () => {
                 </InputGroup>
                 <Form.Control
                   as="textarea"
-                  rows={5}
+                  rows={7}
                   placeholder="Generated questions (one per line with less than 15 words each)..."
                   value={generatedDraft}
                   onChange={(e) => setGeneratedDraft(e.target.value)}
                   className="mb-2"
-                  style={{ fontSize: "0.85rem" }}
+                  style={{
+                    fontSize: "1rem",
+                    lineHeight: 1.6,
+                    padding: "0.75rem",
+                  }}
                 />
                 <Button
                   variant="outline-success"
